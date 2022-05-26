@@ -10,8 +10,4 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         DynamicColors.applyToActivityIfAvailable(this)
     }
-
-    override fun onPause() {
-        super.onPause()
-    }
 }
