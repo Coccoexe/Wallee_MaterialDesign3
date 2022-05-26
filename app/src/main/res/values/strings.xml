@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MD3</string>
     <string name="balance">Balance</string>
+    <string name="transaction">Add Transaction</string>
 </resources>
