@@ -20,16 +20,7 @@ class MainActivity : AppCompatActivity() {
 
             popup.show(supportFragmentManager, "popupTransaction")
 
-            /*
-            val transCat : Spinner = findViewById(R.id.popupSpinner)
 
-            var items = arrayOf<String>("Categoria1","Categoria2","Altro")
-
-            val adapter: Any =
-                ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_dropdown_item, items)
-
-            transCat.adapter = adapter as SpinnerAdapter?
-            */
         }
     }
 }
