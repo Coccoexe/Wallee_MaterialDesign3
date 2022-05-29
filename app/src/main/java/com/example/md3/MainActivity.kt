@@ -12,10 +12,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //navigation
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navigationController) as NavHostFragment
         val navController = navHostFragment.navController
-
         findViewById<BottomNavigationView>(R.id.navigationBar).setupWithNavController(navController)
+
+
+        //database
 
     }
 }
