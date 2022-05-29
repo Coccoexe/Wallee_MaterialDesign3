@@ -18,4 +18,19 @@
         android:name="com.example.md3.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="com.example.md3.GraphFragment"
+        android:label="fragment_graph"
+        tools:layout="@layout/fragment_graph" />
+    <fragment
+        android:id="@+id/goalFragment"
+        android:name="com.example.md3.GoalFragment"
+        android:label="fragment_goal"
+        tools:layout="@layout/fragment_goal" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.md3.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

@@ -1,21 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/mainFragment"
         android:enabled="true"
         android:icon="@drawable/ic_home_24"
         android:title="home"/>
     <item
-        android:id="@+id/barChart"
+        android:id="@+id/graphFragment"
         android:enabled="true"
         android:icon="@drawable/ic_bar_chart_24"
         android:title="bar chart"/>
     <item
-        android:id="@+id/goal"
+        android:id="@+id/goalFragment"
         android:enabled="true"
         android:icon="@drawable/ic_goal_24"
         android:title="goal"/>
     <item
-        android:id="@+id/settings"
+        android:id="@+id/settingsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_settings_24"
         android:title="settings"/>
