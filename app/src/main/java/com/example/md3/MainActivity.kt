@@ -34,12 +34,12 @@ class MainActivity : AppCompatActivity() {
         )
 
         val transactions = listOf(
-            Transaction(1,"ciao@prova.it"),
-            Transaction(2,"coccobin@gmail.it"),
-            Transaction(3,"coccobin@gmail.it"),
-            Transaction(4,"coccobin@gmail.it"),
-            Transaction(5,"ghi8@frenata.dritta"),
-            Transaction(6,"ghi8@frenata.dritta")
+            Transaction(0,"ciao@prova.it",10,"lavaggio_macchina"),
+            Transaction(0,"coccobin@gmail.it",10,"ripetizioni"),
+            Transaction(0,"coccobin@gmail.it",-30,"cena_la_marghe"),
+            Transaction(0,"coccobin@gmail.it",40,"lavorato_viale_verona"),
+            Transaction(0,"ghi8@frenata.dritta",-840,"pc_nuovo"),
+            Transaction(0,"ghi8@frenata.dritta",900,"gratta&vinci")
         )
 
         lifecycleScope.launch{
