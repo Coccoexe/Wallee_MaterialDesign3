@@ -41,31 +41,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
         //database
         dao = UserDatabase.getInstance(this).userDao
 
-        /*
-        val users = listOf(
-            User("ciao@prova.it","userProva","amogus",0) ,
-            User("coccobin@gmail.it","coccoexe","frenata",0),
-            User("ghi8@frenata.dritta","ghiotto","forzanapoli",0)
-        )
 
-        val transactions = listOf(
-            Transaction(0,"ciao@prova.it",10,"lavaggio_macchina"),
-            Transaction(0,"coccobin@gmail.it",10,"ripetizioni"),
-            Transaction(0,"coccobin@gmail.it",-30,"cena_la_marghe"),
-            Transaction(0,"coccobin@gmail.it",40,"lavorato_viale_verona"),
-            Transaction(0,"ghi8@frenata.dritta",-840,"pc_nuovo"),
-            Transaction(0,"ghi8@frenata.dritta",900,"gratta&vinci")
-        )
-
-        lifecycleScope.launch{
-            users.forEach{dao.insertUser(it)}
-            transactions.forEach{dao.insertTransaction(it)}
-
-            val trans1 = dao.getUserWithTransactions("ghi8@frenata.dritta")
-
-            Log.e("trans", trans1[0].toString())
-        }
-        */
     }
 
     override fun onBackPressed() {

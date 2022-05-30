@@ -2,7 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
+    android:padding="24dp"
+    android:minWidth="260dp"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_rounded_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
