@@ -22,21 +22,11 @@
         />
 
     <EditText
-        android:id="@+id/oldMail"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:hint="Old Mail"
-        app:layout_constraintTop_toBottomOf="@id/popupTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <EditText
         android:id="@+id/newMail"
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:hint="New Mail"
-        app:layout_constraintTop_toBottomOf="@id/oldMail"
+        app:layout_constraintTop_toBottomOf="@id/popupTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

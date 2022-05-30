@@ -48,32 +48,26 @@ class ChangeEmail : DialogFragment() {
         }
 
         //confirmButton
-        val oldM : EditText = inflateView.findViewById(R.id.oldMail)
         val newM : EditText = inflateView.findViewById(R.id.newMail)
         val newMC : EditText = inflateView.findViewById(R.id.newMailConfirm)
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
         confirm.setOnClickListener{
 
-            //check old mail
-            if (oldM.text.toString() == activityData.getEmail()){
-                //check if new mail is empty
-                if(newM.text.toString() != "") {
-                    //check if new mail is correct
-                    if (newM.text.toString() == newMC.text.toString()) {
-                        activityData.updateEmail(newM.text.toString(),activityData.getId())
-                        activityData.removeAutoLog()
-                        val textEmail : TextView? = activity?.findViewById(R.id.emailProfile)
-                        textEmail?.text = newM.text.toString()
-                        dismiss()
-                    } else {
-                        Toast.makeText(context, "New Passwords must be equals!", Toast.LENGTH_SHORT).show()
-                    }
+            //check if new mail is empty
+            if(newM.text.toString() != "") {
+                //check if new mail is correct
+                if (newM.text.toString() == newMC.text.toString()) {
+                    activityData.updateEmail(newM.text.toString(),activityData.getId())
+                    activityData.removeAutoLog()
+                    val textEmail : TextView? = activity?.findViewById(R.id.emailProfile)
+                    textEmail?.text = newM.text.toString()
+                    dismiss()
+                } else {
+                    Toast.makeText(context, "New Mail must be equals!", Toast.LENGTH_SHORT).show()
                 }
-                else{
-                    Toast.makeText(context,"New password cannot be empty!", Toast.LENGTH_SHORT).show()
-                }
-            }else{
-                Toast.makeText(context,"Old password is incorrect!", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(context,"New Mail cannot be empty!", Toast.LENGTH_SHORT).show()
             }
         }
 
