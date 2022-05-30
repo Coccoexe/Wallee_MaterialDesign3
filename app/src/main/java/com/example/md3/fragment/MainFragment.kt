@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.findNavController
 import com.example.md3.R
-import com.example.md3.addTransPopup
 import com.example.md3.events.IActivityData
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.floatingactionbutton.FloatingActionButton

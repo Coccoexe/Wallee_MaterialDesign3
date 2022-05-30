@@ -62,6 +62,22 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return user
     }
 
+    override fun getPassword(): String{
+        var pass = ""
+
+        runBlocking {
+            pass = dao.getPassword(userEmail)
+        }
+
+        return pass
+    }
+
+    override fun updatePassword(password: String, userMail: String) {
+        runBlocking {
+            dao.updatePassword(password,userMail)
+        }
+    }
+
     override fun removeAutoLog() {
         runBlocking {
             dao.removeAutoLog()

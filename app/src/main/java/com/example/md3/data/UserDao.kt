@@ -1,7 +1,10 @@
 package com.example.md3.data
 
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.md3.data.entity.AutoLogin
 import com.example.md3.data.entity.Transaction
 import com.example.md3.data.entity.User
@@ -35,4 +38,11 @@ interface UserDao {
     //UserName
     @Query("Select userName FROM user WHERE userMail = :userMail")
     suspend fun getUserName(userMail: String) : String
+
+    //change password
+    @Query("UPDATE user SET password=:password WHERE userMail = :userMail")
+    suspend fun updatePassword(password: String, userMail: String)
+
+    @Query("Select password From user where userMail = :userMail")
+    suspend fun getPassword(userMail: String) : String
 }

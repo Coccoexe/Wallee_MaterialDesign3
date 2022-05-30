@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
@@ -31,6 +33,7 @@ class ProfileFragment : Fragment() {
         }
         activityData = requireActivity() as IActivityData
 
+        //topbackbutton
         val backButton : AppCompatImageView = inflaterView.findViewById(R.id.profileBack)
         backButton.setOnClickListener{
             val controller : NavController = requireActivity().findNavController(R.id.navigationController)
@@ -40,6 +43,23 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        //email
+        val cardEmail : CardView = inflaterView.findViewById(R.id.cardEmail)
+        val textEmail : TextView = inflaterView.findViewById(R.id.emailProfile)
+        textEmail.text = activityData.getEmail()
+        cardEmail.setOnClickListener{
+            Toast.makeText(inflaterView.context,"Cannot change email!", Toast.LENGTH_SHORT).show()
+        }
+
+        //password
+        val cardPass : CardView = inflaterView.findViewById(R.id.cardPassword)
+        cardPass.setOnClickListener{
+            val popup = ChangePassword()
+            popup.show(requireActivity().supportFragmentManager,"popupPassword")
+        }
+
+
+        //logout
         val cardLogout : CardView = inflaterView.findViewById(R.id.cardLogout)
         cardLogout.setOnClickListener{
             activityData.removeAutoLog()

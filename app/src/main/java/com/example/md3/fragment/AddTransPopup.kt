@@ -1,4 +1,4 @@
-package com.example.md3
+package com.example.md3.fragment
 
 
 import android.graphics.Color
@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.SpinnerAdapter
 import androidx.fragment.app.DialogFragment
+import com.example.md3.R
 
 
 class addTransPopup : DialogFragment() {
@@ -26,9 +27,9 @@ class addTransPopup : DialogFragment() {
         //inflater
         val inflateView =  inflater.inflate(R.layout.trans_popup, container, false)
 
-        if (getDialog() != null && getDialog()?.getWindow() != null) {
-            getDialog()?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            getDialog()?.getWindow()?.requestFeature(Window.FEATURE_NO_TITLE)
+        if (dialog != null && dialog?.window != null) {
+            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         }
 
         //menu tendina
