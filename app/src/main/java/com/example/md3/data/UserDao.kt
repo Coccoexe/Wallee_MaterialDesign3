@@ -23,5 +23,9 @@ interface UserDao {
 
     //login
     @Query("SELECT * FROM user WHERE userMail = :userMail and password = :password")
-    suspend fun login(userMail: String, password: String) : User
+    suspend fun login(userMail: String, password: String) : User?
+
+    //UserName
+    @Query("Select userName FROM user WHERE userMail = :userMail")
+    suspend fun getUserName(userMail: String) : String
 }

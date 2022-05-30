@@ -25,8 +25,7 @@ class RegisterActivity : AppCompatActivity() {
             val user : User = User(
                 userMail.text.toString(),
                 userName.text.toString(),
-                userPass.text.toString(),
-                0
+                userPass.text.toString()
             )
             if(validateInput(user)){
                 val dao = UserDatabase.getInstance(this).userDao

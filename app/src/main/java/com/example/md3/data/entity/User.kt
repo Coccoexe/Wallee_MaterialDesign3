@@ -12,6 +12,4 @@ data class User(
     val userName: String,
     @ColumnInfo
     val password: String,
-    @ColumnInfo
-    val balance: Int
 )

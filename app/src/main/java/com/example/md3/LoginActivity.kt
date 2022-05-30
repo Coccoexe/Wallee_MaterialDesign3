@@ -25,8 +25,6 @@ class LoginActivity : AppCompatActivity() {
 
 
         loginButton.setOnClickListener {
-            //val intent = Intent(this, MainActivity::class.java)
-            //startActivity(intent)
             val mail = userMail.text.toString()
             val pass = userPass.text.toString()
             if (mail.isEmpty() || pass.isEmpty()){
@@ -35,13 +33,14 @@ class LoginActivity : AppCompatActivity() {
             else{
                 val dao = UserDatabase.getInstance(this).userDao
                 lifecycleScope.launch{
-                    val user: User = dao.login(mail,pass)
+                    val user: User? = dao.login(mail,pass)
                     if (user == null){
                         Toast.makeText(applicationContext,"Invalid Credentials!", Toast.LENGTH_SHORT).show()
                     }
                     else
                     {
                         val intent = Intent(applicationContext, MainActivity::class.java)
+                        intent.putExtra("email",mail)
                         startActivity(intent)
                     }
                 }

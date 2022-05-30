@@ -2,19 +2,31 @@ package com.example.md3
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.md3.data.UserDao
 import com.example.md3.data.UserDatabase
 import com.example.md3.data.entity.Transaction
 import com.example.md3.data.entity.User
 import com.example.md3.data.relation.UserTransaction
+import com.example.md3.events.IActivityData
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IActivityData {
+
+    private lateinit var userEmail : String
+    private lateinit var dao : UserDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,10 +36,12 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         findViewById<BottomNavigationView>(R.id.navigationBar).setupWithNavController(navController)
 
-        /*
-        //database
-        val dao = UserDatabase.getInstance(this).userDao
+        userEmail = intent.getStringExtra("email")!!
 
+        //database
+        dao = UserDatabase.getInstance(this).userDao
+
+        /*
         val users = listOf(
             User("ciao@prova.it","userProva","amogus",0) ,
             User("coccobin@gmail.it","coccoexe","frenata",0),
@@ -56,5 +70,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         //super.onBackPressed()
+    }
+
+    override fun getEmail(): String {
+        return userEmail
+    }
+
+    override fun getUserName(): String {
+        var user = ""
+
+        fun scope() = runBlocking {
+            user = dao.getUserName(userEmail)
+        }
+
+        scope()
+        return user
     }
 }
