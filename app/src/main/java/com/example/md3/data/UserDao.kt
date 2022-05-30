@@ -21,4 +21,5 @@ interface UserDao {
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")
     suspend fun getUserWithTransactions(userMail: String): List<Transaction>
 
+
 }

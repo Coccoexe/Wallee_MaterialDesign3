@@ -24,13 +24,14 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         findViewById<BottomNavigationView>(R.id.navigationBar).setupWithNavController(navController)
 
+        /*
         //database
         val dao = UserDatabase.getInstance(this).userDao
 
         val users = listOf(
-            User("ciao@prova.it","userProva","amogus") ,
-            User("coccobin@gmail.it","coccoexe","frenata"),
-            User("ghi8@frenata.dritta","ghiotto","forzanapoli")
+            User("ciao@prova.it","userProva","amogus",0) ,
+            User("coccobin@gmail.it","coccoexe","frenata",0),
+            User("ghi8@frenata.dritta","ghiotto","forzanapoli",0)
         )
 
         val transactions = listOf(
@@ -50,6 +51,10 @@ class MainActivity : AppCompatActivity() {
 
             Log.e("trans", trans1[0].toString())
         }
+        */
+    }
 
+    override fun onBackPressed() {
+        //super.onBackPressed()
     }
 }
