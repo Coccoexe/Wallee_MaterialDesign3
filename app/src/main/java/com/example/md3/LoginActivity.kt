@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
+    private lateinit var userMail : EditText
+    private lateinit var userPass : EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -20,9 +23,11 @@ class LoginActivity : AppCompatActivity() {
 
         val loginButton: Button = findViewById(R.id.loginButton)
         val registerButton : Button = findViewById(R.id.registerButton)
-        val userMail : EditText = findViewById(R.id.emailText)
-        val userPass : EditText = findViewById(R.id.passText)
+        userMail = findViewById(R.id.emailText)
+        userPass = findViewById(R.id.passText)
 
+        userMail.text.clear()
+        userPass.text.clear()
 
         loginButton.setOnClickListener {
             val mail = userMail.text.toString()
@@ -53,5 +58,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        userMail.text.clear()
+        userPass.text.clear()
     }
 }

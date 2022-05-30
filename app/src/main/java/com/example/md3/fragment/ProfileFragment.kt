@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.md3.R
@@ -27,6 +28,12 @@ class ProfileFragment : Fragment() {
                 controller.popBackStack()
             }
         }
+
+        val cardLogout : CardView = inflaterView.findViewById(R.id.cardLogout)
+        cardLogout.setOnClickListener{
+            requireActivity().finish()
+        }
+
         return inflaterView
     }
 
