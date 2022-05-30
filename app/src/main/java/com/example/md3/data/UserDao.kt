@@ -21,5 +21,7 @@ interface UserDao {
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")
     suspend fun getUserWithTransactions(userMail: String): List<Transaction>
 
-
+    //login
+    @Query("SELECT * FROM user WHERE userMail = :userMail and password = :password")
+    suspend fun login(userMail: String, password: String) : User
 }
