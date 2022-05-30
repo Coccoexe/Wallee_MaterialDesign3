@@ -1,4 +1,4 @@
-package com.example.md3
+package com.example.md3.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.example.md3.R
 
 class ProfileFragment : Fragment() {
 

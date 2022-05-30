@@ -6,7 +6,7 @@
     app:startDestination="@id/mainFragment">
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.md3.MainFragment"
+        android:name="com.example.md3.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -15,22 +15,22 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.md3.ProfileFragment"
+        android:name="com.example.md3.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/graphFragment"
-        android:name="com.example.md3.GraphFragment"
+        android:name="com.example.md3.fragment.GraphFragment"
         android:label="fragment_graph"
         tools:layout="@layout/fragment_graph" />
     <fragment
         android:id="@+id/goalFragment"
-        android:name="com.example.md3.GoalFragment"
+        android:name="com.example.md3.fragment.GoalFragment"
         android:label="fragment_goal"
         tools:layout="@layout/fragment_goal" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.md3.SettingsFragment"
+        android:name="com.example.md3.fragment.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>
