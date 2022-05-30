@@ -35,14 +35,25 @@ interface UserDao {
     @Query("SELECT * FROM autologin")
     suspend fun getAutoLogin() : AutoLogin?
 
+    //id
+    @Query("Select id from user where userMail = :userMail")
+    suspend fun getId(userMail: String) : Int
+
     //UserName
-    @Query("Select userName FROM user WHERE userMail = :userMail")
-    suspend fun getUserName(userMail: String) : String
+    @Query("Select userName FROM user WHERE id = :id")
+    suspend fun getUserName(id : Int) : String
 
-    //change password
-    @Query("UPDATE user SET password=:password WHERE userMail = :userMail")
-    suspend fun updatePassword(password: String, userMail: String)
+    //email
+    @Query("UPDATE user SET userMail=:userMail WHERE id = :id")
+    suspend fun updateEmail(userMail: String, id: Int)
 
-    @Query("Select password From user where userMail = :userMail")
-    suspend fun getPassword(userMail: String) : String
+    @Query("Select userMail From user where id = :id")
+    suspend fun getEmail(id: Int) : String
+
+    //password
+    @Query("UPDATE user SET password=:password WHERE id = :id")
+    suspend fun updatePassword(password: String, id: Int)
+
+    @Query("Select password From user where id = :id")
+    suspend fun getPassword(id: Int) : String
 }

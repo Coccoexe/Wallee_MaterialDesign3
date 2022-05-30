@@ -23,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
         registerButton.setOnClickListener{
 
             val user : User = User(
+                0,
                 userMail.text.toString(),
                 userName.text.toString(),
                 userPass.text.toString()

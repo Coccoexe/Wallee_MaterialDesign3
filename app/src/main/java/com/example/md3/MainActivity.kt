@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
 
     private lateinit var userEmail : String
     private lateinit var dao : UserDao
+    private var userId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,9 @@ class MainActivity : AppCompatActivity(), IActivityData {
 
         //database
         dao = UserDatabase.getInstance(this).userDao
-
+        runBlocking {
+            userId = dao.getId(userEmail)
+        }
 
     }
 
@@ -48,15 +51,25 @@ class MainActivity : AppCompatActivity(), IActivityData {
         //super.onBackPressed()
     }
 
+    override fun getId(): Int {
+        return userId
+    }
+
     override fun getEmail(): String {
-        return userEmail
+        var email = ""
+
+        runBlocking {
+            email = dao.getEmail(userId)
+        }
+
+        return email
     }
 
     override fun getUserName(): String {
         var user = ""
 
         runBlocking {
-            user = dao.getUserName(userEmail)
+            user = dao.getUserName(userId)
         }
 
         return user
@@ -66,7 +79,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
         var pass = ""
 
         runBlocking {
-            pass = dao.getPassword(userEmail)
+            pass = dao.getPassword(userId)
         }
 
         return pass
@@ -74,8 +87,15 @@ class MainActivity : AppCompatActivity(), IActivityData {
 
     override fun updatePassword(password: String, userMail: String) {
         runBlocking {
-            dao.updatePassword(password,userMail)
+            dao.updatePassword(password,userId)
         }
+    }
+
+    override fun updateEmail(userMail: String, userId: Int) {
+        runBlocking {
+            dao.updateEmail(userMail,userId)
+        }
+        userEmail = getEmail()
     }
 
     override fun removeAutoLog() {

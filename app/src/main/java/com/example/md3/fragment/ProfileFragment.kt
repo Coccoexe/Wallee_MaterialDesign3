@@ -1,19 +1,17 @@
 package com.example.md3.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.md3.R
 import com.example.md3.events.IActivityData
-import java.lang.RuntimeException
 
 class ProfileFragment : Fragment() {
 
@@ -48,7 +46,8 @@ class ProfileFragment : Fragment() {
         val textEmail : TextView = inflaterView.findViewById(R.id.emailProfile)
         textEmail.text = activityData.getEmail()
         cardEmail.setOnClickListener{
-            Toast.makeText(inflaterView.context,"Cannot change email!", Toast.LENGTH_SHORT).show()
+            val popup = ChangeEmail()
+            popup.show(requireActivity().supportFragmentManager, "popupEmail")
         }
 
         //password
@@ -70,3 +69,5 @@ class ProfileFragment : Fragment() {
     }
 
 }
+
+
