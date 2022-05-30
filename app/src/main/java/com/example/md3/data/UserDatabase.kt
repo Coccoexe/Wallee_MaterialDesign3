@@ -4,13 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.md3.data.entity.AutoLogin
 import com.example.md3.data.entity.Transaction
 import com.example.md3.data.entity.User
 
 @Database(
     entities = [
         User::class,
-        Transaction::class
+        Transaction::class,
+        AutoLogin::class
     ],
     version = 1
 )

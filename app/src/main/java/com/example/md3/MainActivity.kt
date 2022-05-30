@@ -55,11 +55,17 @@ class MainActivity : AppCompatActivity(), IActivityData {
     override fun getUserName(): String {
         var user = ""
 
-        fun scope() = runBlocking {
+        runBlocking {
             user = dao.getUserName(userEmail)
         }
 
-        scope()
         return user
     }
+
+    override fun removeAutoLog() {
+        runBlocking {
+            dao.removeAutoLog()
+        }
+    }
+
 }
