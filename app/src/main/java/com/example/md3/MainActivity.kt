@@ -52,6 +52,12 @@ class MainActivity : AppCompatActivity(), IActivityData {
         //super.onBackPressed()
     }
 
+    override fun insertTransaction(transaction: Transaction) {
+        runBlocking {
+            dao.insertTransaction(transaction)
+        }
+    }
+
     override fun getId(): Int {
         return userId
     }

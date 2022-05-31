@@ -6,4 +6,23 @@
     <string name="my_profile">Il mio Profilo</string>
     <string name="my_name">Il mio Nome</string>
     <string name="user_welcome">Ciao %s,</string>
+    <string-array name="expenses">
+        <item>Bollette</item>
+        <item>Groceries</item>
+        <item>Transportation</item>
+        <item>Entertainment</item>
+        <item>House</item>
+        <item>Health</item>
+        <item>Gift</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="income">
+        <item>Stipendio</item>
+        <item>Renting</item>
+        <item>Investment</item>
+        <item>Selling</item>
+        <item>Gift</item>
+        <item>Other</item>
+    </string-array>
 </resources>
