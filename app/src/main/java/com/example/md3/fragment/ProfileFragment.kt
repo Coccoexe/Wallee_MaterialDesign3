@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.md3.R
 import com.example.md3.events.IActivityData
+import kotlinx.coroutines.flow.channelFlow
 
 class ProfileFragment : Fragment() {
 
@@ -39,6 +40,15 @@ class ProfileFragment : Fragment() {
             {
                 controller.popBackStack()
             }
+        }
+
+        //user
+        val userText : TextView = inflaterView.findViewById(R.id.profileName)
+        userText.text = activityData.getUserName()
+        val userButton : AppCompatImageView = inflaterView.findViewById(R.id.profileEdit)
+        userButton.setOnClickListener{
+            val popup = ChangeUserName()
+            popup.show(requireActivity().supportFragmentManager, "popupUser")
         }
 
         //email

@@ -85,6 +85,12 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return pass
     }
 
+    override fun updateUser(userName: String, userId: Int) {
+        runBlocking {
+            dao.updateUser(userName,userId)
+        }
+    }
+
     override fun updatePassword(password: String, userMail: String) {
         runBlocking {
             dao.updatePassword(password,userId)
