@@ -1,5 +1,6 @@
 package com.example.md3
 
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -19,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
         val userMail : EditText = findViewById(R.id.emailText)
         val userPass : EditText = findViewById(R.id.passText)
         val userName : EditText = findViewById(R.id.nameText)
+        val userUri : Uri = Uri.parse("android.resource://com.example.md3/drawable/no_image")
 
         registerButton.setOnClickListener{
 
@@ -26,7 +28,8 @@ class RegisterActivity : AppCompatActivity() {
                 0,
                 userMail.text.toString(),
                 userName.text.toString(),
-                userPass.text.toString()
+                userPass.text.toString(),
+                userUri.toString()
             )
             if(validateInput(user)){
                 val dao = UserDatabase.getInstance(this).userDao

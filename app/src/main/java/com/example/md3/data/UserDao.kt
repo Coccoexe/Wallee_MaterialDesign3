@@ -59,4 +59,12 @@ interface UserDao {
 
     @Query("Select password From user where id = :id")
     suspend fun getPassword(id: Int) : String
+
+    //image
+    @Query("UPDATE user SET imageUri=:imageUri WHERE id = :id")
+    suspend fun updateImage(imageUri: String, id: Int)
+
+    @Query("Select imageUri From user where id = :id ")
+    suspend fun getImageUri(id: Int) : String
+
 }

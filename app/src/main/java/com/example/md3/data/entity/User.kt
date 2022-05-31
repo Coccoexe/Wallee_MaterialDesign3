@@ -13,5 +13,7 @@ data class User(
     @ColumnInfo
     val userName: String,
     @ColumnInfo
-    val password: String
+    val password: String,
+    @ColumnInfo
+    val imageUri: String
 )

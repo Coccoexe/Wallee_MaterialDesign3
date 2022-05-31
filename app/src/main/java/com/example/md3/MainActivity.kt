@@ -1,5 +1,6 @@
 package com.example.md3
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -85,6 +86,16 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return pass
     }
 
+    override fun getImageUri(): Uri {
+        var uri : Uri = Uri.EMPTY
+
+        runBlocking {
+            uri = Uri.parse(dao.getImageUri(userId))
+        }
+
+        return uri
+    }
+
     override fun updateUser(userName: String, userId: Int) {
         runBlocking {
             dao.updateUser(userName,userId)
@@ -102,6 +113,12 @@ class MainActivity : AppCompatActivity(), IActivityData {
             dao.updateEmail(userMail,userId)
         }
         userEmail = getEmail()
+    }
+
+    override fun updateImageUri(imageUri: Uri, userId: Int) {
+        runBlocking {
+            dao.updateImage(imageUri.toString(),userId)
+        }
     }
 
     override fun removeAutoLog() {
