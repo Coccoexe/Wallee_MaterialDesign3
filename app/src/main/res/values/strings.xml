@@ -5,4 +5,24 @@
     <string name="my_profile">My Profile</string>
     <string name="my_name">My Name</string>
     <string name="user_welcome">Hi %s,</string>
+    
+    <string-array name="expenses">
+        <item>Bills</item>
+        <item>Groceries</item>
+        <item>Transportation</item>
+        <item>Entertainment</item>
+        <item>House</item>
+        <item>Health</item>
+        <item>Gift</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="income">
+        <item>Salary</item>
+        <item>Renting</item>
+        <item>Investment</item>
+        <item>Selling</item>
+        <item>Gift</item>
+        <item>Other</item>
+    </string-array>
 </resources>

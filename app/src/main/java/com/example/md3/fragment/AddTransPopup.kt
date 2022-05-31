@@ -8,15 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.SpinnerAdapter
+import android.widget.*
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 
 
-class addTransPopup : DialogFragment() {
+class AddTransPopup : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,10 +31,33 @@ class addTransPopup : DialogFragment() {
 
         //menu tendina
         val transCat : Spinner = inflateView.findViewById(R.id.popupSpinner)
-        var items = arrayOf<String>("Categoria1","Categoria2","Altro")
-        val adapter: Any =
-            ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
-        transCat.adapter = adapter as SpinnerAdapter?
+
+        //radiogroup
+        val radiogroup : RadioGroup = inflateView.findViewById(R.id.selectTransaction)
+        radiogroup.setOnCheckedChangeListener { _, optionId ->
+            run {
+                when (optionId) {
+                    R.id.add -> {
+                        val items = resources.getStringArray(R.array.income)
+                        val adapter: Any =
+                            ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
+                        transCat.adapter = adapter as SpinnerAdapter?
+                    }
+                    R.id.remove -> {
+                        val items = resources.getStringArray(R.array.expenses)
+                        val adapter: Any =
+                            ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
+                        transCat.adapter = adapter as SpinnerAdapter?
+                    }
+                }
+            }
+        }
+
+        //confirmButton
+        val confirm : Button = inflateView.findViewById(R.id.popupOk)
+        confirm.setOnClickListener{
+            dismiss()
+        }
 
         //cancelButton
         val cancel : Button = inflateView.findViewById(R.id.popupBack)

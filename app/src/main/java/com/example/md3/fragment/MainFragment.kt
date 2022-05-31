@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
         //add transaction
         val addTrans : Button = inflateView.findViewById(R.id.addTransaction)
         addTrans.setOnClickListener{
-            val popup = addTransPopup()
+            val popup = AddTransPopup()
 
             popup.show(requireActivity().supportFragmentManager, "popupTransaction")
         }
