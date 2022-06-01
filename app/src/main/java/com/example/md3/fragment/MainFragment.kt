@@ -63,7 +63,7 @@ class MainFragment : Fragment() {
         val lastTransaction : TextView = inflateView.findViewById(R.id.last_transactions)
         val trans : List<Transaction>? = activityData.getUserWithTransaction()
         if (trans!!.isNotEmpty()) {
-            lastTransaction.text = trans.last().amount.toString() + " " + trans.last().date
+            lastTransaction.text = trans.last().amount.toString() + "$ " + trans.last().date
         }
 
         // Inflate the layout for this fragment
