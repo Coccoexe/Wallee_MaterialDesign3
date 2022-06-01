@@ -1,5 +1,6 @@
 package com.example.md3
 
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -22,7 +23,6 @@ class RegisterActivity : AppCompatActivity() {
         val userMail : EditText = findViewById(R.id.emailText)
         val userPass : EditText = findViewById(R.id.passText)
         val userName : EditText = findViewById(R.id.nameText)
-        val userUri : Uri = Uri.parse("android.resource://com.example.md3/drawable/no_image")
         val dao = UserDatabase.getInstance(this).userDao
 
         registerButton.setOnClickListener {
@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity() {
                 userMail.text.toString(),
                 userName.text.toString(),
                 userPass.text.toString(),
-                userUri.toString()
+                BitmapFactory.decodeResource(applicationContext.resources,R.drawable.no_image)
             )
             if (existMail(dao,user)) {
                 Toast.makeText(applicationContext, "Email already used!", Toast.LENGTH_SHORT)

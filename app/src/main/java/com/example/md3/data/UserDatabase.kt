@@ -1,9 +1,8 @@
 package com.example.md3.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import com.example.md3.data.converter.ImageConverter
 import com.example.md3.data.entity.AutoLogin
 import com.example.md3.data.entity.Transaction
 import com.example.md3.data.entity.User
@@ -16,6 +15,7 @@ import com.example.md3.data.entity.User
     ],
     version = 1
 )
+@TypeConverters(ImageConverter::class)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract val userDao: UserDao

@@ -1,5 +1,6 @@
 package com.example.md3
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -92,11 +93,11 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return pass
     }
 
-    override fun getImageUri(): Uri {
-        var uri : Uri = Uri.EMPTY
+    override fun getImageUri(): Bitmap? {
+        var uri : Bitmap? = null
 
         runBlocking {
-            uri = Uri.parse(dao.getImageUri(userId))
+            uri = dao.getImageUri(userId)
         }
 
         return uri
@@ -121,9 +122,9 @@ class MainActivity : AppCompatActivity(), IActivityData {
         userEmail = getEmail()
     }
 
-    override fun updateImageUri(imageUri: Uri, userId: Int) {
+    override fun updateImageUri(imageUri: Bitmap, userId: Int) {
         runBlocking {
-            dao.updateImage(imageUri.toString(),userId)
+            dao.updateImage(imageUri,userId)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.md3.events
 
+import android.graphics.Bitmap
 import android.net.Uri
 import com.example.md3.data.entity.Transaction
 
@@ -9,10 +10,10 @@ interface IActivityData {
     fun getEmail(): String
     fun getUserName(): String
     fun getPassword(): String
-    fun getImageUri(): Uri
+    fun getImageUri(): Bitmap?
     fun updateUser(userName: String, userId: Int)
     fun updatePassword(password: String, userMail: String)
     fun updateEmail(userMail: String, userId: Int)
-    fun updateImageUri(imageUri: Uri, userId: Int)
+    fun updateImageUri(imageUri: Bitmap, userId: Int)
     fun removeAutoLog()
 }

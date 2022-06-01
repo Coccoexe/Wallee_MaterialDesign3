@@ -1,15 +1,16 @@
 package com.example.md3.fragment
 
-
-import android.graphics.drawable.Drawable
+import android.content.ContentResolver
+import android.content.Context
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
@@ -19,7 +20,6 @@ import androidx.navigation.findNavController
 import com.example.md3.R
 import com.example.md3.events.IActivityData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
 
 
 class ProfileFragment : Fragment() {
@@ -53,20 +53,49 @@ class ProfileFragment : Fragment() {
 
 
         //picture
+
         val profileImage : ImageView = inflaterView.findViewById(R.id.profileImage)
-        //profileImage.setImageURI(activityData.getImageUri())
+        profileImage.setImageBitmap(activityData.getImageUri())
 
         val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri ->
             // Handle the returned Uri
-            Toast.makeText(context, uri.toString(), Toast.LENGTH_SHORT).show()
             profileImage.setImageURI(uri)
-            activityData.updateImageUri(uri,activityData.getId())
+            activityData.updateImageUri(MediaStore.Images.Media.getBitmap(context?.contentResolver,uri),activityData.getId())
         }
 
         val pictureButton : FloatingActionButton = inflaterView.findViewById(R.id.changeImage)
         pictureButton.setOnClickListener{
             getContent.launch("image/*")
         }
+
+        /*
+        val profileImage : ImageView = inflaterView.findViewById(R.id.profileImage)
+        val storagePermissionRequest = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+            if (it){
+                requireContext().grantUriPermission(requireContext().packageName,activityData.getImageUri(),FLAG_GRANT_READ_URI_PERMISSION)
+                profileImage.setImageURI(activityData.getImageUri())
+
+                val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri ->
+                    // Handle the returned Uri
+                    Toast.makeText(context, uri.toString(), Toast.LENGTH_SHORT).show()
+                    profileImage.setImageURI(uri)
+                    activityData.updateImageUri(uri,activityData.getId())
+                }
+
+                val pictureButton : FloatingActionButton = inflaterView.findViewById(R.id.changeImage)
+                pictureButton.setOnClickListener{
+                    getContent.launch("image/*")
+                }
+            }
+            else{
+
+            }
+        }
+        storagePermissionRequest.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        */
+         */
+
+
 
         //user
         val userText : TextView = inflaterView.findViewById(R.id.profileName)

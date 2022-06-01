@@ -1,5 +1,6 @@
 package com.example.md3.data.entity
 
+import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
@@ -16,5 +17,5 @@ data class User(
     @ColumnInfo
     val password: String,
     @ColumnInfo
-    val imageUri: String
+    val imageUri: Bitmap
 )

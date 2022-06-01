@@ -1,6 +1,7 @@
 package com.example.md3.data
 
 
+import android.graphics.Bitmap
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -71,9 +72,9 @@ interface UserDao {
 
     //image
     @Query("UPDATE user SET imageUri=:imageUri WHERE id = :id")
-    suspend fun updateImage(imageUri: String, id: Int)
+    suspend fun updateImage(imageUri: Bitmap, id: Int)
 
     @Query("Select imageUri From user where id = :id ")
-    suspend fun getImageUri(id: Int) : String
+    suspend fun getImageUri(id: Int) : Bitmap?
 
 }
