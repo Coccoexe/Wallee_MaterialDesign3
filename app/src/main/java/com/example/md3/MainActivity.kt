@@ -103,6 +103,16 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return uri
     }
 
+    override fun getUserWithTransaction(): List<Transaction>? {
+        var transactionList : List<Transaction>? = null
+
+        runBlocking {
+            transactionList = dao.getUserWithTransactions(userEmail)
+        }
+
+        return transactionList
+    }
+
     override fun updateUser(userName: String, userId: Int) {
         runBlocking {
             dao.updateUser(userName,userId)

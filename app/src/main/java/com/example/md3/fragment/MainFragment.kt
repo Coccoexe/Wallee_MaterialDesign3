@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.findNavController
 import com.example.md3.R
+import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -50,6 +51,13 @@ class MainFragment : Fragment() {
         val profileButton : FloatingActionButton = inflateView.findViewById(R.id.userPicture)
         profileButton.setOnClickListener{
             inflateView.findNavController().navigate(R.id.action_profile)
+        }
+
+        //last transaction
+        val lastTransaction : TextView = inflateView.findViewById(R.id.last_transactions)
+        val trans : List<Transaction>? = activityData.getUserWithTransaction()
+        if (trans!!.isNotEmpty()) {
+            lastTransaction.text = trans[0].amount.toString() + " " + trans[0].date
         }
 
         // Inflate the layout for this fragment

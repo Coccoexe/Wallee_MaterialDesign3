@@ -30,7 +30,7 @@ interface UserDao {
     //join
     @androidx.room.Transaction
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")
-    suspend fun getUserWithTransactions(userMail: String): List<Transaction>
+    suspend fun getUserWithTransactions(userMail: String): List<Transaction>?
 
 
     //login
