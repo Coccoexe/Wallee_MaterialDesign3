@@ -105,7 +105,8 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/more" />
+                        android:src="@drawable/more"
+                        app:tint="?attr/colorOnPrimaryContainer" />
 
                     <TextView
                         android:id="@+id/lastAmount"
@@ -141,21 +142,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="180dp"
+                android:orientation="horizontal"
                 android:padding="16dp">
 
-                <TextView
-                    android:textColor="?attr/colorOnPrimaryContainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Graph: "
-                    android:textSize="26sp"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher" />
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/incomeChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
             </LinearLayout>
 
