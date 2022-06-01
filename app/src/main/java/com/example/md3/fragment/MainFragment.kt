@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
@@ -62,18 +63,42 @@ class MainFragment : Fragment() {
         //last transaction
         val lastAmount : TextView = inflateView.findViewById(R.id.lastAmount)
         val lastDate : TextView = inflateView.findViewById(R.id.lastDate)
+        val lastImage : ImageView = inflateView.findViewById(R.id.lastImage)
         val trans : List<Transaction>? = activityData.getUserWithTransaction()
         if (trans!!.isNotEmpty()) {
             lastAmount.text = trans.last().amount.toString() + "$ "
             lastDate.text = trans.last().date
+            lastImage.setImageResource(getDrawable(trans.last().category))
         }else{
             lastAmount.text = "0 $"
             lastDate.text = "No recent transaction"
+            lastImage.setImageResource(R.drawable.more)
         }
 
 
         // Inflate the layout for this fragment
         return inflateView
+    }
+
+    private fun getDrawable(category : String) : Int{
+        val income = resources.getStringArray(R.array.income)
+        val expense = resources.getStringArray(R.array.expenses)
+        when(category){
+            income[0] -> return R.drawable.salary
+            income[1] -> return R.drawable.rent
+            income[2] -> return R.drawable.investment
+            income[3] -> return R.drawable.selling
+            income[4] -> return R.drawable.gift
+            income[5] -> return R.drawable.more
+            expense[0] -> return R.drawable.bills
+            expense[1] -> return R.drawable.grocery
+            expense[2] -> return R.drawable.transportation
+            expense[3] -> return R.drawable.home
+            expense[4] -> return R.drawable.health
+            expense[5] -> return R.drawable.gift
+            expense[6] -> return R.drawable.more
+        }
+        return R.drawable.more
     }
 
 }
