@@ -2,6 +2,7 @@ package com.example.md3.fragment
 
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
@@ -40,6 +41,11 @@ class ProfileFragment : Fragment() {
         }
         activityData = requireActivity() as IActivityData
 
+        //user
+        val id = activityData.getId()
+        val email = activityData.getEmail()
+        val userName = activityData.getUserName()
+
         //topbackbutton
         val backButton : AppCompatImageView = inflaterView.findViewById(R.id.profileBack)
         backButton.setOnClickListener{
@@ -50,17 +56,16 @@ class ProfileFragment : Fragment() {
             }
         }
 
-
-
         //picture
-
         val profileImage : ImageView = inflaterView.findViewById(R.id.profileImage)
         profileImage.setImageBitmap(activityData.getImageUri())
 
         val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri ->
             // Handle the returned Uri
-            profileImage.setImageURI(uri)
-            activityData.updateImageUri(MediaStore.Images.Media.getBitmap(context?.contentResolver,uri),activityData.getId())
+            var bitmap : Bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver,uri)
+            bitmap = Bitmap.createScaledBitmap(bitmap,200,200,true)
+            profileImage.setImageBitmap(bitmap)
+            activityData.updateImageUri(bitmap,id)
         }
 
         val pictureButton : FloatingActionButton = inflaterView.findViewById(R.id.changeImage)
@@ -68,38 +73,10 @@ class ProfileFragment : Fragment() {
             getContent.launch("image/*")
         }
 
-        /*
-        val profileImage : ImageView = inflaterView.findViewById(R.id.profileImage)
-        val storagePermissionRequest = registerForActivityResult(ActivityResultContracts.RequestPermission()){
-            if (it){
-                requireContext().grantUriPermission(requireContext().packageName,activityData.getImageUri(),FLAG_GRANT_READ_URI_PERMISSION)
-                profileImage.setImageURI(activityData.getImageUri())
-
-                val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri ->
-                    // Handle the returned Uri
-                    Toast.makeText(context, uri.toString(), Toast.LENGTH_SHORT).show()
-                    profileImage.setImageURI(uri)
-                    activityData.updateImageUri(uri,activityData.getId())
-                }
-
-                val pictureButton : FloatingActionButton = inflaterView.findViewById(R.id.changeImage)
-                pictureButton.setOnClickListener{
-                    getContent.launch("image/*")
-                }
-            }
-            else{
-
-            }
-        }
-        storagePermissionRequest.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-        */
-         */
-
-
 
         //user
         val userText : TextView = inflaterView.findViewById(R.id.profileName)
-        userText.text = activityData.getUserName()
+        userText.text = userName
         val userButton : AppCompatImageView = inflaterView.findViewById(R.id.profileEdit)
         userButton.setOnClickListener{
             val popup = ChangeUserName()
@@ -109,7 +86,7 @@ class ProfileFragment : Fragment() {
         //email
         val cardEmail : CardView = inflaterView.findViewById(R.id.cardEmail)
         val textEmail : TextView = inflaterView.findViewById(R.id.emailProfile)
-        textEmail.text = activityData.getEmail()
+        textEmail.text = email
         cardEmail.setOnClickListener{
             val popup = ChangeEmail()
             popup.show(requireActivity().supportFragmentManager, "popupEmail")
