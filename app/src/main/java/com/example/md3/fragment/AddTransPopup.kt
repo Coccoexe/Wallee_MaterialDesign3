@@ -75,7 +75,7 @@ class AddTransPopup : DialogFragment() {
 
             var money = 0.0
 
-            if(radiogroup.checkedRadioButtonId == -1){
+            if(radiogroup.checkedRadioButtonId == -1 || amount.text.isEmpty()){
                 dismiss()
             }else {
                 if (radiogroup.checkedRadioButtonId == R.id.add) {
@@ -84,15 +84,25 @@ class AddTransPopup : DialogFragment() {
                     money = 0 - amount.text.toString().toDouble()
                 }
 
+                val calendar : Calendar = Calendar.getInstance()
+                val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a",Locale.US)
+
                 activityData.insertTransaction(
                     Transaction(
                         0,
                         activityData.getEmail(),
                         money,
                         transCat.selectedItem.toString(),
-                        Calendar.getInstance().time.toString()
+                        format.format(calendar.time)
+                        //Calendar.getInstance().time.toString()
                     )
                 )
+
+                val balance : TextView = requireActivity().findViewById(R.id.balance)
+                val lastTransaction : TextView = requireActivity().findViewById(R.id.last_transactions)
+                balance.text = activityData.getUserBalance().toString() + "$"
+                lastTransaction.text = activityData.getUserWithTransaction()!!.last().amount.toString() +
+                        " " + activityData.getUserWithTransaction()!!.last().date
             }
             dismiss()
         }
@@ -104,7 +114,8 @@ class AddTransPopup : DialogFragment() {
             dismiss()
         }
 
-
         return inflateView
     }
+
+
 }

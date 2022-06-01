@@ -103,6 +103,17 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return uri
     }
 
+    override fun getUserBalance(): Double {
+        var balance : Double? = null
+        runBlocking {
+            balance = dao.getUserBalance(userEmail)
+        }
+        if (balance == null) {
+            balance = 0.0
+        }
+        return balance!!
+    }
+
     override fun getUserWithTransaction(): List<Transaction>? {
         var transactionList : List<Transaction>? = null
 

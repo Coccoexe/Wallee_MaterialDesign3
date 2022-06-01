@@ -32,6 +32,10 @@ interface UserDao {
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")
     suspend fun getUserWithTransactions(userMail: String): List<Transaction>?
 
+    //getBalance
+    @Query("Select sum(amount) as balance from `transaction` where userMail = :userMail")
+    suspend fun getUserBalance(userMail: String): Double
+
 
     //login
     @Query("SELECT * FROM user WHERE userMail = :userMail and password = :password")

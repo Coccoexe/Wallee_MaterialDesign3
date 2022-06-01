@@ -39,11 +39,14 @@ class MainFragment : Fragment() {
         val welcome : TextView = inflateView.findViewById(R.id.welcome)
         welcome.text = getString(R.string.user_welcome).format(activityData.getUserName())
 
+        //balance
+        val balance : TextView = inflateView.findViewById(R.id.balance)
+        balance.text = activityData.getUserBalance().toString() + "$"
+
         //add transaction
         val addTrans : Button = inflateView.findViewById(R.id.addTransaction)
         addTrans.setOnClickListener{
             val popup = AddTransPopup()
-
             popup.show(requireActivity().supportFragmentManager, "popupTransaction")
         }
 
@@ -57,7 +60,7 @@ class MainFragment : Fragment() {
         val lastTransaction : TextView = inflateView.findViewById(R.id.last_transactions)
         val trans : List<Transaction>? = activityData.getUserWithTransaction()
         if (trans!!.isNotEmpty()) {
-            lastTransaction.text = trans[0].amount.toString() + " " + trans[0].date
+            lastTransaction.text = trans.last().amount.toString() + " " + trans.last().date
         }
 
         // Inflate the layout for this fragment

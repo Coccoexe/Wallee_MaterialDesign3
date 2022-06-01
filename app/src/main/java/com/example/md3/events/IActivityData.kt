@@ -12,6 +12,7 @@ interface IActivityData {
     fun getUserName(): String
     fun getPassword(): String
     fun getImageUri(): Bitmap?
+    fun getUserBalance(): Double
     fun getUserWithTransaction(): List<Transaction>?
     fun updateUser(userName: String, userId: Int)
     fun updatePassword(password: String, userMail: String)
