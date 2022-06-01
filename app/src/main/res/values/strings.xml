@@ -5,6 +5,7 @@
     <string name="my_profile">My Profile</string>
     <string name="my_name">My Name</string>
     <string name="user_welcome">Hi %s,</string>
+    <string name="goals">Goals</string>
     
     <string-array name="expenses">
         <item>Bills</item>
