@@ -2,9 +2,10 @@ package com.example.md3.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(indices = [Index(value = ["userMail"], unique = true)])
 data class User(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
