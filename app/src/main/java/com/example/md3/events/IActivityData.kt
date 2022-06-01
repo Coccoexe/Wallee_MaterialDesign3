@@ -2,6 +2,7 @@ package com.example.md3.events
 
 import android.graphics.Bitmap
 import android.net.Uri
+import com.example.md3.data.UserDao
 import com.example.md3.data.entity.Transaction
 
 interface IActivityData {
@@ -16,4 +17,5 @@ interface IActivityData {
     fun updateEmail(userMail: String, userId: Int)
     fun updateImageUri(imageUri: Bitmap, userId: Int)
     fun removeAutoLog()
+    fun existMail(userMail: String): Boolean
 }

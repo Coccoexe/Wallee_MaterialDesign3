@@ -13,7 +13,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
+import com.example.md3.data.UserDao
+import com.example.md3.data.entity.User
 import com.example.md3.events.IActivityData
+import kotlinx.coroutines.runBlocking
 
 
 class ChangeEmail : DialogFragment() {
@@ -56,21 +59,29 @@ class ChangeEmail : DialogFragment() {
             //check if new mail is empty
             if(newM.text.toString() != "") {
                 //check if new mail is correct
-                if (newM.text.toString() == newMC.text.toString()) {
-                    activityData.updateEmail(newM.text.toString(),activityData.getId())
-                    activityData.removeAutoLog()
-                    val textEmail : TextView? = activity?.findViewById(R.id.emailProfile)
-                    textEmail?.text = newM.text.toString()
-                    dismiss()
+                if (activityData.existMail(newM.text.toString())){
+                    Toast.makeText(context, "Email already used!", Toast.LENGTH_SHORT)
+                        .show()
+                    newM.text.clear()
+                    newMC.text.clear()
                 } else {
-                    Toast.makeText(context, "New Mail must be equals!", Toast.LENGTH_SHORT).show()
+                    if (newM.text.toString() == newMC.text.toString()) {
+                        activityData.updateEmail(newM.text.toString(), activityData.getId())
+                        activityData.removeAutoLog()
+                        val textEmail: TextView? = activity?.findViewById(R.id.emailProfile)
+                        textEmail?.text = newM.text.toString()
+                        dismiss()
+                    } else {
+                        Toast.makeText(context, "New Mail must be equals!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
-            }
-            else{
+            } else {
                 Toast.makeText(context,"New Mail cannot be empty!", Toast.LENGTH_SHORT).show()
             }
         }
 
         return inflateView
     }
+
 }

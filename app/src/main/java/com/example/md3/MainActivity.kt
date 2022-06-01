@@ -134,4 +134,12 @@ class MainActivity : AppCompatActivity(), IActivityData {
         }
     }
 
+    override fun existMail(userMail: String) : Boolean{
+        var exist : Int? = null
+        runBlocking {
+            exist = dao.getId(userMail)
+        }
+        return exist != null
+    }
+
 }
