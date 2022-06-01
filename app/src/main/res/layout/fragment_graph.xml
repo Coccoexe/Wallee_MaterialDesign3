@@ -23,6 +23,47 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My transactions"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/allTransactions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back_24"
+            android:tint="?attr/colorOnBackground"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            app:layout_constraintEnd_toStartOf="@id/positiveTransactions"
+            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/positiveTransactions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back_24"
+            android:tint="?attr/colorOnBackground"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            app:layout_constraintEnd_toStartOf="@id/negativeTransactions"
+            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/negativeTransactions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back_24"
+            android:tint="?attr/colorOnBackground"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigationBar"
             app:menu="@menu/bottom_navigation_menu"
