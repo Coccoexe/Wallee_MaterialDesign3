@@ -60,12 +60,15 @@ class ProfileFragment : Fragment() {
         val profileImage : ImageView = inflaterView.findViewById(R.id.profileImage)
         profileImage.setImageBitmap(activityData.getImageUri())
 
-        val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri ->
+        val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             // Handle the returned Uri
-            var bitmap : Bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver,uri)
-            bitmap = Bitmap.createScaledBitmap(bitmap,200,200,true)
-            profileImage.setImageBitmap(bitmap)
-            activityData.updateImageUri(bitmap,id)
+            if(uri != null) {
+                var bitmap: Bitmap =
+                    MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
+                bitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, true)
+                profileImage.setImageBitmap(bitmap)
+                activityData.updateImageUri(bitmap, id)
+            }
         }
 
         val pictureButton : FloatingActionButton = inflaterView.findViewById(R.id.changeImage)
