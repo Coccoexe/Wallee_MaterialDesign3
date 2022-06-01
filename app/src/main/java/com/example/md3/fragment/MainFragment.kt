@@ -1,19 +1,22 @@
 package com.example.md3.fragment
 
+import android.R.attr.bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.graphics.drawable.toDrawable
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.lang.RuntimeException
 
 
 class MainFragment : Fragment() {
