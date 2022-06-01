@@ -1,17 +1,14 @@
 package com.example.md3
 
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.example.md3.data.UserDao
 import com.example.md3.data.UserDatabase
 import com.example.md3.data.entity.User
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class RegisterActivity : AppCompatActivity() {
