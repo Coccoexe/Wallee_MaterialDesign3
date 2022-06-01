@@ -102,7 +102,7 @@ class AddTransPopup : DialogFragment() {
                 val lastTransaction : TextView = requireActivity().findViewById(R.id.last_transactions)
                 balance.text = activityData.getUserBalance().toString() + "$"
                 lastTransaction.text = activityData.getUserWithTransaction()!!.last().amount.toString() +
-                        " " + activityData.getUserWithTransaction()!!.last().date
+                        "$ " + activityData.getUserWithTransaction()!!.last().date
             }
             dismiss()
         }
