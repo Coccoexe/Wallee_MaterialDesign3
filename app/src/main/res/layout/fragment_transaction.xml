@@ -63,6 +63,8 @@
                 <Button
                     android:id="@+id/last_month"
                     style="?attr/materialButtonOutlinedStyle"
+                    android:backgroundTint="@drawable/button_color_selector"
+                    android:textColor="@drawable/button_text_color_selector"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="month" />
@@ -70,6 +72,8 @@
                 <Button
                     android:id="@+id/last_three_month"
                     style="?attr/materialButtonOutlinedStyle"
+                    android:backgroundTint="@drawable/button_color_selector"
+                    android:textColor="@drawable/button_text_color_selector"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3 month" />
@@ -77,6 +81,8 @@
                 <Button
                     android:id="@+id/last_year"
                     style="?attr/materialButtonOutlinedStyle"
+                    android:backgroundTint="@drawable/button_color_selector"
+                    android:textColor="@drawable/button_text_color_selector"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="year" />
@@ -84,6 +90,8 @@
                 <Button
                     android:id="@+id/all_time"
                     style="?attr/materialButtonOutlinedStyle"
+                    android:backgroundTint="@drawable/button_color_selector"
+                    android:textColor="@drawable/button_text_color_selector"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="all" />
