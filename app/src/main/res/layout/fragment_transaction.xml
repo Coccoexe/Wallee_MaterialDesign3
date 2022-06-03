@@ -10,42 +10,90 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/allTransactions"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/money_in_out"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/positiveTransactions"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/upBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSecondaryContainer"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/positiveTransactions"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/money_in"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/negativeTransactions" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/allTransactions"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/money_in_out"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/positiveTransactions"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/negativeTransactions"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/money_out"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/positiveTransactions"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/money_in"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/negativeTransactions" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/negativeTransactions"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/money_out"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <RadioGroup
+                android:id="@+id/selectCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/popupSpinner"
+                app:layout_constraintTop_toBottomOf="@id/negativeTransactions">
+
+                <RadioButton
+                    android:id="@+id/add"
+                    android:text="all"
+                    android:textColor="?attr/colorOnSecondaryContainer"
+                    android:buttonTint="?attr/colorOnSecondaryContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/remove"
+                    android:text="custom"
+                    android:textColor="?attr/colorOnSecondaryContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+            <Spinner
+                android:id="@+id/popupSpinner"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:popupBackground="?attr/colorSecondaryContainer"
+                android:spinnerMode="dropdown"
+                android:layout_marginHorizontal="30dp"
+                app:layout_constraintStart_toEndOf="@id/selectCategory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/selectCategory"
+                app:layout_constraintBottom_toBottomOf="@id/selectCategory"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dataList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintTop_toBottomOf="@id/allTransactions"
+            app:layout_constraintTop_toBottomOf="@id/upBar"
             app:layout_constraintBottom_toTopOf="@id/navigationBar"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
