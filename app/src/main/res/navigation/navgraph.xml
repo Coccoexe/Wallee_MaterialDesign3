@@ -29,8 +29,8 @@
         android:label="fragment_goal"
         tools:layout="@layout/fragment_goal" />
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.md3.fragment.SettingsFragment"
+        android:id="@+id/transactionFragment"
+        android:name="com.example.md3.fragment.TransactionFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_transaction" />
 </navigation>
