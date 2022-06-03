@@ -48,40 +48,47 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <RadioGroup
+            <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/selectDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/allTransactions"
+                app:selectionRequired="true"
+                app:singleSelection="true">
 
-                <RadioButton
+                <Button
                     android:id="@+id/last_month"
-                    android:text="month"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="month" />
 
-                <RadioButton
+                <Button
                     android:id="@+id/last_three_month"
-                    android:text="3 month"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="3 month" />
 
-                <RadioButton
+                <Button
                     android:id="@+id/last_year"
-                    android:text="year"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="year" />
 
-                <RadioButton
+                <Button
                     android:id="@+id/all_time"
-                    android:text="all"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="all" />
 
-            </RadioGroup>
+            </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <RadioGroup
                 android:id="@+id/selectCategory"
@@ -91,7 +98,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/categorySpinner"
-                app:layout_constraintTop_toBottomOf="@id/negativeTransactions">
+                app:layout_constraintTop_toBottomOf="@id/selectDate">
 
                 <RadioButton
                     android:id="@+id/all"

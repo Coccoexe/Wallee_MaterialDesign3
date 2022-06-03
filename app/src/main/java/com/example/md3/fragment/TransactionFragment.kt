@@ -13,6 +13,7 @@ import com.example.md3.R
 import com.example.md3.adapter.TransactionAdapter
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 import java.text.SimpleDateFormat
@@ -58,7 +59,7 @@ class TransactionFragment : Fragment() {
                 //color
         val color : Int = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSurface)
             //date
-        val dateGroup: RadioGroup = inflateView.findViewById(R.id.selectDate)
+        val dateGroup: MaterialButtonToggleGroup = inflateView.findViewById(R.id.selectDate)
             //category
         val categoryGroup: RadioGroup = inflateView.findViewById(R.id.selectCategory)
         val categorySpinner: Spinner = inflateView.findViewById(R.id.categorySpinner)
@@ -190,9 +191,9 @@ class TransactionFragment : Fragment() {
             setAdapter()
         }
 
-        dateGroup.setOnCheckedChangeListener { _, optionId ->
-            run {
-                when (optionId) {
+        dateGroup.addOnButtonCheckedListener() { dateGroup, chekedId, isChecked ->
+            if (isChecked){
+                when (chekedId) {
                     R.id.all_time -> {
                         filterDate = null
                     }
