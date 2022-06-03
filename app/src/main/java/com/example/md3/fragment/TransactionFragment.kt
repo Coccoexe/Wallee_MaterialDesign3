@@ -1,7 +1,6 @@
 package com.example.md3.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
-import com.example.md3.TransactionAdapter
+import com.example.md3.adapter.TransactionAdapter
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
 import com.google.android.material.color.DynamicColors

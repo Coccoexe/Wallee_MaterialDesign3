@@ -1,4 +1,4 @@
-package com.example.md3
+package com.example.md3.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 
 class CardGoalAdapter(private val cards : List<Transaction>) :

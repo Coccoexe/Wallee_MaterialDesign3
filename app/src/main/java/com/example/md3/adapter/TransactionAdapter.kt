@@ -1,4 +1,4 @@
-package com.example.md3
+package com.example.md3.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 
 class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>) :
