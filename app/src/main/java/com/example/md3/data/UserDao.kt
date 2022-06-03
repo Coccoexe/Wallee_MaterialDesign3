@@ -27,10 +27,18 @@ interface UserDao {
     @Query("DELETE FROM AutoLogin")
     suspend fun removeAutoLog()
 
-    //join
+    //transaction
     @androidx.room.Transaction
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")
     suspend fun getUserWithTransactions(userMail: String): List<Transaction>?
+
+    @androidx.room.Transaction
+    @Query("SELECT * FROM `transaction` WHERE userMail = :userMail and amount > 0")
+    suspend fun getUserWithTransactionsPositive(userMail: String): List<Transaction>?
+
+    @androidx.room.Transaction
+    @Query("SELECT * FROM `transaction` WHERE userMail = :userMail and amount < 0")
+    suspend fun getUserWithTransactionsNegative(userMail: String): List<Transaction>?
 
     //getBalance
     @Query("Select sum(amount) as balance from `transaction` where userMail = :userMail")

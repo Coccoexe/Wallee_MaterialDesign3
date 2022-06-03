@@ -77,6 +77,9 @@ class AddTransPopup : DialogFragment() {
 
             if(radiogroup.checkedRadioButtonId == -1 || amount.text.isEmpty()){
                 dismiss()
+            }else if(amount.text.toString().toDouble() == 0.0){
+                amount.text.clear()
+                Toast.makeText(context, "Transaction amount cannot be 0!", Toast.LENGTH_SHORT).show()
             }else {
                 if (radiogroup.checkedRadioButtonId == R.id.add) {
                     money = amount.text.toString().toDouble()
@@ -106,8 +109,10 @@ class AddTransPopup : DialogFragment() {
                 lastAmount.text = trans!!.last().amount.toString() + "$ "
                 lastDate.text = trans.last().date
                 lastImage.setImageResource(getDrawable(trans.last().category))
+
+                dismiss()
             }
-            dismiss()
+
         }
 
 
