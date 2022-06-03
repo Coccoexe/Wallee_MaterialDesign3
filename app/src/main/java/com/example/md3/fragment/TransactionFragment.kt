@@ -1,10 +1,12 @@
 package com.example.md3.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,9 @@ import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TransactionFragment : Fragment() {
 
@@ -21,6 +26,14 @@ class TransactionFragment : Fragment() {
     private lateinit var dataList : RecyclerView
     private var transactionList : List<Transaction>? = null
     private lateinit var gridLayoutManager: GridLayoutManager
+    private val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a",Locale.getDefault())
+
+    //amount -> "all", "positive", "negative"
+    private lateinit var filterAmount : String
+    //category -> list contain category filter
+    private var filterCategory : ArrayList<String> = ArrayList()
+    //date -> date in string with format
+    private var filterDate : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,16 +56,38 @@ class TransactionFragment : Fragment() {
         gridLayoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
         setAdapter()
 
-
+        //filter View
+            //amount
         val all : AppCompatImageView = inflateView.findViewById(R.id.allTransactions)
         val positive : AppCompatImageView = inflateView.findViewById(R.id.positiveTransactions)
         val negative : AppCompatImageView = inflateView.findViewById(R.id.negativeTransactions)
+                //color
         val color : Int = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSurface)
+            //date
+        val dateGroup: RadioGroup = inflateView.findViewById(R.id.selectDate)
+            //category
+        val categoryGroup: RadioGroup = inflateView.findViewById(R.id.selectCategory)
+        val categorySpinner: Spinner = inflateView.findViewById(R.id.categorySpinner)
 
-        //default
+
+        //default -------------------------------------------------------
+
+            //amount
+        filterAmount = "all"
+        //filterCategory is empty
+        //filterDate is null
         all.setImageResource(R.drawable.money_in_out_color)
         positive.setColorFilter(color)
         negative.setColorFilter(color)
+
+            //date
+        dateGroup.check(R.id.all_time)
+
+            //category
+        categoryGroup.check(R.id.all)
+        categorySpinner.visibility = View.INVISIBLE
+
+        // ---------------------------------------------------------------
 
         //listener
         all.setOnClickListener{
@@ -66,7 +101,10 @@ class TransactionFragment : Fragment() {
             positive.setImageResource(R.drawable.money_in)
             negative.setImageResource(R.drawable.money_out)
 
-            transactionList = activityData.getUserWithTransaction()
+            filterAmount = "all"
+
+            getTransactionList()
+
             setAdapter()
         }
 
@@ -80,7 +118,11 @@ class TransactionFragment : Fragment() {
             all.setImageResource(R.drawable.money_in_out)
             positive.setImageResource(R.drawable.money_in_color)
             negative.setImageResource(R.drawable.money_out)
-            transactionList = activityData.getUserWithTransactionPositive()
+
+            filterAmount = "positive"
+
+            getTransactionList()
+
             setAdapter()
         }
 
@@ -94,8 +136,107 @@ class TransactionFragment : Fragment() {
             all.setImageResource(R.drawable.money_in_out)
             positive.setImageResource(R.drawable.money_in)
             negative.setImageResource(R.drawable.money_out_color)
-            transactionList = activityData.getUserWithTransactionNegative()
+
+            filterAmount = "negative"
+
+            getTransactionList()
+
             setAdapter()
+        }
+
+        dateGroup.setOnCheckedChangeListener { _, optionId ->
+            run {
+                when (optionId) {
+                    R.id.all_time -> {
+                        filterDate = null
+                    }
+                    R.id.last_year -> {
+                        val calendar: Calendar = Calendar.getInstance()
+                        calendar.add(Calendar.YEAR, -1)
+                        filterDate = format.format(calendar.time)
+                    }
+                    R.id.last_three_month -> {
+                        val calendar: Calendar = Calendar.getInstance()
+                        calendar.add(Calendar.MONTH, -3)
+                        filterDate = format.format(calendar.time)
+                    }
+                    R.id.last_month -> {
+                        val calendar: Calendar = Calendar.getInstance()
+                        calendar.add(Calendar.MONTH, -1)
+                        filterDate = format.format(calendar.time)
+                    }
+                }
+            }
+            getTransactionList()
+            setAdapter()
+        }
+
+        categoryGroup.setOnCheckedChangeListener{ _, optionId ->
+            run {
+                when (optionId) {
+                    R.id.all -> {
+                        filterCategory.clear()
+                        categorySpinner.visibility = View.INVISIBLE
+                    }
+                    R.id.custom -> {
+                        when(filterAmount){
+                            "all" -> {
+                                val items = ArrayList<String>()
+                                items.addAll(resources.getStringArray(R.array.income))
+                                items.addAll(resources.getStringArray(R.array.expenses))
+                                val adapter: Any =
+                                    ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                                        items as List<Any?>
+                                    )
+                                categorySpinner.adapter = adapter as SpinnerAdapter?
+                                filterCategory.clear()
+                                filterCategory.add(categorySpinner.selectedItem.toString())
+                                categorySpinner.visibility = View.VISIBLE
+                            }
+                            "positive" -> {
+                                val items = ArrayList<String>()
+                                items.addAll(resources.getStringArray(R.array.income))
+                                val adapter: Any =
+                                    ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                                        items as List<Any?>
+                                    )
+                                categorySpinner.adapter = adapter as SpinnerAdapter?
+                                filterCategory.clear()
+                                filterCategory.add(categorySpinner.selectedItem.toString())
+                                categorySpinner.visibility = View.VISIBLE
+                            }
+                            "negative" -> {
+                                val items = ArrayList<String>()
+                                items.addAll(resources.getStringArray(R.array.expenses))
+                                val adapter: Any =
+                                    ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                                        items as List<Any?>
+                                    )
+                                categorySpinner.adapter = adapter as SpinnerAdapter?
+                                filterCategory.clear()
+                                filterCategory.add(categorySpinner.selectedItem.toString())
+                                categorySpinner.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+                }
+            }
+            getTransactionList()
+            setAdapter()
+        }
+
+        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                filterCategory.clear()
+                filterCategory.add(categorySpinner.selectedItem.toString())
+                getTransactionList()
+                setAdapter()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
         }
 
         return inflateView
@@ -108,6 +249,11 @@ class TransactionFragment : Fragment() {
             dataList.layoutManager = gridLayoutManager
             dataList.adapter = adapter
         }
+    }
+
+    private fun getTransactionList(){
+
+        transactionList = activityData.getUserWithTransactionFiltered(filterAmount,filterCategory,filterDate)
     }
 
 }

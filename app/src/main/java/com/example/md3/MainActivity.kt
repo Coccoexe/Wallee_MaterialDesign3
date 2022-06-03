@@ -22,6 +22,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), IActivityData {
@@ -124,25 +127,59 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return transactionList
     }
 
-    override fun getUserWithTransactionPositive(): List<Transaction>? {
+    override fun getUserWithTransactionFiltered(amount: String, category: List<String>, date: String?): List<Transaction>? {
         var transactionList : List<Transaction>? = null
+        val ret : ArrayList<Transaction> = ArrayList()
+        val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a", Locale.getDefault())
 
         runBlocking {
-            transactionList = dao.getUserWithTransactionsPositive(userEmail)
+            if (category.isEmpty()){
+                transactionList = dao.getUserWithTransactions(userEmail)
+            }
+            else {
+                Log.e("filter",category[0])
+                transactionList = dao.getUserWithTransactionsFiltered(userEmail, category)
+            }
         }
 
-        return transactionList
-    }
-
-    override fun getUserWithTransactionNegative(): List<Transaction>? {
-        var transactionList : List<Transaction>? = null
-
-        runBlocking {
-            transactionList = dao.getUserWithTransactionsNegative(userEmail)
+        if (transactionList != null) {
+            when (amount) {
+                "all" -> {
+                    for (t in transactionList!!){
+                        if (date == null || format.parse(t.date)!! > format.parse(date))
+                        {
+                            ret.add(t)
+                        }
+                    }
+                }
+                "positive" -> {
+                    for (t in transactionList!!){
+                        if (t.amount > 0.0)
+                        {
+                            if (date == null || format.parse(t.date)!! > format.parse(date))
+                            {
+                                ret.add(t)
+                            }
+                        }
+                    }
+                }
+                "negative" -> {
+                    for (t in transactionList!!){
+                        if (t.amount < 0.0)
+                        {
+                            if (date == null || format.parse(t.date)!! > format.parse(date))
+                            {
+                                ret.add(t)
+                            }
+                        }
+                    }
+                }
+            }
         }
 
-        return transactionList
+        return ret
     }
+
 
     override fun updateUser(userName: String, userId: Int) {
         runBlocking {
