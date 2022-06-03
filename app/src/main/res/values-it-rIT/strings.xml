@@ -7,6 +7,7 @@
     <string name="my_name">Il mio Nome</string>
     <string name="user_welcome">Ciao %s,</string>
     <string name="goals">Obiettivi</string>
+
     <string-array name="expenses">
         <item>Bollette</item>
         <item>Groceries</item>

@@ -10,6 +10,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottoms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/allTransactions"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/money_in_out"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/positiveTransactions"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/positiveTransactions"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/money_in"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/negativeTransactions" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/negativeTransactions"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/money_out"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
@@ -23,6 +61,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/bottoms"/>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigationBar"
             app:menu="@menu/bottom_navigation_menu"
@@ -30,49 +74,17 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            app:cardCornerRadius="16dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cardFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom|end"
+            android:elevation="6dp"
+            app:layout_constraintBottom_toTopOf="@id/navigationBar"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/ic_baseline_add_24"/>
 
-            <LinearLayout
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:layout_gravity="center">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center">
-
-                    <TextView
-                        android:id="@+id/textCard"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textSize="25sp"
-                        android:textAlignment="center"
-                        android:textAppearance="?attr/textAppearanceHeadline6" />
-
-                </LinearLayout>
-                
-                <ProgressBar
-                    android:id="@+id/progBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:progress="0"/>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
