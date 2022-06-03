@@ -128,6 +128,15 @@
             app:layout_constraintTop_toBottomOf="@id/upBar"
             app:layout_constraintBottom_toTopOf="@id/navigationBar"/>
 
+        <TextView
+            android:id="@+id/no_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="No transaction found"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/upBar"
+            app:layout_constraintBottom_toTopOf="@id/navigationBar"/>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigationBar"
             app:menu="@menu/bottom_navigation_menu"

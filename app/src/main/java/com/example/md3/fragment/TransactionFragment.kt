@@ -24,6 +24,7 @@ class TransactionFragment : Fragment() {
 
     private lateinit var activityData : IActivityData
     private lateinit var dataList : RecyclerView
+    private lateinit var noTransaction : TextView
     private var transactionList : List<Transaction>? = null
     private lateinit var gridLayoutManager: GridLayoutManager
     private val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a",Locale.getDefault())
@@ -49,12 +50,6 @@ class TransactionFragment : Fragment() {
             throw RuntimeException("Not implemented IActivityData")
         }
         activityData = requireActivity() as IActivityData
-
-        //recyclerview
-        transactionList = activityData.getUserWithTransaction()
-        dataList = inflateView.findViewById(R.id.dataList)
-        gridLayoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
-        setAdapter()
 
         //filter View
             //amount
@@ -87,6 +82,18 @@ class TransactionFragment : Fragment() {
         categoryGroup.check(R.id.all)
         categorySpinner.visibility = View.INVISIBLE
 
+            //recyclerview
+        dataList = inflateView.findViewById(R.id.dataList)
+            //no view available
+        noTransaction = inflateView.findViewById(R.id.no_transaction)
+        noTransaction.visibility = View.INVISIBLE
+            //gridLayout
+        gridLayoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
+            //adapter
+        getTransactionList()
+        setAdapter()
+
+
         // ---------------------------------------------------------------
 
         //listener
@@ -103,6 +110,20 @@ class TransactionFragment : Fragment() {
 
             filterAmount = "all"
 
+            if (categoryGroup.checkedRadioButtonId == R.id.custom) {
+                val items = ArrayList<String>()
+                items.addAll(resources.getStringArray(R.array.income))
+                items.addAll(resources.getStringArray(R.array.expenses))
+                val adapter: Any =
+                    ArrayAdapter<Any?>(
+                        requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                        items as List<Any?>
+                    )
+                categorySpinner.adapter = adapter as SpinnerAdapter?
+                filterCategory.clear()
+                filterCategory.add(categorySpinner.selectedItem.toString())
+                categorySpinner.visibility = View.VISIBLE
+            }
             getTransactionList()
 
             setAdapter()
@@ -120,6 +141,19 @@ class TransactionFragment : Fragment() {
             negative.setImageResource(R.drawable.money_out)
 
             filterAmount = "positive"
+
+            if (categoryGroup.checkedRadioButtonId == R.id.custom) {
+                val items = ArrayList<String>()
+                items.addAll(resources.getStringArray(R.array.income))
+                val adapter: Any =
+                    ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                        items as List<Any?>
+                    )
+                categorySpinner.adapter = adapter as SpinnerAdapter?
+                filterCategory.clear()
+                filterCategory.add(categorySpinner.selectedItem.toString())
+                categorySpinner.visibility = View.VISIBLE
+            }
 
             getTransactionList()
 
@@ -139,6 +173,19 @@ class TransactionFragment : Fragment() {
 
             filterAmount = "negative"
 
+            if (categoryGroup.checkedRadioButtonId == R.id.custom) {
+                val items = ArrayList<String>()
+                items.addAll(resources.getStringArray(R.array.expenses))
+                val adapter: Any =
+                    ArrayAdapter<Any?>(
+                        requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                        items as List<Any?>
+                    )
+                categorySpinner.adapter = adapter as SpinnerAdapter?
+                filterCategory.clear()
+                filterCategory.add(categorySpinner.selectedItem.toString())
+                categorySpinner.visibility = View.VISIBLE
+            }
             getTransactionList()
 
             setAdapter()
@@ -245,9 +292,14 @@ class TransactionFragment : Fragment() {
     private fun setAdapter()
     {
         if (!transactionList.isNullOrEmpty()) {
+            noTransaction.visibility = View.INVISIBLE
             val adapter = TransactionAdapter(context, transactionList!!)
             dataList.layoutManager = gridLayoutManager
             dataList.adapter = adapter
+        }
+        else{
+            noTransaction.visibility = View.VISIBLE
+            dataList.adapter = null
         }
     }
 

@@ -137,12 +137,11 @@ class MainActivity : AppCompatActivity(), IActivityData {
                 transactionList = dao.getUserWithTransactions(userEmail)
             }
             else {
-                Log.e("filter",category[0])
                 transactionList = dao.getUserWithTransactionsFiltered(userEmail, category)
             }
         }
 
-        if (transactionList != null) {
+        if (!transactionList.isNullOrEmpty()) {
             when (amount) {
                 "all" -> {
                     for (t in transactionList!!){
