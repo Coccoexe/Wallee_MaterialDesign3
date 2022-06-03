@@ -16,6 +16,7 @@ import com.example.md3.events.IActivityData
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.divider.MaterialDivider
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -53,13 +54,14 @@ class TransactionFragment : Fragment() {
 
         //filter View
         val filterMenu : AppCompatImageView = inflateView.findViewById(R.id.filterMenu)
+        val divider : MaterialDivider = inflateView.findViewById(R.id.divider)
         var filterToggle = false
             //amount
         val all : AppCompatImageView = inflateView.findViewById(R.id.allTransactions)
         val positive : AppCompatImageView = inflateView.findViewById(R.id.positiveTransactions)
         val negative : AppCompatImageView = inflateView.findViewById(R.id.negativeTransactions)
                 //color
-        val color : Int = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSurface)
+        val color : Int = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSecondaryContainer)
             //date
         val dateGroup: MaterialButtonToggleGroup = inflateView.findViewById(R.id.selectDate)
             //category
@@ -68,6 +70,9 @@ class TransactionFragment : Fragment() {
 
 
         //default -------------------------------------------------------
+
+            //divider
+        divider.visibility = View.GONE
 
             //amount
         filterAmount = "all"
@@ -105,6 +110,7 @@ class TransactionFragment : Fragment() {
             if (filterToggle)
             {
                 filterMenu.setImageResource(R.drawable.ic_filter_down_24)
+                divider.visibility = View.GONE
                 dateGroup.visibility = View.GONE
                 categoryGroup.visibility = View.GONE
                 if (categoryGroup.checkedRadioButtonId == R.id.custom)
@@ -115,6 +121,7 @@ class TransactionFragment : Fragment() {
             }
             else{
                 filterMenu.setImageResource(R.drawable.ic_filter_up_24)
+                divider.visibility = View.VISIBLE
                 dateGroup.visibility = View.VISIBLE
                 categoryGroup.visibility = View.VISIBLE
                 if (categoryGroup.checkedRadioButtonId == R.id.custom)
