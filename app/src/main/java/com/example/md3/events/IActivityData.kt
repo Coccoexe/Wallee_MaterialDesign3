@@ -14,6 +14,8 @@ interface IActivityData {
     fun getImageUri(): Bitmap?
     fun getUserBalance(): Double
     fun getUserWithTransaction(): List<Transaction>?
+    fun getUserWithTransactionPositive() : List<Transaction>?
+    fun getUserWithTransactionNegative() : List<Transaction>?
     fun updateUser(userName: String, userId: Int)
     fun updatePassword(password: String, userMail: String)
     fun updateEmail(userMail: String, userId: Int)
