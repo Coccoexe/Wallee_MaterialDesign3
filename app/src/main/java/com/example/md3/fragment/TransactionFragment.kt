@@ -52,6 +52,8 @@ class TransactionFragment : Fragment() {
         activityData = requireActivity() as IActivityData
 
         //filter View
+        val filterMenu : AppCompatImageView = inflateView.findViewById(R.id.filterMenu)
+        var filterToggle = false
             //amount
         val all : AppCompatImageView = inflateView.findViewById(R.id.allTransactions)
         val positive : AppCompatImageView = inflateView.findViewById(R.id.positiveTransactions)
@@ -76,9 +78,11 @@ class TransactionFragment : Fragment() {
         negative.setColorFilter(color)
 
             //date
+        dateGroup.visibility = View.GONE
         dateGroup.check(R.id.all_time)
 
             //category
+        categoryGroup.visibility = View.GONE
         categoryGroup.check(R.id.all)
         categorySpinner.visibility = View.INVISIBLE
 
@@ -97,6 +101,30 @@ class TransactionFragment : Fragment() {
         // ---------------------------------------------------------------
 
         //listener
+        filterMenu.setOnClickListener{
+            if (filterToggle)
+            {
+                filterMenu.setImageResource(R.drawable.ic_filter_down_24)
+                dateGroup.visibility = View.GONE
+                categoryGroup.visibility = View.GONE
+                if (categoryGroup.checkedRadioButtonId == R.id.custom)
+                {
+                    categorySpinner.visibility = View.GONE
+                }
+                filterToggle = false
+            }
+            else{
+                filterMenu.setImageResource(R.drawable.ic_filter_up_24)
+                dateGroup.visibility = View.VISIBLE
+                categoryGroup.visibility = View.VISIBLE
+                if (categoryGroup.checkedRadioButtonId == R.id.custom)
+                {
+                    categorySpinner.visibility = View.VISIBLE
+                }
+                filterToggle = true
+            }
+        }
+
         all.setOnClickListener{
             //manage filter
             all.clearColorFilter()
