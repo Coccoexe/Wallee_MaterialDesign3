@@ -3,6 +3,7 @@ package com.example.md3.fragment
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -172,6 +173,7 @@ class TransactionFragment : Fragment() {
             if (isChecked){
 
                 val items = ArrayList<String>()
+                (categoryMenu.editText as? AutoCompleteTextView)?.text?.clear()
 
                 when(chekedId){
                     R.id.all_transaction -> {
@@ -225,14 +227,16 @@ class TransactionFragment : Fragment() {
                         }
                     }
                 }
-                val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
-                (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-                filterCategory = categoryMenu.editText?.text.toString()
-                if (filterToggle) {
-                    categoryMenu.visibility = View.VISIBLE
-                }
-                else{
-                    categoryMenu.visibility = View.GONE
+                if (categoryGroup.checkedRadioButtonId == R.id.custom) {
+                    val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+                    (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+                    filterCategory = categoryMenu.editText?.text.toString()
+                    if (filterToggle) {
+                        categoryMenu.visibility = View.VISIBLE
+                    }
+                    else{
+                        categoryMenu.visibility = View.GONE
+                    }
                 }
             }
             getTransactionList()
