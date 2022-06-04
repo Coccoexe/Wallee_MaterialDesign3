@@ -1,6 +1,7 @@
 package com.example.md3.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,11 +25,23 @@ import kotlin.collections.ArrayList
 class TransactionFragment : Fragment() {
 
     private lateinit var activityData : IActivityData
-    private lateinit var dataList : RecyclerView
-    private lateinit var noTransaction : TextView
     private var transactionList : List<Transaction>? = null
     private lateinit var gridLayoutManager: GridLayoutManager
     private val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a",Locale.getDefault())
+    private var filterToggle : Boolean = false
+    private var color : Int = -1
+
+    //view
+    private lateinit var dataList : RecyclerView
+    private lateinit var noTransaction : TextView
+    private lateinit var filterMenu : AppCompatImageView
+    private lateinit var divider : MaterialDivider
+    private lateinit var all : AppCompatImageView
+    private lateinit var positive : AppCompatImageView
+    private lateinit var negative : AppCompatImageView
+    private lateinit var dateGroup: MaterialButtonToggleGroup
+    private lateinit var categoryGroup: RadioGroup
+    private lateinit var categorySpinner: Spinner
 
     //amount -> "all", "positive", "negative"
     private lateinit var filterAmount : String
@@ -53,20 +66,20 @@ class TransactionFragment : Fragment() {
         activityData = requireActivity() as IActivityData
 
         //filter View
-        val filterMenu : AppCompatImageView = inflateView.findViewById(R.id.filterMenu)
-        val divider : MaterialDivider = inflateView.findViewById(R.id.divider)
-        var filterToggle = false
-            //amount
-        val all : AppCompatImageView = inflateView.findViewById(R.id.allTransactions)
-        val positive : AppCompatImageView = inflateView.findViewById(R.id.positiveTransactions)
-        val negative : AppCompatImageView = inflateView.findViewById(R.id.negativeTransactions)
-                //color
-        val color : Int = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSecondaryContainer)
-            //date
-        val dateGroup: MaterialButtonToggleGroup = inflateView.findViewById(R.id.selectDate)
-            //category
-        val categoryGroup: RadioGroup = inflateView.findViewById(R.id.selectCategory)
-        val categorySpinner: Spinner = inflateView.findViewById(R.id.categorySpinner)
+        filterMenu = inflateView.findViewById(R.id.filterMenu)
+        divider = inflateView.findViewById(R.id.divider)
+        filterToggle = false
+        //amount
+        all = inflateView.findViewById(R.id.allTransactions)
+        positive = inflateView.findViewById(R.id.positiveTransactions)
+        negative = inflateView.findViewById(R.id.negativeTransactions)
+            //color
+        color = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSecondaryContainer)
+        //date
+        dateGroup = inflateView.findViewById(R.id.selectDate)
+        //category
+        categoryGroup = inflateView.findViewById(R.id.selectCategory)
+        categorySpinner = inflateView.findViewById(R.id.categorySpinner)
 
 
         //default -------------------------------------------------------
