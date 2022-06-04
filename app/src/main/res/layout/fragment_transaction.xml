@@ -146,7 +146,7 @@
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/categorySpinner"
+                app:layout_constraintEnd_toStartOf="@id/categoryMenu"
                 app:layout_constraintTop_toBottomOf="@id/selectDate">
 
                 <RadioButton
@@ -163,17 +163,23 @@
 
             </RadioGroup>
 
-            <Spinner
-                android:id="@+id/categorySpinner"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/categoryMenu"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:popupBackground="?attr/colorSecondaryContainer"
-                android:spinnerMode="dropdown"
-                android:layout_marginHorizontal="30dp"
+                android:hint="Category"
                 app:layout_constraintStart_toEndOf="@id/selectCategory"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/selectCategory"
-                app:layout_constraintBottom_toBottomOf="@id/selectCategory"/>
+                app:layout_constraintBottom_toBottomOf="@id/selectCategory">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

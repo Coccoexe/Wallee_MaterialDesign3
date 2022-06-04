@@ -127,13 +127,13 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return transactionList
     }
 
-    override fun getUserWithTransactionFiltered(amount: String, category: List<String>, date: String?): List<Transaction>? {
+    override fun getUserWithTransactionFiltered(amount: String, category: String?, date: String?): List<Transaction>? {
         var transactionList : List<Transaction>? = null
         val ret : ArrayList<Transaction> = ArrayList()
         val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a", Locale.getDefault())
 
         runBlocking {
-            if (category.isEmpty()){
+            if (category == null){
                 transactionList = dao.getUserWithTransactions(userEmail)
             }
             else {

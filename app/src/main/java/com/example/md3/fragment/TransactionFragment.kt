@@ -22,6 +22,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.divider.MaterialDivider
+import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -43,7 +44,7 @@ class TransactionFragment : Fragment() {
     private lateinit var transactionGroup : MaterialButtonToggleGroup
     private lateinit var dateGroup: MaterialButtonToggleGroup
     private lateinit var categoryGroup: RadioGroup
-    private lateinit var categorySpinner: Spinner
+    private lateinit var categoryMenu: TextInputLayout
     private lateinit var all : MaterialButton
     private lateinit var positive : MaterialButton
     private lateinit var negative : MaterialButton
@@ -52,7 +53,7 @@ class TransactionFragment : Fragment() {
     //amount -> "all", "positive", "negative"
     private lateinit var filterAmount : String
     //category -> list contain category filter
-    private var filterCategory : ArrayList<String> = ArrayList()
+    private var filterCategory : String? = null
     //date -> date in string with format
     private var filterDate : String? = null
 
@@ -85,7 +86,7 @@ class TransactionFragment : Fragment() {
         dateGroup = inflateView.findViewById(R.id.selectDate)
         //category
         categoryGroup = inflateView.findViewById(R.id.selectCategory)
-        categorySpinner = inflateView.findViewById(R.id.categorySpinner)
+        categoryMenu = inflateView.findViewById(R.id.categoryMenu)
 
 
         //default -------------------------------------------------------
@@ -108,7 +109,7 @@ class TransactionFragment : Fragment() {
             //category
         categoryGroup.visibility = View.GONE
         categoryGroup.check(R.id.all)
-        categorySpinner.visibility = View.GONE
+        categoryMenu.visibility = View.GONE
 
             //recyclerview
         dataList = inflateView.findViewById(R.id.dataList)
@@ -132,7 +133,7 @@ class TransactionFragment : Fragment() {
                 divider.visibility = View.GONE
                 dateGroup.visibility = View.GONE
                 categoryGroup.visibility = View.GONE
-                categorySpinner.visibility = View.GONE
+                categoryMenu.visibility = View.GONE
 
                 filterToggle = false
             }
@@ -143,10 +144,10 @@ class TransactionFragment : Fragment() {
                 categoryGroup.visibility = View.VISIBLE
                 if (categoryGroup.checkedRadioButtonId == R.id.custom)
                 {
-                    categorySpinner.visibility = View.VISIBLE
+                    categoryMenu.visibility = View.VISIBLE
                 }
                 else{
-                    categorySpinner.visibility = View.INVISIBLE
+                    categoryMenu.visibility = View.INVISIBLE
                 }
                 filterToggle = true
             }
@@ -154,6 +155,9 @@ class TransactionFragment : Fragment() {
 
         transactionGroup.addOnButtonCheckedListener() { trasactionGroup, chekedId, isChecked ->
             if (isChecked){
+
+                val items = ArrayList<String>()
+
                 when(chekedId){
                     R.id.all_transaction -> {
                         filterAmount = "all"
@@ -168,18 +172,8 @@ class TransactionFragment : Fragment() {
                         negative.setIconResource(R.drawable.money_out)
 
                         if (categoryGroup.checkedRadioButtonId == R.id.custom) {
-                            val items = ArrayList<String>()
                             items.addAll(resources.getStringArray(R.array.income))
                             items.addAll(resources.getStringArray(R.array.expenses))
-                            val adapter: Any =
-                                ArrayAdapter<Any?>(
-                                    requireContext(), android.R.layout.simple_spinner_dropdown_item,
-                                    items as List<Any?>
-                                )
-                            categorySpinner.adapter = adapter as SpinnerAdapter?
-                            filterCategory.clear()
-                            filterCategory.add(categorySpinner.selectedItem.toString())
-                            categorySpinner.visibility = View.VISIBLE
                         }
 
                     }
@@ -196,16 +190,7 @@ class TransactionFragment : Fragment() {
                         negative.setIconResource(R.drawable.money_out)
 
                         if (categoryGroup.checkedRadioButtonId == R.id.custom) {
-                            val items = ArrayList<String>()
                             items.addAll(resources.getStringArray(R.array.income))
-                            val adapter: Any =
-                                ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item,
-                                    items as List<Any?>
-                                )
-                            categorySpinner.adapter = adapter as SpinnerAdapter?
-                            filterCategory.clear()
-                            filterCategory.add(categorySpinner.selectedItem.toString())
-                            categorySpinner.visibility = View.VISIBLE
                         }
                     }
                     R.id.negative_transaction -> {
@@ -221,19 +206,18 @@ class TransactionFragment : Fragment() {
                         negative.setIconResource(R.drawable.money_out_color)
 
                         if (categoryGroup.checkedRadioButtonId == R.id.custom) {
-                            val items = ArrayList<String>()
                             items.addAll(resources.getStringArray(R.array.expenses))
-                            val adapter: Any =
-                                ArrayAdapter<Any?>(
-                                    requireContext(), android.R.layout.simple_spinner_dropdown_item,
-                                    items as List<Any?>
-                                )
-                            categorySpinner.adapter = adapter as SpinnerAdapter?
-                            filterCategory.clear()
-                            filterCategory.add(categorySpinner.selectedItem.toString())
-                            categorySpinner.visibility = View.VISIBLE
                         }
                     }
+                }
+                val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+                (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+                filterCategory = categoryMenu.editText?.text.toString()
+                if (filterToggle) {
+                    categoryMenu.visibility = View.VISIBLE
+                }
+                else{
+                    categoryMenu.visibility = View.GONE
                 }
             }
             getTransactionList()
@@ -271,9 +255,9 @@ class TransactionFragment : Fragment() {
             run {
                 when (optionId) {
                     R.id.all -> {
-                        filterCategory.clear()
+                        filterCategory = null
 
-                        categorySpinner.visibility = View.INVISIBLE
+                        categoryMenu.visibility = View.INVISIBLE
                     }
                     R.id.custom -> {
 
@@ -292,18 +276,14 @@ class TransactionFragment : Fragment() {
                                 items.addAll(resources.getStringArray(R.array.expenses))
                             }
                         }
-                        val adapter: Any =
-                            ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item,
-                                items as List<Any?>
-                            )
-                        categorySpinner.adapter = adapter as SpinnerAdapter?
-                        filterCategory.clear()
-                        filterCategory.add(categorySpinner.selectedItem.toString())
+                        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+                        (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+                        filterCategory = categoryMenu.editText?.text.toString()
                         if (filterToggle) {
-                            categorySpinner.visibility = View.VISIBLE
+                            categoryMenu.visibility = View.VISIBLE
                         }
                         else{
-                            categorySpinner.visibility = View.GONE
+                            categoryMenu.visibility = View.GONE
                         }
                     }
                 }
@@ -312,19 +292,11 @@ class TransactionFragment : Fragment() {
             setAdapter()
         }
 
-        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                filterCategory.clear()
-                filterCategory.add(categorySpinner.selectedItem.toString())
+        (categoryMenu.editText as? AutoCompleteTextView)?.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
+                filterCategory = categoryMenu.editText?.text.toString()
                 getTransactionList()
                 setAdapter()
             }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-
-        }
 
         return inflateView
     }
