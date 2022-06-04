@@ -39,8 +39,11 @@ class TransactionFragment : Fragment() {
     //view
     private lateinit var dataList : RecyclerView
     private lateinit var noTransaction : TextView
+    private lateinit var filterDateText : TextView
+    private lateinit var filterCategoryText: TextView
     private lateinit var filterMenu : AppCompatImageView
     private lateinit var divider : MaterialDivider
+    private lateinit var dividerFilter : MaterialDivider
     private lateinit var transactionGroup : MaterialButtonToggleGroup
     private lateinit var dateGroup: MaterialButtonToggleGroup
     private lateinit var categoryGroup: RadioGroup
@@ -75,6 +78,9 @@ class TransactionFragment : Fragment() {
         //filter View
         filterMenu = inflateView.findViewById(R.id.filterMenu)
         divider = inflateView.findViewById(R.id.divider)
+        dividerFilter = inflateView.findViewById(R.id.dividerFilter)
+        filterDateText = inflateView.findViewById(R.id.dateFilterText)
+        filterCategoryText = inflateView.findViewById(R.id.categoryFilterText)
         filterToggle = false
         //amount
         transactionGroup = inflateView.findViewById(R.id.selectTransaction)
@@ -93,6 +99,7 @@ class TransactionFragment : Fragment() {
 
             //divider
         divider.visibility = View.GONE
+        dividerFilter.visibility = View.GONE
 
             //amount
         filterAmount = "all"
@@ -103,10 +110,12 @@ class TransactionFragment : Fragment() {
         all.setIconResource(R.drawable.money_in_out_color)
 
             //date
+        filterDateText.visibility = View.GONE
         dateGroup.visibility = View.GONE
         dateGroup.check(R.id.all_time)
 
             //category
+        filterCategoryText.visibility = View.GONE
         categoryGroup.visibility = View.GONE
         categoryGroup.check(R.id.all)
         categoryMenu.visibility = View.GONE
@@ -131,7 +140,10 @@ class TransactionFragment : Fragment() {
             {
                 filterMenu.setImageResource(R.drawable.ic_filter_down_24)
                 divider.visibility = View.GONE
+                dividerFilter.visibility = View.GONE
+                filterDateText.visibility = View.GONE
                 dateGroup.visibility = View.GONE
+                filterCategoryText.visibility = View.GONE
                 categoryGroup.visibility = View.GONE
                 categoryMenu.visibility = View.GONE
 
@@ -140,7 +152,10 @@ class TransactionFragment : Fragment() {
             else{
                 filterMenu.setImageResource(R.drawable.ic_filter_up_24)
                 divider.visibility = View.VISIBLE
+                dividerFilter.visibility = View.VISIBLE
+                filterDateText.visibility = View.VISIBLE
                 dateGroup.visibility = View.VISIBLE
+                filterCategoryText.visibility = View.VISIBLE
                 categoryGroup.visibility = View.VISIBLE
                 if (categoryGroup.checkedRadioButtonId == R.id.custom)
                 {
