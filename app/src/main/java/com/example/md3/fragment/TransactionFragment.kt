@@ -1,5 +1,7 @@
 package com.example.md3.fragment
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,12 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
 import com.example.md3.adapter.TransactionAdapter
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
@@ -29,19 +33,21 @@ class TransactionFragment : Fragment() {
     private lateinit var gridLayoutManager: GridLayoutManager
     private val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a",Locale.getDefault())
     private var filterToggle : Boolean = false
-    private var color : Int = -1
+    private var color: Int = -1
 
     //view
     private lateinit var dataList : RecyclerView
     private lateinit var noTransaction : TextView
     private lateinit var filterMenu : AppCompatImageView
     private lateinit var divider : MaterialDivider
-    private lateinit var all : AppCompatImageView
-    private lateinit var positive : AppCompatImageView
-    private lateinit var negative : AppCompatImageView
+    private lateinit var transactionGroup : MaterialButtonToggleGroup
     private lateinit var dateGroup: MaterialButtonToggleGroup
     private lateinit var categoryGroup: RadioGroup
     private lateinit var categorySpinner: Spinner
+    private lateinit var all : MaterialButton
+    private lateinit var positive : MaterialButton
+    private lateinit var negative : MaterialButton
+
 
     //amount -> "all", "positive", "negative"
     private lateinit var filterAmount : String
@@ -70,10 +76,10 @@ class TransactionFragment : Fragment() {
         divider = inflateView.findViewById(R.id.divider)
         filterToggle = false
         //amount
-        all = inflateView.findViewById(R.id.allTransactions)
-        positive = inflateView.findViewById(R.id.positiveTransactions)
-        negative = inflateView.findViewById(R.id.negativeTransactions)
-            //color
+        transactionGroup = inflateView.findViewById(R.id.selectTransaction)
+        all = inflateView.findViewById(R.id.all_transaction)
+        positive = inflateView.findViewById(R.id.positive_transaction)
+        negative = inflateView.findViewById(R.id.negative_transaction)
         color = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSecondaryContainer)
         //date
         dateGroup = inflateView.findViewById(R.id.selectDate)
@@ -91,9 +97,9 @@ class TransactionFragment : Fragment() {
         filterAmount = "all"
         //filterCategory is empty
         //filterDate is null
-        all.setImageResource(R.drawable.money_in_out_color)
-        positive.setColorFilter(color)
-        negative.setColorFilter(color)
+        transactionGroup.check(R.id.all_transaction)
+        all.iconTint = null
+        all.setIconResource(R.drawable.money_in_out_color)
 
             //date
         dateGroup.visibility = View.GONE
@@ -145,97 +151,91 @@ class TransactionFragment : Fragment() {
             }
         }
 
-        all.setOnClickListener{
-            //manage filter
-            all.clearColorFilter()
-            positive.setColorFilter(color)
-            negative.setColorFilter(color)
+        transactionGroup.addOnButtonCheckedListener() { trasactionGroup, chekedId, isChecked ->
+            if (isChecked){
+                when(chekedId){
+                    R.id.all_transaction -> {
+                        filterAmount = "all"
 
-            //manage image
-            all.setImageResource(R.drawable.money_in_out_color)
-            positive.setImageResource(R.drawable.money_in)
-            negative.setImageResource(R.drawable.money_out)
+                        all.iconTint = null
+                        all.setIconResource(R.drawable.money_in_out_color)
 
-            filterAmount = "all"
+                        positive.iconTint = ColorStateList.valueOf(color)
+                        positive.setIconResource(R.drawable.money_in)
 
-            if (categoryGroup.checkedRadioButtonId == R.id.custom) {
-                val items = ArrayList<String>()
-                items.addAll(resources.getStringArray(R.array.income))
-                items.addAll(resources.getStringArray(R.array.expenses))
-                val adapter: Any =
-                    ArrayAdapter<Any?>(
-                        requireContext(), android.R.layout.simple_spinner_dropdown_item,
-                        items as List<Any?>
-                    )
-                categorySpinner.adapter = adapter as SpinnerAdapter?
-                filterCategory.clear()
-                filterCategory.add(categorySpinner.selectedItem.toString())
-                categorySpinner.visibility = View.VISIBLE
+                        negative.iconTint = ColorStateList.valueOf(color)
+                        negative.setIconResource(R.drawable.money_out)
+
+                        if (categoryGroup.checkedRadioButtonId == R.id.custom) {
+                            val items = ArrayList<String>()
+                            items.addAll(resources.getStringArray(R.array.income))
+                            items.addAll(resources.getStringArray(R.array.expenses))
+                            val adapter: Any =
+                                ArrayAdapter<Any?>(
+                                    requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                                    items as List<Any?>
+                                )
+                            categorySpinner.adapter = adapter as SpinnerAdapter?
+                            filterCategory.clear()
+                            filterCategory.add(categorySpinner.selectedItem.toString())
+                            categorySpinner.visibility = View.VISIBLE
+                        }
+
+                    }
+                    R.id.positive_transaction -> {
+                        filterAmount = "positive"
+
+                        all.iconTint = ColorStateList.valueOf(color)
+                        all.setIconResource(R.drawable.money_in_out)
+
+                        positive.iconTint = null
+                        positive.setIconResource(R.drawable.money_in_color)
+
+                        negative.iconTint = ColorStateList.valueOf(color)
+                        negative.setIconResource(R.drawable.money_out)
+
+                        if (categoryGroup.checkedRadioButtonId == R.id.custom) {
+                            val items = ArrayList<String>()
+                            items.addAll(resources.getStringArray(R.array.income))
+                            val adapter: Any =
+                                ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                                    items as List<Any?>
+                                )
+                            categorySpinner.adapter = adapter as SpinnerAdapter?
+                            filterCategory.clear()
+                            filterCategory.add(categorySpinner.selectedItem.toString())
+                            categorySpinner.visibility = View.VISIBLE
+                        }
+                    }
+                    R.id.negative_transaction -> {
+                        filterAmount = "negative"
+
+                        all.iconTint = ColorStateList.valueOf(color)
+                        all.setIconResource(R.drawable.money_in_out)
+
+                        positive.iconTint = ColorStateList.valueOf(color)
+                        positive.setIconResource(R.drawable.money_in)
+
+                        negative.iconTint = null
+                        negative.setIconResource(R.drawable.money_out_color)
+
+                        if (categoryGroup.checkedRadioButtonId == R.id.custom) {
+                            val items = ArrayList<String>()
+                            items.addAll(resources.getStringArray(R.array.expenses))
+                            val adapter: Any =
+                                ArrayAdapter<Any?>(
+                                    requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                                    items as List<Any?>
+                                )
+                            categorySpinner.adapter = adapter as SpinnerAdapter?
+                            filterCategory.clear()
+                            filterCategory.add(categorySpinner.selectedItem.toString())
+                            categorySpinner.visibility = View.VISIBLE
+                        }
+                    }
+                }
             }
             getTransactionList()
-
-            setAdapter()
-        }
-
-        positive.setOnClickListener{
-            //manage filter
-            all.setColorFilter(color)
-            positive.clearColorFilter()
-            negative.setColorFilter(color)
-
-            //manage image
-            all.setImageResource(R.drawable.money_in_out)
-            positive.setImageResource(R.drawable.money_in_color)
-            negative.setImageResource(R.drawable.money_out)
-
-            filterAmount = "positive"
-
-            if (categoryGroup.checkedRadioButtonId == R.id.custom) {
-                val items = ArrayList<String>()
-                items.addAll(resources.getStringArray(R.array.income))
-                val adapter: Any =
-                    ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item,
-                        items as List<Any?>
-                    )
-                categorySpinner.adapter = adapter as SpinnerAdapter?
-                filterCategory.clear()
-                filterCategory.add(categorySpinner.selectedItem.toString())
-                categorySpinner.visibility = View.VISIBLE
-            }
-
-            getTransactionList()
-
-            setAdapter()
-        }
-
-        negative.setOnClickListener{
-            //manage filter
-            all.setColorFilter(color)
-            positive.setColorFilter(color)
-            negative.clearColorFilter()
-
-            //manage image
-            all.setImageResource(R.drawable.money_in_out)
-            positive.setImageResource(R.drawable.money_in)
-            negative.setImageResource(R.drawable.money_out_color)
-
-            filterAmount = "negative"
-
-            if (categoryGroup.checkedRadioButtonId == R.id.custom) {
-                val items = ArrayList<String>()
-                items.addAll(resources.getStringArray(R.array.expenses))
-                val adapter: Any =
-                    ArrayAdapter<Any?>(
-                        requireContext(), android.R.layout.simple_spinner_dropdown_item,
-                        items as List<Any?>
-                    )
-                categorySpinner.adapter = adapter as SpinnerAdapter?
-                filterCategory.clear()
-                filterCategory.add(categorySpinner.selectedItem.toString())
-                categorySpinner.visibility = View.VISIBLE
-            }
-            getTransactionList()
-
             setAdapter()
         }
 
@@ -337,8 +337,7 @@ class TransactionFragment : Fragment() {
         return inflateView
     }
 
-    private fun setAdapter()
-    {
+    private fun setAdapter() {
         if (!transactionList.isNullOrEmpty()) {
             noTransaction.visibility = View.INVISIBLE
             val adapter = TransactionAdapter(context, transactionList!!)

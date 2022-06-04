@@ -41,42 +41,51 @@
                 app:layout_constraintBottom_toBottomOf="@id/filterMenu"
                 />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/allTransactions"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/money_in_out"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/selectTransaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:selectionRequired="true"
+                app:singleSelection="true"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/positiveTransactions"/>
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/positiveTransactions"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/money_in"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/negativeTransactions" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/all_transaction"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:backgroundTint="@drawable/button_color_selector"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/money_in_out"
+                    app:iconSize="30dp"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/negativeTransactions"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/money_out"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/positive_transaction"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:backgroundTint="@drawable/button_color_selector"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/money_in"
+                    app:iconSize="30dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/negative_transaction"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:backgroundTint="@drawable/button_color_selector"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/money_out"
+                    app:iconSize="30dp"/>
+
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/allTransactions"
+                app:layout_constraintTop_toBottomOf="@id/selectTransaction"
                 app:layout_constraintBottom_toTopOf="@id/selectDate"
                 />
 
