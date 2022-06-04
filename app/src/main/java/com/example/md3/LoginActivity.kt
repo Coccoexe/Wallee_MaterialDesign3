@@ -11,13 +11,15 @@ import androidx.lifecycle.lifecycleScope
 import com.example.md3.data.UserDatabase
 import com.example.md3.data.entity.AutoLogin
 import com.example.md3.data.entity.User
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var userMail : EditText
-    private lateinit var userPass : EditText
+    private lateinit var userMail : TextInputLayout
+    private lateinit var userPass : TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +35,8 @@ class LoginActivity : AppCompatActivity() {
         userPass = findViewById(R.id.passText)
 
         //clear edit text
-        userMail.text.clear()
-        userPass.text.clear()
+        userMail.editText?.text?.clear()
+        userPass.editText?.text?.clear()
 
         //autologin
         val checkLog : CheckBox = findViewById(R.id.autoLog)
@@ -49,20 +51,28 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
-            val mail = userMail.text.toString()
-            val pass = userPass.text.toString()
+            val mail = userMail.editText!!.text.toString()
+            val pass = userPass.editText!!.text.toString()
             if (mail.isEmpty() || pass.isEmpty()){
-                Toast.makeText(applicationContext,"Fill all fields!", Toast.LENGTH_SHORT).show()
+                if(mail.isEmpty()) {
+                    userMail.error = "Fill this field"
+                }
+                if(pass.isEmpty()){
+                    userPass.error = "Fill this field"
+                }
             }
             else{
-
-                lifecycleScope.launch{
+                runBlocking{
                     val user: User? = dao.login(mail,pass)
                     if (user == null){
-                        Toast.makeText(applicationContext,"Invalid Credentials!", Toast.LENGTH_SHORT).show()
+                        userMail.error = "Invalid Mail"
+                        userPass.error = "Invalid Password"
                     }
                     else
                     {
+                        userMail.error = null
+                        userPass.error = null
+
                         dao.removeAutoLog()
 
                         if(checkLog.isChecked)
@@ -87,7 +97,9 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        userMail.text.clear()
-        userPass.text.clear()
+        userMail.editText!!.text.clear()
+        userPass.editText!!.text.clear()
+        userMail.error = null
+        userPass.error = null
     }
 }
