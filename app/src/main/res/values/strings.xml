@@ -6,6 +6,27 @@
     <string name="my_name">My Name</string>
     <string name="user_welcome">Hi %s,</string>
     <string name="goals">Goals</string>
+    <string name="insert_email">Insert Email</string>
+    <string name="insert_password">Insert Password</string>
+    <string name="auto_login">Auto Login</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="insert_username">Insert Username</string>
+    <string name="last_transaction">Last Transaction:</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="about_us">About Us</string>
+    <string name="log_out">Log Out</string>
+    <string name="more_filters">more filters</string>
+    <string name="filter_by_date">Filter by date:</string>
+    <string name="month">month</string>
+    <string name="_3_month">3 month</string>
+    <string name="year">year</string>
+    <string name="filter_by_category">Filter by category:</string>
+    <string name="all">all</string>
+    <string name="custom">custom</string>
+    <string name="category">Category</string>
+    <string name="no_transaction_found">No transaction found</string>
 
     <string-array name="expenses">
         <item>Bills</item>

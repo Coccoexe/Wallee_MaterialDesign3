@@ -10,20 +10,41 @@
 
     <string-array name="expenses">
         <item>Bollette</item>
-        <item>Groceries</item>
-        <item>Transportation</item>
-        <item>House</item>
-        <item>Health</item>
-        <item>Gift</item>
-        <item>Other</item>
+        <item>Alimentari</item>
+        <item>Trasporti</item>
+        <item>Casa</item>
+        <item>Salute</item>
+        <item>Regali</item>
+        <item>Altro</item>
     </string-array>
 
     <string-array name="income">
         <item>Stipendio</item>
-        <item>Renting</item>
-        <item>Investment</item>
-        <item>Selling</item>
-        <item>Gift</item>
-        <item>Other</item>
+        <item>Affitti</item>
+        <item>Investimenti</item>
+        <item>Vendite</item>
+        <item>Regali</item>
+        <item>Altro</item>
     </string-array>
+    <string name="insert_email">Inserisci Email</string>
+    <string name="insert_password">Inserisci Password</string>
+    <string name="auto_login">Accesso Automatico</string>
+    <string name="login">Accedi</string>
+    <string name="register">Registrati</string>
+    <string name="insert_username">Inserisci Nome Utente</string>
+    <string name="last_transaction">Ultima Transazione:</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="about_us">About Us</string>
+    <string name="log_out">Esci</string>
+    <string name="more_filters">Piu filtri</string>
+    <string name="filter_by_date">Filtra per data:</string>
+    <string name="month">mese</string>
+    <string name="_3_month">3 mesi</string>
+    <string name="year">anno</string>
+    <string name="filter_by_category">Filtra per categoria:</string>
+    <string name="all">tutto</string>
+    <string name="custom">Personalizzato</string>
+    <string name="category">Categoria</string>
+    <string name="no_transaction_found">Nessuna transazione trovata</string>
 </resources>
