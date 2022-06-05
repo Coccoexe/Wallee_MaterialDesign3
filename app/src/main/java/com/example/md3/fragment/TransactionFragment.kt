@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,8 +39,10 @@ class TransactionFragment : Fragment() {
     private var color: Int = -1
 
     //view
+    private lateinit var filterBar : ConstraintLayout
     private lateinit var dataList : RecyclerView
     private lateinit var noTransaction : TextView
+    private lateinit var filterAmountText : TextView
     private lateinit var filterDateText : TextView
     private lateinit var filterCategoryText: TextView
     private lateinit var filterMenu : AppCompatImageView
@@ -77,9 +80,11 @@ class TransactionFragment : Fragment() {
         activityData = requireActivity() as IActivityData
 
         //filter View
+        filterBar = inflateView.findViewById(R.id.filterBar)
         filterMenu = inflateView.findViewById(R.id.filterMenu)
         divider = inflateView.findViewById(R.id.divider)
         dividerFilter = inflateView.findViewById(R.id.dividerFilter)
+        filterAmountText = inflateView.findViewById(R.id.transactionFilterText)
         filterDateText = inflateView.findViewById(R.id.dateFilterText)
         filterCategoryText = inflateView.findViewById(R.id.categoryFilterText)
         filterToggle = false
@@ -98,24 +103,29 @@ class TransactionFragment : Fragment() {
 
         //default -------------------------------------------------------
 
+        //filterBar
+        filterBar.visibility = View.GONE
+
             //divider
         divider.visibility = View.GONE
         dividerFilter.visibility = View.GONE
 
             //amount
         filterAmount = "all"
-        //filterCategory is empty
-        //filterDate is null
+        filterAmountText.visibility = View.GONE
+        transactionGroup.visibility = View.GONE
         transactionGroup.check(R.id.all_transaction)
         all.iconTint = null
         all.setIconResource(R.drawable.money_in_out_color)
 
             //date
+        //filterDate is null
         filterDateText.visibility = View.GONE
         dateGroup.visibility = View.GONE
         dateGroup.check(R.id.all_time)
 
             //category
+        //filterCategory is empty
         filterCategoryText.visibility = View.GONE
         categoryGroup.visibility = View.GONE
         categoryGroup.check(R.id.all)
@@ -140,8 +150,11 @@ class TransactionFragment : Fragment() {
             if (filterToggle)
             {
                 filterMenu.setImageResource(R.drawable.ic_filter_down_24)
+                filterBar.visibility = View.GONE
                 divider.visibility = View.GONE
                 dividerFilter.visibility = View.GONE
+                filterAmountText.visibility = View.GONE
+                transactionGroup.visibility = View.GONE
                 filterDateText.visibility = View.GONE
                 dateGroup.visibility = View.GONE
                 filterCategoryText.visibility = View.GONE
@@ -152,8 +165,11 @@ class TransactionFragment : Fragment() {
             }
             else{
                 filterMenu.setImageResource(R.drawable.ic_filter_up_24)
+                filterBar.visibility = View.VISIBLE
                 divider.visibility = View.VISIBLE
                 dividerFilter.visibility = View.VISIBLE
+                filterAmountText.visibility = View.VISIBLE
+                transactionGroup.visibility = View.VISIBLE
                 filterDateText.visibility = View.VISIBLE
                 dateGroup.visibility = View.VISIBLE
                 filterCategoryText.visibility = View.VISIBLE

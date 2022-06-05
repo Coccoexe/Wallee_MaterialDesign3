@@ -105,8 +105,8 @@ class AddTransPopup : DialogFragment() {
                 val lastDate : TextView = requireActivity().findViewById(R.id.lastDate)
                 val lastImage : ImageView = requireActivity().findViewById(R.id.lastImage)
                 val trans : List<Transaction>? = activityData.getUserWithTransaction()
-                balance.text = activityData.getUserBalance().toString() + "$"
-                lastAmount.text = trans!!.last().amount.toString() + "$ "
+                balance.text = String.format("%.2f",activityData.getUserBalance()) + "$"
+                lastAmount.text = String.format("%.2f",trans!!.last().amount) + "$ "
                 lastDate.text = trans.last().date
                 lastImage.setImageResource(getDrawable(trans.last().category))
 

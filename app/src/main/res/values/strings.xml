@@ -27,6 +27,7 @@
     <string name="custom">custom</string>
     <string name="category">Category</string>
     <string name="no_transaction_found">No transaction found</string>
+    <string name="filter_by_transaction_type">Filter by Transaction Type:</string>
 
     <string-array name="expenses">
         <item>Bills</item>

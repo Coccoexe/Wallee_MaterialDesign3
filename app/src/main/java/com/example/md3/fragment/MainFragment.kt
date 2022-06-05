@@ -47,7 +47,7 @@ class MainFragment : Fragment() {
 
         //balance
         val balance : TextView = inflateView.findViewById(R.id.balance)
-        balance.text = activityData.getUserBalance().toString() + "$"
+        balance.text = String.format("%.2f",activityData.getUserBalance()) + "$"
 
         //add transaction
         val addTrans : Button = inflateView.findViewById(R.id.addTransaction)
@@ -68,7 +68,7 @@ class MainFragment : Fragment() {
         val lastImage : ImageView = inflateView.findViewById(R.id.lastImage)
         val trans : List<Transaction>? = activityData.getUserWithTransaction()
         if (trans!!.isNotEmpty()) {
-            lastAmount.text = trans.last().amount.toString() + "$ "
+            lastAmount.text = String.format("%.2f",trans.last().amount) + "$ "
             lastDate.text = trans.last().date
             lastImage.setImageResource(getDrawable(trans.last().category))
         }else{
