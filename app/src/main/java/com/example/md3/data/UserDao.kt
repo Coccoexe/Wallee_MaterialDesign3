@@ -27,6 +27,9 @@ interface UserDao {
     @Query("DELETE FROM AutoLogin")
     suspend fun removeAutoLog()
 
+    @Query("DELETE FROM `transaction` Where id =:id ")
+    suspend fun removeTransaction(id: Int)
+
     //transaction
     @androidx.room.Transaction
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")

@@ -211,6 +211,14 @@ class MainActivity : AppCompatActivity(), IActivityData {
         }
     }
 
+    override fun removeSelectedTransaction(selected : ArrayList<Int>) {
+        runBlocking {
+            for (t in selected) {
+                dao.removeTransaction(t)
+            }
+        }
+    }
+
     override fun existMail(userMail: String) : Boolean{
         var exist : Int? = null
         runBlocking {

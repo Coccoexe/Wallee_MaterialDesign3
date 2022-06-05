@@ -341,8 +341,24 @@ class TransactionFragment : Fragment(){
     }
 
     fun openContextBar(){
-        actionMode = (activity as MainActivity?)!!.startSupportActionMode(mActionModeCallback)
         //actionMode = requireActivity().startSupportActionMode(mActionModeCallback)
+        actionMode = (activity as MainActivity?)!!.startSupportActionMode(mActionModeCallback)
+
+        if (filterToggle) {
+            filterMenu.setImageResource(R.drawable.ic_filter_down_24)
+            filterBar.visibility = View.GONE
+            divider.visibility = View.GONE
+            dividerFilter.visibility = View.GONE
+            filterAmountText.visibility = View.GONE
+            transactionGroup.visibility = View.GONE
+            filterDateText.visibility = View.GONE
+            dateGroup.visibility = View.GONE
+            filterCategoryText.visibility = View.GONE
+            categoryGroup.visibility = View.GONE
+            categoryMenu.visibility = View.GONE
+            filterToggle = false
+        }
+
     }
 
     fun closeContextBar() {
@@ -371,7 +387,7 @@ class TransactionFragment : Fragment(){
                     true
                 }
                 R.id.deleteSelected -> {
-                    Log.e("remove",(dataList.adapter as TransactionAdapter).selected.size.toString())
+                    activityData.removeSelectedTransaction((dataList.adapter as TransactionAdapter).selected)
                     mode.finish()
                     true
                 }
@@ -383,6 +399,7 @@ class TransactionFragment : Fragment(){
             actionMode = null
             (dataList.adapter as TransactionAdapter).selected.clear()
             (dataList.adapter as TransactionAdapter).selectionMode = false
+            getTransactionList()
             setAdapter()
         }
     }

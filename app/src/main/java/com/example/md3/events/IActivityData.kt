@@ -20,5 +20,6 @@ interface IActivityData {
     fun updateEmail(userMail: String, userId: Int)
     fun updateImageUri(imageUri: Bitmap, userId: Int)
     fun removeAutoLog()
+    fun removeSelectedTransaction(selected : ArrayList<Int>)
     fun existMail(userMail: String): Boolean
 }
