@@ -2,7 +2,6 @@ package com.example.md3.adapter
 
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
+import com.example.md3.fragment.TransactionFragment
 import com.google.android.material.color.MaterialColors
 
-class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>) :
+class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>,
+                         var fragment: TransactionFragment
+) :
     RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
     var inflater: LayoutInflater
@@ -58,6 +60,7 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>)
 
         override fun onLongClick(p0: View?): Boolean {
             if (selected.isEmpty()){
+                fragment.openContextBar()
                 selectionMode = true
                 updateView()
             } else {
@@ -65,6 +68,7 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>)
             }
 
             if (selected.isEmpty()){
+                fragment.closeContextBar()
                 selectionMode = false
             }
             return true
@@ -75,6 +79,7 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>)
                updateView()
             }
             if (selected.isEmpty()){
+                fragment.closeContextBar()
                 selectionMode = false
             }
         }

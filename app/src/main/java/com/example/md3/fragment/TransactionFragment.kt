@@ -2,19 +2,21 @@ package com.example.md3.fragment
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.*
+import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.md3.MainActivity
 import com.example.md3.R
 import com.example.md3.adapter.TransactionAdapter
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
@@ -24,7 +26,8 @@ import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TransactionFragment : Fragment() {
+
+class TransactionFragment : Fragment(){
 
     private lateinit var activityData : IActivityData
     private var transactionList : List<Transaction>? = null
@@ -34,6 +37,7 @@ class TransactionFragment : Fragment() {
     private var color: Int = -1
 
     //view
+    private lateinit var topAppBar : AppBarLayout
     private lateinit var filterBar : ConstraintLayout
     private lateinit var dataList : RecyclerView
     private lateinit var noTransaction : TextView
@@ -50,6 +54,9 @@ class TransactionFragment : Fragment() {
     private lateinit var all : MaterialButton
     private lateinit var positive : MaterialButton
     private lateinit var negative : MaterialButton
+
+    //contextBar
+    private var actionMode: ActionMode? = null
 
 
     //amount -> "all", "positive", "negative"
@@ -75,6 +82,7 @@ class TransactionFragment : Fragment() {
         activityData = requireActivity() as IActivityData
 
         //filter View
+        topAppBar = inflateView.findViewById(R.id.appBar)
         filterBar = inflateView.findViewById(R.id.filterBar)
         filterMenu = inflateView.findViewById(R.id.filterMenu)
         divider = inflateView.findViewById(R.id.divider)
@@ -329,17 +337,60 @@ class TransactionFragment : Fragment() {
             }
 
 
-        //access selected list
-        (dataList.adapter as TransactionAdapter).selected
-
-
         return inflateView
+    }
+
+    fun openContextBar(){
+        actionMode = (activity as MainActivity?)!!.startSupportActionMode(mActionModeCallback)
+        //actionMode = requireActivity().startSupportActionMode(mActionModeCallback)
+    }
+
+    fun closeContextBar() {
+        actionMode?.finish()
+    }
+
+    private val mActionModeCallback = object : ActionMode.Callback {
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu?): Boolean {
+            mode.menuInflater.inflate(R.menu.context_transaction_menu, menu)
+            return true
+        }
+
+        override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+            return false
+        }
+
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.selectAll -> {
+                    if (transactionList != null) {
+                        (dataList.adapter as TransactionAdapter).selected.clear()
+                        for (t in transactionList!!) {
+                            (dataList.adapter as TransactionAdapter).selected.add(t.id)
+                        }
+                    }
+                    true
+                }
+                R.id.deleteSelected -> {
+                    Log.e("remove",(dataList.adapter as TransactionAdapter).selected.size.toString())
+                    mode.finish()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        override fun onDestroyActionMode(mode: ActionMode) {
+            actionMode = null
+            (dataList.adapter as TransactionAdapter).selected.clear()
+            (dataList.adapter as TransactionAdapter).selectionMode = false
+            setAdapter()
+        }
     }
 
     private fun setAdapter() {
         if (!transactionList.isNullOrEmpty()) {
             noTransaction.visibility = View.INVISIBLE
-            val adapter = TransactionAdapter(context, transactionList!!)
+            val adapter = TransactionAdapter(context, transactionList!!, this)
             dataList.layoutManager = gridLayoutManager
             dataList.adapter = adapter
         }
