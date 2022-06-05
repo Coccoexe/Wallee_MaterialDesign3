@@ -1,18 +1,14 @@
 package com.example.md3.fragment
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
@@ -27,7 +23,6 @@ import com.google.android.material.divider.MaterialDivider
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class TransactionFragment : Fragment() {
 
@@ -332,6 +327,11 @@ class TransactionFragment : Fragment() {
                 getTransactionList()
                 setAdapter()
             }
+
+
+        //access selected list
+        (dataList.adapter as TransactionAdapter).selected
+
 
         return inflateView
     }

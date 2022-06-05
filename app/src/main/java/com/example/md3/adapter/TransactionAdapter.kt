@@ -1,6 +1,8 @@
 package com.example.md3.adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +11,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
+import com.google.android.material.color.MaterialColors
 
 class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>) :
     RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
     var inflater: LayoutInflater
     var context = ctx
+
+    var selectionMode = false
+    var selected : ArrayList<Int>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view : View = inflater.inflate(R.layout.transaction_card,parent,false)
@@ -25,6 +31,8 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>)
         holder.image.setImageResource(getDrawable(transactionList[position].category))
         holder.amount.text = String.format("%.2f",transactionList[position].amount)
         holder.date.text = transactionList[position].date
+
+        holder.transaction = transactionList[position]
         //holder.bind(transactionList[position])
     }
 
@@ -32,21 +40,62 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>)
         return transactionList.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnLongClickListener, View.OnClickListener{
 
         var image : ImageView
         var amount : TextView
         var date : TextView
 
+        lateinit var transaction : Transaction
+
         init {
             image = itemView.findViewById(R.id.lastImage)
             amount = itemView.findViewById(R.id.lastAmount)
             date = itemView.findViewById(R.id.lastDate)
+            itemView.setOnLongClickListener(this)
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onLongClick(p0: View?): Boolean {
+            if (selected.isEmpty()){
+                selectionMode = true
+                updateView()
+            } else {
+                updateView()
+            }
+
+            if (selected.isEmpty()){
+                selectionMode = false
+            }
+            return true
+        }
+
+        override fun onClick(p0: View?) {
+            if(selectionMode) {
+               updateView()
+            }
+            if (selected.isEmpty()){
+                selectionMode = false
+            }
+        }
+
+        private fun updateView(){
+            if (transaction.isSelected) {
+                selected.remove(transaction.id)
+                transaction.isSelected = false
+                itemView.setBackgroundColor(Color.TRANSPARENT)
+            } else {
+                selected.add(transaction.id)
+                transaction.isSelected = true
+                itemView.setBackgroundColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorPrimaryContainer))
+            }
         }
     }
 
     init {
         inflater = LayoutInflater.from(ctx)
+        selected = ArrayList()
+        selected.clear()
     }
 
     private fun getDrawable(category : String) : Int{
