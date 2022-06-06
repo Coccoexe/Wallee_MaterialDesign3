@@ -1,8 +1,8 @@
 package com.example.md3.fragment
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.appcompat.view.ActionMode
@@ -17,6 +17,7 @@ import com.example.md3.adapter.TransactionAdapter
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
@@ -37,14 +38,13 @@ class TransactionFragment : Fragment(){
     private var color: Int = -1
 
     //view
-    private lateinit var topAppBar : AppBarLayout
+    private lateinit var topAppBar : MaterialToolbar
     private lateinit var filterBar : ConstraintLayout
     private lateinit var dataList : RecyclerView
     private lateinit var noTransaction : TextView
     private lateinit var filterAmountText : TextView
     private lateinit var filterDateText : TextView
     private lateinit var filterCategoryText: TextView
-    private lateinit var filterMenu : AppCompatImageView
     private lateinit var divider : MaterialDivider
     private lateinit var dividerFilter : MaterialDivider
     private lateinit var transactionGroup : MaterialButtonToggleGroup
@@ -81,9 +81,8 @@ class TransactionFragment : Fragment(){
         activityData = requireActivity() as IActivityData
 
         //filter View
-        topAppBar = inflateView.findViewById(R.id.appBar)
+        topAppBar = inflateView.findViewById(R.id.topAppBar)
         filterBar = inflateView.findViewById(R.id.filterBar)
-        filterMenu = inflateView.findViewById(R.id.filterMenu)
         divider = inflateView.findViewById(R.id.divider)
         dividerFilter = inflateView.findViewById(R.id.dividerFilter)
         filterAmountText = inflateView.findViewById(R.id.transactionFilterText)
@@ -148,42 +147,48 @@ class TransactionFragment : Fragment(){
         // ---------------------------------------------------------------
 
         //listener
-        filterMenu.setOnClickListener{
-            if (filterToggle)
-            {
-                filterMenu.setImageResource(R.drawable.ic_filter_down_24)
-                filterBar.visibility = View.GONE
-                divider.visibility = View.GONE
-                dividerFilter.visibility = View.GONE
-                filterAmountText.visibility = View.GONE
-                transactionGroup.visibility = View.GONE
-                filterDateText.visibility = View.GONE
-                dateGroup.visibility = View.GONE
-                filterCategoryText.visibility = View.GONE
-                categoryGroup.visibility = View.GONE
-                categoryMenu.visibility = View.GONE
+        topAppBar.setOnMenuItemClickListener{menuItem ->
+            when(menuItem.itemId){
+                R.id.filterMenu -> {
+                    if (filterToggle)
+                    {
+                        topAppBar.menu.getItem(0).setIcon(R.drawable.ic_filter_down_24)
+                        filterBar.visibility = View.GONE
+                        divider.visibility = View.GONE
+                        dividerFilter.visibility = View.GONE
+                        filterAmountText.visibility = View.GONE
+                        transactionGroup.visibility = View.GONE
+                        filterDateText.visibility = View.GONE
+                        dateGroup.visibility = View.GONE
+                        filterCategoryText.visibility = View.GONE
+                        categoryGroup.visibility = View.GONE
+                        categoryMenu.visibility = View.GONE
 
-                filterToggle = false
-            }
-            else{
-                filterMenu.setImageResource(R.drawable.ic_filter_up_24)
-                filterBar.visibility = View.VISIBLE
-                divider.visibility = View.VISIBLE
-                dividerFilter.visibility = View.VISIBLE
-                filterAmountText.visibility = View.VISIBLE
-                transactionGroup.visibility = View.VISIBLE
-                filterDateText.visibility = View.VISIBLE
-                dateGroup.visibility = View.VISIBLE
-                filterCategoryText.visibility = View.VISIBLE
-                categoryGroup.visibility = View.VISIBLE
-                if (categoryGroup.checkedRadioButtonId == R.id.custom)
-                {
-                    categoryMenu.visibility = View.VISIBLE
+                        filterToggle = false
+                    }
+                    else{
+                        topAppBar.menu.getItem(0).setIcon(R.drawable.ic_filter_up_24)
+                        filterBar.visibility = View.VISIBLE
+                        divider.visibility = View.VISIBLE
+                        dividerFilter.visibility = View.VISIBLE
+                        filterAmountText.visibility = View.VISIBLE
+                        transactionGroup.visibility = View.VISIBLE
+                        filterDateText.visibility = View.VISIBLE
+                        dateGroup.visibility = View.VISIBLE
+                        filterCategoryText.visibility = View.VISIBLE
+                        categoryGroup.visibility = View.VISIBLE
+                        if (categoryGroup.checkedRadioButtonId == R.id.custom)
+                        {
+                            categoryMenu.visibility = View.VISIBLE
+                        }
+                        else{
+                            categoryMenu.visibility = View.INVISIBLE
+                        }
+                        filterToggle = true
+                    }
+                    true
                 }
-                else{
-                    categoryMenu.visibility = View.INVISIBLE
-                }
-                filterToggle = true
+                else -> false
             }
         }
 
@@ -340,11 +345,10 @@ class TransactionFragment : Fragment(){
     }
 
     fun openContextBar(){
-        //actionMode = requireActivity().startSupportActionMode(mActionModeCallback)
         actionMode = (activity as MainActivity?)!!.startSupportActionMode(mActionModeCallback)
 
         if (filterToggle) {
-            filterMenu.setImageResource(R.drawable.ic_filter_down_24)
+            topAppBar.menu.getItem(0).setIcon(R.drawable.ic_filter_down_24)
             filterBar.visibility = View.GONE
             divider.visibility = View.GONE
             dividerFilter.visibility = View.GONE
@@ -366,6 +370,11 @@ class TransactionFragment : Fragment(){
 
     fun updateContextBarTitle(n : Int){
         actionMode?.title = "$n Item Selected"
+        if (n == transactionList!!.size) {
+            actionMode?.menu?.getItem(0)?.setIcon(R.drawable.ic_check_all_24)
+        } else {
+            actionMode?.menu?.getItem(0)?.setIcon(R.drawable.ic_check_24)
+        }
     }
 
     private val mActionModeCallback = object : ActionMode.Callback {

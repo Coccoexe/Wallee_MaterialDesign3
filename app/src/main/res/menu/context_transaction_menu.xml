@@ -5,7 +5,7 @@
     <item
         android:id="@+id/selectAll"
         android:title="Select/Deselect All"
-        android:icon="@drawable/ic_check_all_24"
+        android:icon="@drawable/ic_check_24"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/deleteSelected"
