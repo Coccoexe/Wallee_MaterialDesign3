@@ -51,5 +51,7 @@
 
     <string-array name="currency">
         <item>$</item>
+        <item>€</item>
+        <item>£</item>
     </string-array>
 </resources>

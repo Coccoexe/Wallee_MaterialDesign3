@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.events.IActivityData
+import com.google.android.material.textfield.TextInputLayout
 
 class ChangeCurrency : DialogFragment() {
 
@@ -43,23 +44,10 @@ class ChangeCurrency : DialogFragment() {
             dismiss()
         }
 
-        //radiogroup
-        val radiogroup : RadioGroup = inflateView.findViewById(R.id.selectCurrency)
-        radiogroup.setOnCheckedChangeListener { _, optionId ->
-            run {
-                when (optionId) {
-                    R.id.euro -> {
-
-                    }
-                    R.id.dollaro -> {
-
-                    }
-                    R.id.sterlina -> {
-
-                    }
-                }
-            }
-        }
+        //menu tendina
+        val categoryMenu: TextInputLayout = inflateView.findViewById(R.id.selectCurrency)
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, resources.getStringArray(R.array.currency))
+        (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
         //confirmButton
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
