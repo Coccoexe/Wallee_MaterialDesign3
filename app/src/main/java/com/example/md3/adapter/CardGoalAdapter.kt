@@ -11,17 +11,32 @@ import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 import com.example.md3.fragment.GoalFragment
 import com.example.md3.fragment.TransactionFragment
+import kotlin.math.max
 
 class CardGoalAdapter(private val cards : List<Goal>, var fragment: GoalFragment) :
     RecyclerView.Adapter<CardGoalAdapter.CardViewHolder>() {
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val categoryCard : TextView = itemView.findViewById(R.id.textCard)
-        var progressBar : ProgressBar = itemView.findViewById(R.id.progBar)
+        private val progressBar : ProgressBar = itemView.findViewById(R.id.progBar)
+        private val points : TextView = itemView.findViewById(R.id.points)
 
         fun bind(goal: Goal) {
+            var maximum = goal.sum
+            if (maximum < 0)
+                maximum = 0 - maximum
+
+            var amount = fragment.getBalanceGoal(goal.category)
+            if (amount < 0)
+                amount = 0 - amount
+
+            val percent = String.format("%.2f", (amount/maximum)*100)
+
             categoryCard.text = goal.category
-            progressBar.progress = (fragment.getBalanceGoal(goal.category)/goal.sum).toInt()
+            progressBar.max = maximum.toInt()
+            progressBar.setProgress(amount.toInt())
+            points.text = percent.plus("%")
+            //points.text = amount.toString().plus("/").plus(maximum.toString())
         }
     }
 

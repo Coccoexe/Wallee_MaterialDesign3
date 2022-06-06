@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
 import com.example.md3.adapter.CardGoalAdapter
@@ -38,20 +39,20 @@ class GoalFragment : Fragment() {
         val cardFAB : FloatingActionButton= inflateView.findViewById(R.id.cardFAB)
 
         cardFAB.setOnClickListener {
-            //Toast.makeText(this.context, "FAB is clicked", Toast.LENGTH_SHORT).show()
-            activityData.insertGoal(
+            val popup = AddGoalPopup()
+            popup.show(requireActivity().supportFragmentManager, "popupGoal")
+            /*activityData.insertGoal(
                 Goal(
                     0,
-                    "salary",
+                    "Salary",
                     100.0
                 )
-            )
+            )*/
         }
 
         val recyclerView: RecyclerView = inflateView.findViewById(R.id.recyclerViewCard)
         val layoutManager = GridLayoutManager(context,1, GridLayoutManager.VERTICAL,false)
         recyclerView.layoutManager = layoutManager
-
 
         goalList = activityData.getAllGoal()
         recyclerView.adapter = CardGoalAdapter(goalList!!, this)
