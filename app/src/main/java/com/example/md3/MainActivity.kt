@@ -1,35 +1,22 @@
 package com.example.md3
 
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.md3.data.UserDao
 import com.example.md3.data.UserDatabase
 import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
-import com.example.md3.data.entity.User
-import com.example.md3.data.relation.UserTransaction
 import com.example.md3.events.IActivityData
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.floor
-import kotlin.math.log10
-import kotlin.math.pow
+import kotlin.math.*
 
 
 class MainActivity : AppCompatActivity(), IActivityData {
@@ -289,18 +276,17 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun formatMoney(num: Double): String {
-        if (num > 999.99){
-            val suffix = charArrayOf(' ', 'k', 'M', 'B', 'T', 'P', 'E')
-            val value = floor(log10(num)).toInt()
-            val base = value / 3
-            if (value >= 3 && base < suffix.size){
-                return DecimalFormat("#0.0").format(num / 10.0.pow((base * 3).toDouble())) + suffix[base] + "$"
-            } else {
-                return DecimalFormat("#,##0").format(num) + "$"
-            }
+
+        val suffix = arrayOf(' ', 'k', 'M', 'B', 'T', 'P', 'E')
+        val value =log10(abs(num))
+        val base = (value / 3).roundToInt()
+        if (value >= 4 && base < suffix.size){
+            return DecimalFormat("#0.00").format(num / 10.0.pow((base * 3).toDouble())) + suffix[base] + "$"
         } else {
-            return String.format("%.2f",num) + "$ "
+            return DecimalFormat("#,##0.00").format(num) + "$"
         }
+
+
     }
 
 }

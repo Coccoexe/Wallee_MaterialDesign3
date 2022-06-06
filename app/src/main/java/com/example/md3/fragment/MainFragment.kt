@@ -71,9 +71,7 @@ class MainFragment : Fragment() {
             lastDate.text = trans.last().date
             lastImage.setImageResource(activityData.getDrawable(trans.last().category))
         }else{
-            lastAmount.text = "0 $"
-            lastDate.text = "No recent transaction"
-            lastImage.setImageResource(R.drawable.more)
+            lastDate.text = resources.getString(R.string.no_transaction_found)
         }
 
         //incomeChart
