@@ -102,6 +102,12 @@ class ProfileFragment : Fragment() {
             popup.show(requireActivity().supportFragmentManager,"popupPassword")
         }
 
+        //currency
+        val cardCurrency : CardView = inflaterView.findViewById(R.id.cardCurrency)
+        cardCurrency.setOnClickListener{
+            val popup = ChangeCurrency()
+            popup.show(requireActivity().supportFragmentManager,"popupCurrency")
+        }
 
         //logout
         val cardLogout : CardView = inflaterView.findViewById(R.id.cardLogout)
