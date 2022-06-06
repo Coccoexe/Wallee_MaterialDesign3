@@ -8,11 +8,7 @@
         android:id="@+id/mainFragment"
         android:name="com.example.md3.fragment.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_profile"
-            app:destination="@id/profileFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.md3.fragment.ProfileFragment"

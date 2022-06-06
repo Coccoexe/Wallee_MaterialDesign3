@@ -56,12 +56,6 @@ class MainFragment : Fragment() {
             popup.show(requireActivity().supportFragmentManager, "popupTransaction")
         }
 
-        //profile button
-        val profileButton : FloatingActionButton = inflateView.findViewById(R.id.userPicture)
-        profileButton.setOnClickListener{
-            inflateView.findNavController().navigate(R.id.action_profile)
-        }
-
         //last transaction
         val lastAmount : TextView = inflateView.findViewById(R.id.lastAmount)
         val lastDate : TextView = inflateView.findViewById(R.id.lastDate)
