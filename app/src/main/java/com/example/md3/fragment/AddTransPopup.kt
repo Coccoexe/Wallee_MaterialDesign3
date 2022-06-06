@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
@@ -50,15 +51,15 @@ class AddTransPopup : DialogFragment() {
         (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
         //radiogroup
-        val radiogroup : RadioGroup = inflateView.findViewById(R.id.selectTransaction)
+        val radiogroup : MaterialButtonToggleGroup = inflateView.findViewById(R.id.selectTransaction)
         radiogroup.check(R.id.add)
-        radiogroup.setOnCheckedChangeListener { _, optionId ->
-            run {
+        radiogroup.addOnButtonCheckedListener() { dateGroup, chekedId, isChecked ->
+            if(isChecked){
 
                 val items = ArrayList<String>()
                 (categoryMenu.editText as? AutoCompleteTextView)?.text?.clear()
 
-                when (optionId) {
+                when (chekedId) {
                     R.id.add -> {
                         items.addAll(resources.getStringArray(R.array.income))
                     }
@@ -80,13 +81,13 @@ class AddTransPopup : DialogFragment() {
 
             var money = 0.0
 
-            if(radiogroup.checkedRadioButtonId == -1 || amount.editText!!.text.isEmpty() || categoryMenu.editText!!.text.isEmpty()){
+            if(amount.editText!!.text.isEmpty() || categoryMenu.editText!!.text.isEmpty()){
                 dismiss()
             }else if(amount.editText!!.text.toString().toDouble() == 0.0){
                 amount.editText!!.text.clear()
                 Toast.makeText(context, "Transaction amount cannot be 0!", Toast.LENGTH_SHORT).show()
             }else {
-                if (radiogroup.checkedRadioButtonId == R.id.add) {
+                if (radiogroup.checkedButtonId == R.id.add) {
                     money = amount.editText!!.text.toString().toDouble()
                 } else {
                     money = 0 - amount.editText!!.text.toString().toDouble()
