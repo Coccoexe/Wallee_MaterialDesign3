@@ -15,6 +15,7 @@
     <string name="last_transaction">Last Transaction:</string>
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
+    <string name="currency">Currency</string>
     <string name="about_us">About Us</string>
     <string name="log_out">Log Out</string>
     <string name="more_filters">more filters</string>

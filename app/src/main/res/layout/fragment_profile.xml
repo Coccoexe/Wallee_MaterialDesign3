@@ -83,9 +83,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="4dp"
-            app:constraint_referenced_ids="cardEmail, cardPassword, cardAbout, cardLogout"
+            app:constraint_referenced_ids="cardEmail, cardPassword, cardCurrency, cardAbout, cardLogout"
             app:flow_horizontalGap="8dp"
-            app:flow_maxElementsWrap="2"
+            app:flow_maxElementsWrap="1"
             app:flow_verticalGap="8dp"
             app:flow_wrapMode="aligned"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -150,6 +150,31 @@
                     android:layout_marginTop="4dp"
                     android:textSize="12sp"
                     android:textStyle="italic"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCurrency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardUseCompatPadding="true"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/currency"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

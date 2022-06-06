@@ -47,4 +47,6 @@
     <string name="custom">Personalizzato</string>
     <string name="category">Categoria</string>
     <string name="no_transaction_found">Nessuna transazione trovata</string>
+    <string name="currency">Valuta</string>
+    <string name="filter_by_transaction_type">Filtra per tipo di transazione:</string>
 </resources>

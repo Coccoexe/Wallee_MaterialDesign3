@@ -5,19 +5,24 @@
         android:icon="@drawable/ic_home_24"
         android:title="Home"/>
     <item
-        android:id="@+id/graphFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_bar_chart_24"
-        android:title="Graph"/>
-    <item
         android:id="@+id/transactionFragment"
         android:enabled="true"
         android:icon="@drawable/ic_settings_24"
         android:title="Transaction"/>
     <item
+        android:id="@+id/graphFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_bar_chart_24"
+        android:title="Graph"/>
+    <item
         android:id="@+id/goalFragment"
         android:enabled="true"
         android:icon="@drawable/ic_goal_24"
         android:title="Goal"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_user_24"
+        android:title="Profile"/>
 
 </menu>
