@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     override fun getUserWithTransactionFiltered(amount: String, category: String?, date: String?): List<Transaction>? {
         var transactionList : List<Transaction>? = null
         val ret : ArrayList<Transaction> = ArrayList()
-        val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a", Locale.getDefault())
+        val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy", Locale.getDefault())
 
         runBlocking {
             if (category == null){

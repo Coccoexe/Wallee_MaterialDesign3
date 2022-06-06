@@ -33,7 +33,7 @@ class TransactionFragment : Fragment(){
     private lateinit var activityData : IActivityData
     private var transactionList : List<Transaction>? = null
     private lateinit var gridLayoutManager: GridLayoutManager
-    private val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a",Locale.getDefault())
+    private val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy",Locale.getDefault())
     private var filterToggle : Boolean = false
     private var color: Int = -1
 

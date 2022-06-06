@@ -4,17 +4,19 @@ package com.example.md3.fragment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,6 +45,22 @@ class AddTransPopup : DialogFragment() {
         if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        }
+
+        //date
+        val calendar : Calendar = Calendar.getInstance()
+        val format = SimpleDateFormat("EE d MMM yyyy",Locale.getDefault())
+        var standarDate = format.format(calendar.time)
+        val date : AppCompatImageView = inflateView.findViewById(R.id.selectDate)
+        date.setOnClickListener{
+            val picker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+            picker.show(requireActivity().supportFragmentManager,"datePicker")
+            picker.addOnPositiveButtonClickListener {
+                standarDate = format.format(picker.selection)
+            }
         }
 
         //menu tendina
@@ -93,16 +111,13 @@ class AddTransPopup : DialogFragment() {
                     money = 0 - amount.editText!!.text.toString().toDouble()
                 }
 
-                val calendar : Calendar = Calendar.getInstance()
-                val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy, 'at' h:mm a",Locale.getDefault())
-
                 activityData.insertTransaction(
                     Transaction(
                         0,
                         activityData.getEmail(),
                         money,
-                        categoryMenu.editText.toString(),
-                        format.format(calendar.time)
+                        categoryMenu.editText!!.text.toString(),
+                        standarDate
                     )
                 )
 
@@ -120,7 +135,6 @@ class AddTransPopup : DialogFragment() {
             }
 
         }
-
 
         //cancelButton
         val cancel : Button = inflateView.findViewById(R.id.popupBack)
