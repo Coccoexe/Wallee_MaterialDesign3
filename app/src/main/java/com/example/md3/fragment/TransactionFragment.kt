@@ -421,4 +421,9 @@ class TransactionFragment : Fragment(){
         transactionList = activityData.getUserWithTransactionFiltered(filterAmount,filterCategory,filterDate)
     }
 
+    override fun onPause() {
+        super.onPause()
+        actionMode?.finish()
+    }
+
 }
