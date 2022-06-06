@@ -43,6 +43,14 @@ interface UserDao {
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail and category = (:filter)")
     suspend fun getUserWithTransactionsFiltered(userMail: String, filter: String): List<Transaction>?
 
+    @androidx.room.Transaction
+    @Query("Select sum(amount) From `transaction` where userMail = :userMail and amount > 0.0")
+    suspend fun getUserPositiveTransactions(userMail: String): Double?
+
+    @androidx.room.Transaction
+    @Query("Select sum(amount) From `transaction` where userMail = :userMail and amount < 0.0")
+    suspend fun getUserNegativeTransactions(userMail: String): Double?
+
     //getBalance
     @Query("Select sum(amount) as balance from `transaction` where userMail = :userMail")
     suspend fun getUserBalance(userMail: String): Double

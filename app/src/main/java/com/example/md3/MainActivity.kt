@@ -207,6 +207,22 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return ret
     }
 
+    override fun getUserPositiveTransactions(): Double? {
+        var income : Double? = null
+        runBlocking{
+            income = dao.getUserPositiveTransactions(userEmail)
+        }
+        return income
+    }
+
+    override fun getUserNegativeTransactions(): Double? {
+        var expense : Double? = null
+        runBlocking{
+            expense = dao.getUserNegativeTransactions(userEmail)
+        }
+        return expense
+    }
+
     override fun updateUser(userName: String, userId: Int) {
         runBlocking {
             dao.updateUser(userName,userId)
