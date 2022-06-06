@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
@@ -50,7 +49,7 @@ class MainFragment : Fragment() {
         balance.text = String.format("%.2f",activityData.getUserBalance()) + "$"
 
         //add transaction
-        val addTrans : Button = inflateView.findViewById(R.id.addTransaction)
+        val addTrans : FloatingActionButton = inflateView.findViewById(R.id.addTransaction)
         addTrans.setOnClickListener{
             val popup = AddTransPopup()
             popup.show(requireActivity().supportFragmentManager, "popupTransaction")
