@@ -365,6 +365,10 @@ class TransactionFragment : Fragment(){
         actionMode?.finish()
     }
 
+    fun updateContextBarTitle(n : Int){
+        actionMode?.title = "$n Item Selected"
+    }
+
     private val mActionModeCallback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu?): Boolean {
             mode.menuInflater.inflate(R.menu.context_transaction_menu, menu)
@@ -378,12 +382,7 @@ class TransactionFragment : Fragment(){
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
             return when (item.itemId) {
                 R.id.selectAll -> {
-                    if (transactionList != null) {
-                        (dataList.adapter as TransactionAdapter).selected.clear()
-                        for (t in transactionList!!) {
-                            (dataList.adapter as TransactionAdapter).selected.add(t.id)
-                        }
-                    }
+                    (dataList.adapter as TransactionAdapter).selectionAll()
                     true
                 }
                 R.id.deleteSelected -> {
@@ -420,6 +419,11 @@ class TransactionFragment : Fragment(){
     private fun getTransactionList(){
 
         transactionList = activityData.getUserWithTransactionFiltered(filterAmount,filterCategory,filterDate)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        actionMode?.finish()
     }
 
 }

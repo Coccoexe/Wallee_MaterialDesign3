@@ -1,5 +1,6 @@
 package com.example.md3.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -13,13 +14,14 @@ import com.example.md3.data.entity.Transaction
 import com.example.md3.fragment.TransactionFragment
 import com.google.android.material.color.MaterialColors
 
-class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>,
+class TransactionAdapter(ctx: Context?, transList : List<Transaction>,
                          var fragment: TransactionFragment
 ) :
     RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
     var inflater: LayoutInflater
     var context = ctx
+    private var transactionList = transList.reversed()
 
     var selectionMode = false
     var selected : ArrayList<Int>
@@ -35,7 +37,7 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>,
         holder.date.text = transactionList[position].date
 
         holder.transaction = transactionList[position]
-        //holder.bind(transactionList[position])
+        holder.selectionUpdateView()
     }
 
     override fun getItemCount(): Int {
@@ -47,6 +49,7 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>,
         var image : ImageView
         var amount : TextView
         var date : TextView
+        private var selectedImage : ImageView
 
         lateinit var transaction : Transaction
 
@@ -54,6 +57,7 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>,
             image = itemView.findViewById(R.id.lastImage)
             amount = itemView.findViewById(R.id.lastAmount)
             date = itemView.findViewById(R.id.lastDate)
+            selectedImage = itemView.findViewById(R.id.selectedTransaction)
             itemView.setOnLongClickListener(this)
             itemView.setOnClickListener(this)
         }
@@ -84,16 +88,26 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>,
             }
         }
 
+        fun selectionUpdateView(){
+            if (transaction.isSelected){
+                selectedImage.visibility = View.VISIBLE
+            }else{
+                selectedImage.visibility = View.INVISIBLE
+            }
+            fragment.updateContextBarTitle(selected.size)
+        }
+
         private fun updateView(){
             if (transaction.isSelected) {
                 selected.remove(transaction.id)
                 transaction.isSelected = false
-                itemView.setBackgroundColor(Color.TRANSPARENT)
+                selectedImage.visibility = View.INVISIBLE
             } else {
                 selected.add(transaction.id)
                 transaction.isSelected = true
-                itemView.setBackgroundColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorPrimaryContainer))
+                selectedImage.visibility = View.VISIBLE
             }
+            fragment.updateContextBarTitle(selected.size)
         }
     }
 
@@ -101,6 +115,30 @@ class TransactionAdapter(ctx: Context?, var transactionList : List<Transaction>,
         inflater = LayoutInflater.from(ctx)
         selected = ArrayList()
         selected.clear()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun selectionAll(){
+        if (selected.size < itemCount) {
+            for (t in transactionList) {
+                if (!t.isSelected) {
+                    t.isSelected = true
+                    selected.add(t.id)
+                }
+            }
+            selectionMode = false
+        }else{
+            for (t in transactionList) {
+                if (t.isSelected) {
+                    t.isSelected = false
+                }
+            }
+            selected.clear()
+            selectionMode = true
+            fragment.closeContextBar()
+        }
+        //all list updated
+        this.notifyDataSetChanged()
     }
 
     private fun getDrawable(category : String) : Int{
