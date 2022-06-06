@@ -7,18 +7,21 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
+import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
+import com.example.md3.fragment.GoalFragment
+import com.example.md3.fragment.TransactionFragment
 
-class CardGoalAdapter(private val cards : List<Transaction>) :
+class CardGoalAdapter(private val cards : List<Goal>, var fragment: GoalFragment) :
     RecyclerView.Adapter<CardGoalAdapter.CardViewHolder>() {
 
-    class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var category : TextView
-        var progressBar : ProgressBar
+    inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val categoryCard : TextView = itemView.findViewById(R.id.textCard)
+        var progressBar : ProgressBar = itemView.findViewById(R.id.progBar)
 
-        init {
-            category = itemView.findViewById(R.id.textCard)
-            progressBar = itemView.findViewById(R.id.progBar)
+        fun bind(goal: Goal) {
+            categoryCard.text = goal.category
+            progressBar.progress = (fragment.getBalanceGoal(goal.category)/goal.sum).toInt()
         }
     }
 
@@ -34,7 +37,6 @@ class CardGoalAdapter(private val cards : List<Transaction>) :
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        holder.category.text = cards[position].category
-        //finire
+        holder.bind(cards[position])
     }
 }

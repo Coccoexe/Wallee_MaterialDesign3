@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/activity_login.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/fragment_add_card_popup.xml" value="0.22010869565217392" />
+        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/fragment_goal.xml" value="0.33564814814814814" />
+        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/fragment_transaction.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/goal_card.xml" value="0.20018115942028986" />
+        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/list_item.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/trans_popup.xml" value="0.264" />
+        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/transaction_card.xml" value="0.23143115942028986" />
+        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/user_popup.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/currency_popup.xml" value="0.365625" />

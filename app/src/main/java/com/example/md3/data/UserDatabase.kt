@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.*
 import com.example.md3.data.converter.ImageConverter
 import com.example.md3.data.entity.AutoLogin
+import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 import com.example.md3.data.entity.User
 
@@ -11,7 +12,8 @@ import com.example.md3.data.entity.User
     entities = [
         User::class,
         Transaction::class,
-        AutoLogin::class
+        AutoLogin::class,
+        Goal::class
     ],
     version = 1
 )

@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.md3.data.entity.AutoLogin
+import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 import com.example.md3.data.entity.User
 
@@ -22,6 +23,9 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAutoLog(autoLogin: AutoLogin)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertGoal(goal: Goal)
 
     //remove
     @Query("DELETE FROM AutoLogin")
@@ -43,7 +47,6 @@ interface UserDao {
     @Query("Select sum(amount) as balance from `transaction` where userMail = :userMail")
     suspend fun getUserBalance(userMail: String): Double
 
-
     //login
     @Query("SELECT * FROM user WHERE userMail = :userMail and password = :password")
     suspend fun login(userMail: String, password: String) : User?
@@ -51,6 +54,14 @@ interface UserDao {
     @Query("SELECT * FROM autologin")
     suspend fun getAutoLogin() : AutoLogin?
 
+    @Query("Select sum(amount) as balanceCategory from `transaction` where userMail = :userMail and category = :category")
+    suspend fun getUserBalanceCategory(userMail: String, category: String): Double
+
+    @Query("SELECT * FROM goal WHERE category = :category")
+    suspend fun getGoalByCategory(category: String) : Goal?
+
+    @Query("SELECT * FROM goal")
+    suspend fun getAllGoal() : List<Goal>?
 
     //id
     @Query("Select id from user where userMail = :userMail")

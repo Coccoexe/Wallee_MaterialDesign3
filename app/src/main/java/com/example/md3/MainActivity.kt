@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.md3.data.UserDao
 import com.example.md3.data.UserDatabase
+import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 import com.example.md3.data.entity.User
 import com.example.md3.data.relation.UserTransaction
@@ -59,6 +60,12 @@ class MainActivity : AppCompatActivity(), IActivityData {
     override fun insertTransaction(transaction: Transaction) {
         runBlocking {
             dao.insertTransaction(transaction)
+        }
+    }
+
+    override fun insertGoal(goal: Goal) {
+        runBlocking {
+            dao.insertGoal(goal)
         }
     }
 
@@ -116,6 +123,37 @@ class MainActivity : AppCompatActivity(), IActivityData {
         }
         return balance!!
     }
+
+    override fun getUserBalanceCategory(category: String): Double {
+        var balance : Double? = null
+        runBlocking {
+            balance = dao.getUserBalanceCategory(userEmail, category)
+        }
+        if (balance == null) {
+            balance = 0.0
+        }
+
+        return balance!!
+    }
+
+    override fun getGoalByCategory(category: String): Goal? {
+        var goal : Goal? = null
+        runBlocking {
+            goal = dao.getGoalByCategory(category)
+        }
+
+        return goal
+    }
+
+    override fun getAllGoal(): List<Goal>? {
+        var listGoal : List<Goal>? = null
+        runBlocking {
+            listGoal = dao.getAllGoal()
+        }
+
+        return listGoal
+    }
+
 
     override fun getUserWithTransaction(): List<Transaction>? {
         var transactionList : List<Transaction>? = null
@@ -178,7 +216,6 @@ class MainActivity : AppCompatActivity(), IActivityData {
 
         return ret
     }
-
 
     override fun updateUser(userName: String, userId: Int) {
         runBlocking {
