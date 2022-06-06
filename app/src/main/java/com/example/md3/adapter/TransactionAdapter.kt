@@ -33,7 +33,7 @@ class TransactionAdapter(ctx: Context?, transList : List<Transaction>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.image.setImageResource(getDrawable(transactionList[position].category))
-        holder.amount.text = String.format("%.2f",transactionList[position].amount)
+        holder.amount.text = fragment.getFormattedMoney(transactionList[position].amount)
         holder.date.text = transactionList[position].date
 
         holder.transaction = transactionList[position]

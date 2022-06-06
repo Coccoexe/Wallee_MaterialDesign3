@@ -377,6 +377,10 @@ class TransactionFragment : Fragment(){
         }
     }
 
+    fun getFormattedMoney(num : Double) : String{
+        return activityData.formatMoney(num)
+    }
+
     private val mActionModeCallback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu?): Boolean {
             mode.menuInflater.inflate(R.menu.context_transaction_menu, menu)

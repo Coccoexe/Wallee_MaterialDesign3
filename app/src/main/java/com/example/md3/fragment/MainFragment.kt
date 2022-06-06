@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -19,6 +18,11 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.lang.Math.pow
+import java.text.DecimalFormat
+import kotlin.math.floor
+import kotlin.math.log10
+import kotlin.math.pow
 
 
 class MainFragment : Fragment() {
@@ -46,7 +50,8 @@ class MainFragment : Fragment() {
 
         //balance
         val balance : TextView = inflateView.findViewById(R.id.balance)
-        balance.text = String.format("%.2f",activityData.getUserBalance()) + "$"
+        //balance.text = String.format("%.2f",activityData.getUserBalance()) + "$"
+        balance.text = activityData.formatMoney(activityData.getUserBalance())
 
         //add transaction
         val addTrans : FloatingActionButton = inflateView.findViewById(R.id.addTransaction)
@@ -61,9 +66,10 @@ class MainFragment : Fragment() {
         val lastImage : ImageView = inflateView.findViewById(R.id.lastImage)
         val trans : List<Transaction>? = activityData.getUserWithTransaction()
         if (trans!!.isNotEmpty()) {
-            lastAmount.text = String.format("%.2f",trans.last().amount) + "$ "
+            //lastAmount.text = String.format("%.2f",trans.last().amount) + "$ "
+            lastAmount.text = activityData.formatMoney(trans.last().amount)
             lastDate.text = trans.last().date
-            lastImage.setImageResource(getDrawable(trans.last().category))
+            lastImage.setImageResource(activityData.getDrawable(trans.last().category))
         }else{
             lastAmount.text = "0 $"
             lastDate.text = "No recent transaction"
@@ -90,27 +96,6 @@ class MainFragment : Fragment() {
 
         // Inflate the layout for this fragment
         return inflateView
-    }
-
-    private fun getDrawable(category : String) : Int{
-        val income = resources.getStringArray(R.array.income)
-        val expense = resources.getStringArray(R.array.expenses)
-        when(category){
-            income[0] -> return R.drawable.salary
-            income[1] -> return R.drawable.rent
-            income[2] -> return R.drawable.investment
-            income[3] -> return R.drawable.selling
-            income[4] -> return R.drawable.gift
-            income[5] -> return R.drawable.more
-            expense[0] -> return R.drawable.bills
-            expense[1] -> return R.drawable.grocery
-            expense[2] -> return R.drawable.transportation
-            expense[3] -> return R.drawable.home
-            expense[4] -> return R.drawable.health
-            expense[5] -> return R.drawable.gift
-            expense[6] -> return R.drawable.more
-        }
-        return R.drawable.more
     }
 
 }

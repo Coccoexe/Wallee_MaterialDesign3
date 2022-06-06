@@ -27,4 +27,8 @@ interface IActivityData {
     fun removeAutoLog()
     fun removeSelectedTransaction(selected : ArrayList<Int>)
     fun existMail(userMail: String): Boolean
+
+    //utility
+    fun getDrawable(category : String) : Int
+    fun formatMoney(num : Double) : String
 }

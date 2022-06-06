@@ -23,9 +23,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.floor
+import kotlin.math.log10
+import kotlin.math.pow
 
 
 class MainActivity : AppCompatActivity(), IActivityData {
@@ -154,7 +158,6 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return listGoal
     }
 
-
     override fun getUserWithTransaction(): List<Transaction>? {
         var transactionList : List<Transaction>? = null
 
@@ -262,6 +265,42 @@ class MainActivity : AppCompatActivity(), IActivityData {
             exist = dao.getId(userMail)
         }
         return exist != null
+    }
+
+    override fun getDrawable(category: String): Int {
+        val income = resources.getStringArray(R.array.income)
+        val expense = resources.getStringArray(R.array.expenses)
+        when(category){
+            income[0] -> return R.drawable.salary
+            income[1] -> return R.drawable.rent
+            income[2] -> return R.drawable.investment
+            income[3] -> return R.drawable.selling
+            income[4] -> return R.drawable.gift
+            income[5] -> return R.drawable.more
+            expense[0] -> return R.drawable.bills
+            expense[1] -> return R.drawable.grocery
+            expense[2] -> return R.drawable.transportation
+            expense[3] -> return R.drawable.home
+            expense[4] -> return R.drawable.health
+            expense[5] -> return R.drawable.gift
+            expense[6] -> return R.drawable.more
+        }
+        return R.drawable.more
+    }
+
+    override fun formatMoney(num: Double): String {
+        if (num > 999.99){
+            val suffix = charArrayOf(' ', 'k', 'M', 'B', 'T', 'P', 'E')
+            val value = floor(log10(num)).toInt()
+            val base = value / 3
+            if (value >= 3 && base < suffix.size){
+                return DecimalFormat("#0.0").format(num / 10.0.pow((base * 3).toDouble())) + suffix[base] + "$"
+            } else {
+                return DecimalFormat("#,##0").format(num) + "$"
+            }
+        } else {
+            return String.format("%.2f",num) + "$ "
+        }
     }
 
 }
