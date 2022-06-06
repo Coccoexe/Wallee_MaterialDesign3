@@ -4,6 +4,7 @@ package com.example.md3.fragment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
+import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,31 +45,34 @@ class AddTransPopup : DialogFragment() {
         }
 
         //menu tendina
-        val transCat : Spinner = inflateView.findViewById(R.id.popupSpinner)
+        val categoryMenu: TextInputLayout = inflateView.findViewById(R.id.categoryMenu)
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, resources.getStringArray(R.array.income))
+        (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
         //radiogroup
         val radiogroup : RadioGroup = inflateView.findViewById(R.id.selectTransaction)
+        radiogroup.check(R.id.add)
         radiogroup.setOnCheckedChangeListener { _, optionId ->
             run {
+
+                val items = ArrayList<String>()
+                (categoryMenu.editText as? AutoCompleteTextView)?.text?.clear()
+
                 when (optionId) {
                     R.id.add -> {
-                        val items = resources.getStringArray(R.array.income)
-                        val adapter: Any =
-                            ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
-                        transCat.adapter = adapter as SpinnerAdapter?
+                        items.addAll(resources.getStringArray(R.array.income))
                     }
                     R.id.remove -> {
-                        val items = resources.getStringArray(R.array.expenses)
-                        val adapter: Any =
-                            ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
-                        transCat.adapter = adapter as SpinnerAdapter?
+                        items.addAll(resources.getStringArray(R.array.expenses))
                     }
                 }
+                val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+                (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
             }
         }
 
         //textammount
-        val amount : EditText = inflateView.findViewById(R.id.ammount)
+        val amount : TextInputLayout = inflateView.findViewById(R.id.amount)
 
         //confirmButton
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
@@ -75,16 +80,16 @@ class AddTransPopup : DialogFragment() {
 
             var money = 0.0
 
-            if(radiogroup.checkedRadioButtonId == -1 || amount.text.isEmpty()){
+            if(radiogroup.checkedRadioButtonId == -1 || amount.editText!!.text.isEmpty() || categoryMenu.editText!!.text.isEmpty()){
                 dismiss()
-            }else if(amount.text.toString().toDouble() == 0.0){
-                amount.text.clear()
+            }else if(amount.editText!!.text.toString().toDouble() == 0.0){
+                amount.editText!!.text.clear()
                 Toast.makeText(context, "Transaction amount cannot be 0!", Toast.LENGTH_SHORT).show()
             }else {
                 if (radiogroup.checkedRadioButtonId == R.id.add) {
-                    money = amount.text.toString().toDouble()
+                    money = amount.editText!!.text.toString().toDouble()
                 } else {
-                    money = 0 - amount.text.toString().toDouble()
+                    money = 0 - amount.editText!!.text.toString().toDouble()
                 }
 
                 val calendar : Calendar = Calendar.getInstance()
@@ -95,7 +100,7 @@ class AddTransPopup : DialogFragment() {
                         0,
                         activityData.getEmail(),
                         money,
-                        transCat.selectedItem.toString(),
+                        categoryMenu.editText.toString(),
                         format.format(calendar.time)
                     )
                 )

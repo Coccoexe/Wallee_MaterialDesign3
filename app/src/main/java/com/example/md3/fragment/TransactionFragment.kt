@@ -58,7 +58,6 @@ class TransactionFragment : Fragment(){
     //contextBar
     private var actionMode: ActionMode? = null
 
-
     //amount -> "all", "positive", "negative"
     private lateinit var filterAmount : String
     //category -> list contain category filter
