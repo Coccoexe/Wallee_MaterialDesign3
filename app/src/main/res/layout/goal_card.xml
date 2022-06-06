@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:progressBackgroundTint="?attr/colorPrimaryContainer"
-                android:progressTint="@color/material_dynamic_primary50"
+                android:progressTint="?attr/colorPrimary"
                 android:progress="0"/>
 
             <LinearLayout

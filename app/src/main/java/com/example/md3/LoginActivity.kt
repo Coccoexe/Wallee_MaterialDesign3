@@ -53,6 +53,10 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val mail = userMail.editText!!.text.toString()
             val pass = userPass.editText!!.text.toString()
+
+            userMail.error = null
+            userPass.error = null
+
             if (mail.isEmpty() || pass.isEmpty()){
                 if(mail.isEmpty()) {
                     userMail.error = "Fill this field"
