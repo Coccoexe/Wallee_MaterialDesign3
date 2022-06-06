@@ -279,7 +279,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
 
         val suffix = arrayOf(' ', 'k', 'M', 'B', 'T', 'P', 'E')
         val value =log10(abs(num))
-        val base = (value / 3).roundToInt()
+        val base = (value / 3).toInt()
         if (value >= 4 && base < suffix.size){
             return DecimalFormat("#0.00").format(num / 10.0.pow((base * 3).toDouble())) + suffix[base] + "$"
         } else {
