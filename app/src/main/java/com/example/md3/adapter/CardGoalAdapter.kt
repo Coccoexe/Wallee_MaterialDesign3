@@ -8,10 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
 import com.example.md3.data.entity.Goal
-import com.example.md3.data.entity.Transaction
 import com.example.md3.fragment.GoalFragment
-import com.example.md3.fragment.TransactionFragment
-import kotlin.math.max
 
 class CardGoalAdapter(private val cards : List<Goal>, var fragment: GoalFragment) :
     RecyclerView.Adapter<CardGoalAdapter.CardViewHolder>() {
@@ -36,6 +33,7 @@ class CardGoalAdapter(private val cards : List<Goal>, var fragment: GoalFragment
             progressBar.max = maximum.toInt()
             progressBar.setProgress(amount.toInt())
             points.text = percent.plus("%")
+
             //points.text = amount.toString().plus("/").plus(maximum.toString())
         }
     }
