@@ -107,4 +107,10 @@ interface UserDao {
     @Query("Select imageUri From user where id = :id ")
     suspend fun getImageUri(id: Int) : Bitmap?
 
+    @Query("Update user Set currency=:currency Where id = :id")
+    suspend fun updateCurrency(currency: String,id: Int)
+
+    @Query("Select currency From user where id = :id")
+    suspend fun getCurrency(id: Int) : String
+
 }

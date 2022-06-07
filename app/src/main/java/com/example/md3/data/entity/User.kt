@@ -17,5 +17,7 @@ data class User(
     @ColumnInfo
     val password: String,
     @ColumnInfo
-    val imageUri: Bitmap
+    val imageUri: Bitmap,
+    @ColumnInfo
+    val currency: String
 )

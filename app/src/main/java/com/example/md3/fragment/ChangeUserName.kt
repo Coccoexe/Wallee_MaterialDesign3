@@ -55,7 +55,7 @@ class ChangeUserName : DialogFragment(){
             if(newU.text.toString() != "") {
                 //check if new user is correct
                 if (newU.text.toString() == newUC.text.toString()) {
-                    activityData.updateUser(newU.text.toString(),activityData.getId())
+                    activityData.updateUser(newU.text.toString())
                     activityData.removeAutoLog()
                     val textUser : TextView? = activity?.findViewById(R.id.profileName)
                     textUser?.text = newU.text.toString()
