@@ -14,7 +14,7 @@ interface IActivityData {
     fun getUserName(): String
     fun getPassword(): String
     fun getImageUri(): Bitmap?
-    fun getCurency(): String
+    fun getCurrency(): String
     fun getUserBalance(): Double
     fun getUserWithTransaction(): List<Transaction>?
     fun getUserWithTransactionFiltered(amount: String, category: String?, date : String?) : List<Transaction>?
