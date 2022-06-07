@@ -97,7 +97,6 @@ class MainFragment : Fragment() {
         balanceGraph.add(PieEntry(income.toFloat(),"Income"))
         balanceGraph.add(PieEntry(expense.toFloat(),"Expense"))
 
-
         val pieDataSet : PieDataSet = PieDataSet(balanceGraph,"Balance")
         pieDataSet.colors = colors
         pieDataSet.valueTextColor = Color.BLACK

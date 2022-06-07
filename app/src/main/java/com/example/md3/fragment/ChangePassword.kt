@@ -59,7 +59,7 @@ class ChangePassword : DialogFragment() {
                 if(newP.text.toString() != "") {
                     //check if new password is correct
                     if (newP.text.toString() == newPC.text.toString()) {
-                        activityData.updatePassword(newP.text.toString(),activityData.getEmail())
+                        activityData.updatePassword(newP.text.toString())
                         activityData.removeAutoLog()
                         dismiss()
                     } else {

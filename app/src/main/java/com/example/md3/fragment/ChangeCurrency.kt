@@ -45,13 +45,16 @@ class ChangeCurrency : DialogFragment() {
         }
 
         //menu tendina
-        val categoryMenu: TextInputLayout = inflateView.findViewById(R.id.selectCurrency)
+        val categoryCurrency: TextInputLayout = inflateView.findViewById(R.id.selectCurrency)
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, resources.getStringArray(R.array.currency))
-        (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        (categoryCurrency.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
         //confirmButton
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
         confirm.setOnClickListener{
+            if(categoryCurrency.editText!!.text.isNotEmpty()){
+                activityData.updateCurrency(categoryCurrency.editText!!.text.toString())
+            }
             dismiss()
         }
 

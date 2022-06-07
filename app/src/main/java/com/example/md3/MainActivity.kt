@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getEmail(): String {
-        var email = ""
+        lateinit var email : String
 
         runBlocking {
             email = dao.getEmail(userId)
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getUserName(): String {
-        var user = ""
+        lateinit var user : String
 
         runBlocking {
             user = dao.getUserName(userId)
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getPassword(): String{
-        var pass = ""
+        lateinit var pass :String
 
         runBlocking {
             pass = dao.getPassword(userId)
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getImageUri(): Bitmap? {
-        var uri : Bitmap? = null
+        var uri: Bitmap?
 
         runBlocking {
             uri = dao.getImageUri(userId)
@@ -104,8 +104,18 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return uri
     }
 
+    override fun getCurrency(): String {
+        var currency : String
+
+        runBlocking {
+            currency = dao.getCurrency(userId)
+        }
+
+        return currency
+    }
+
     override fun getUserBalance(): Double {
-        var balance : Double? = null
+        var balance: Double?
         runBlocking {
             balance = dao.getUserBalance(userEmail)
         }
@@ -116,7 +126,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getUserBalanceCategory(category: String): Double {
-        var balance : Double? = null
+        var balance: Double?
         runBlocking {
             balance = dao.getUserBalanceCategory(userEmail, category)
         }
@@ -128,7 +138,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getGoalByCategory(category: String): Goal? {
-        var goal : Goal? = null
+        var goal: Goal?
         runBlocking {
             goal = dao.getGoalByCategory(category)
         }
@@ -137,7 +147,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getAllGoal(): List<Goal>? {
-        var listGoal : List<Goal>? = null
+        var listGoal: List<Goal>?
         runBlocking {
             listGoal = dao.getAllGoal()
         }
@@ -146,7 +156,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getUserWithTransaction(): List<Transaction>? {
-        var transactionList : List<Transaction>? = null
+        var transactionList: List<Transaction>?
 
         runBlocking {
             transactionList = dao.getUserWithTransactions(userEmail)
@@ -156,9 +166,9 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getUserWithTransactionFiltered(amount: String, category: String?, date: String?): List<Transaction>? {
-        var transactionList : List<Transaction>? = null
+        var transactionList: List<Transaction>?
         val ret : ArrayList<Transaction> = ArrayList()
-        val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy", Locale.getDefault())
+        val format = SimpleDateFormat("EE d MMM yyyy", Locale.getDefault())
 
         runBlocking {
             if (category == null){
@@ -208,7 +218,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getUserPositiveTransactions(): Double? {
-        var income : Double? = null
+        var income: Double?
         runBlocking{
             income = dao.getUserPositiveTransactions(userEmail)
         }
@@ -216,35 +226,41 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun getUserNegativeTransactions(): Double? {
-        var expense : Double? = null
+        var expense: Double?
         runBlocking{
             expense = dao.getUserNegativeTransactions(userEmail)
         }
         return expense
     }
 
-    override fun updateUser(userName: String, userId: Int) {
+    override fun updateUser(userName: String) {
         runBlocking {
             dao.updateUser(userName,userId)
         }
     }
 
-    override fun updatePassword(password: String, userMail: String) {
+    override fun updatePassword(password: String) {
         runBlocking {
             dao.updatePassword(password,userId)
         }
     }
 
-    override fun updateEmail(userMail: String, userId: Int) {
+    override fun updateEmail(userMail: String) {
         runBlocking {
             dao.updateEmail(userMail,userId)
         }
         userEmail = getEmail()
     }
 
-    override fun updateImageUri(imageUri: Bitmap, userId: Int) {
+    override fun updateImageUri(imageUri: Bitmap) {
         runBlocking {
             dao.updateImage(imageUri,userId)
+        }
+    }
+
+    override fun updateCurrency(currency: String) {
+        runBlocking {
+            dao.updateCurrency(currency,userId)
         }
     }
 
@@ -263,7 +279,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun existMail(userMail: String) : Boolean{
-        var exist : Int? = null
+        var exist: Int?
         runBlocking {
             exist = dao.getId(userMail)
         }
@@ -297,9 +313,9 @@ class MainActivity : AppCompatActivity(), IActivityData {
         val value =log10(abs(num))
         val base = (value / 3).toInt()
         if (value >= 4 && base < suffix.size){
-            return DecimalFormat("#0.00").format(num / 10.0.pow((base * 3).toDouble())) + suffix[base] + "$"
+            return DecimalFormat("#0.00").format(num / 10.0.pow((base * 3).toDouble())) + suffix[base] + getCurrency()
         } else {
-            return DecimalFormat("#,##0.00").format(num) + "$"
+            return DecimalFormat("#,##0.00").format(num) + getCurrency()
         }
 
 

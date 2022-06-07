@@ -126,7 +126,6 @@ class TransactionAdapter(ctx: Context?, transList : List<Transaction>,
                     selected.add(t.id)
                 }
             }
-            selectionMode = false
         }else{
             for (t in transactionList) {
                 if (t.isSelected) {

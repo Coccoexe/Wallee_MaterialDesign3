@@ -64,7 +64,7 @@ class ChangeEmail : DialogFragment() {
                     newMC.text.clear()
                 } else {
                     if (newM.text.toString() == newMC.text.toString()) {
-                        activityData.updateEmail(newM.text.toString(), activityData.getId())
+                        activityData.updateEmail(newM.text.toString())
                         activityData.removeAutoLog()
                         val textEmail: TextView? = activity?.findViewById(R.id.emailProfile)
                         textEmail?.text = newM.text.toString()

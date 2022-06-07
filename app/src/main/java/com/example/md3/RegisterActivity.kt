@@ -40,7 +40,8 @@ class RegisterActivity : AppCompatActivity() {
                 userMail.editText!!.text.toString(),
                 userName.editText!!.text.toString(),
                 userPass.editText!!.text.toString(),
-                BitmapFactory.decodeResource(applicationContext.resources,R.drawable.no_image)
+                BitmapFactory.decodeResource(applicationContext.resources,R.drawable.no_image),
+                resources.getStringArray(R.array.currency)[0]
             )
             if(!validateInput(user))
             {
