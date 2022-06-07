@@ -47,7 +47,7 @@
             android:layout_marginHorizontal="4dp"
             app:constraint_referenced_ids="cardTrans, cardGraph"
             app:flow_horizontalGap="8dp"
-            app:flow_maxElementsWrap="1"
+            app:flow_maxElementsWrap="2"
             app:flow_verticalGap="8dp"
             app:flow_wrapMode="aligned"
             app:layout_constraintTop_toBottomOf="@id/balance"
