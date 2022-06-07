@@ -36,11 +36,11 @@ interface UserDao {
     //transaction
     @androidx.room.Transaction
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")
-    suspend fun getUserWithTransactions(userMail: String): List<Transaction>?
+    suspend fun getUserWithTransactions(userMail: String): List<Transaction>
 
     @androidx.room.Transaction
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail and category = (:filter)")
-    suspend fun getUserWithTransactionsFiltered(userMail: String, filter: String): List<Transaction>?
+    suspend fun getUserWithTransactionsFiltered(userMail: String, filter: String): List<Transaction>
 
     @androidx.room.Transaction
     @MapInfo(keyColumn = "category", valueColumn = "income")

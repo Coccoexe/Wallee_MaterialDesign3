@@ -16,8 +16,8 @@ interface IActivityData {
     fun getImageUri(): Bitmap?
     fun getCurrency(): String
     fun getUserBalance(): Double
-    fun getUserWithTransaction(): List<Transaction>?
-    fun getUserWithTransactionFiltered(amount: String, category: String?, date : String?) : List<Transaction>?
+    fun getUserWithTransaction(): List<Transaction>
+    fun getUserWithTransactionFiltered(amount: String, category: String?, date : String?) : List<Transaction>
     fun getUserPositiveTransactionsByCategory() : Map<String,Double>?
     fun getUserNegativeTransactionsByCategory() : Map<String,Double>?
     fun getUserBalanceCategory(category: String) : Double

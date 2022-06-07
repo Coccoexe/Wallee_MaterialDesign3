@@ -155,8 +155,8 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return listGoal
     }
 
-    override fun getUserWithTransaction(): List<Transaction>? {
-        var transactionList: List<Transaction>?
+    override fun getUserWithTransaction(): List<Transaction> {
+        var transactionList: List<Transaction>
 
         runBlocking {
             transactionList = dao.getUserWithTransactions(userEmail)
@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return transactionList
     }
 
-    override fun getUserWithTransactionFiltered(amount: String, category: String?, date: String?): List<Transaction>? {
+    override fun getUserWithTransactionFiltered(amount: String, category: String?, date: String?): List<Transaction> {
         var transactionList: List<Transaction>?
         val ret : ArrayList<Transaction> = ArrayList()
         val format = SimpleDateFormat("EE d MMM yyyy", Locale.getDefault())

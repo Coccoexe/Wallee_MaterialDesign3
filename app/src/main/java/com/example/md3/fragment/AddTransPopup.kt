@@ -131,7 +131,7 @@ class AddTransPopup : DialogFragment() {
                 lastAmount.text = activityData.formatMoney(trans!!.last().amount)
                 lastDate.text = trans.last().date
                 lastImage.setImageResource(activityData.getDrawable(trans.last().category))
-
+                (parentFragment as MainFragment).updateChart()
                 dismiss()
             }
 
