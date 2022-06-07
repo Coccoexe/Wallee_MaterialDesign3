@@ -10,6 +10,9 @@
         android:layout_height="150dp"
         app:cardCornerRadius="16dp"
         app:cardUseCompatPadding="true"
+        style="?attr/materialCardViewElevatedStyle"
+        app:cardElevation="6dp"
+        android:clickable="true"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout

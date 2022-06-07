@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
 import com.example.md3.adapter.CardGoalAdapter
 import com.example.md3.data.entity.Goal
-import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -41,13 +38,6 @@ class GoalFragment : Fragment() {
         cardFAB.setOnClickListener {
             val popup = AddGoalPopup()
             popup.show(requireActivity().supportFragmentManager, "popupGoal")
-            /*activityData.insertGoal(
-                Goal(
-                    0,
-                    "Salary",
-                    100.0
-                )
-            )*/
         }
 
         val recyclerView: RecyclerView = inflateView.findViewById(R.id.recyclerViewCard)
