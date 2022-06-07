@@ -3,6 +3,7 @@ package com.example.md3.fragment
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
+import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LegendEntry
@@ -126,50 +128,32 @@ class MainFragment : Fragment() {
         pieChart.setDrawEntryLabels(false)
         pieChart.contentDescription = ""
 
-        val legend = pieChart.legend
+        val legend : TextView = inflateView.findViewById(R.id.legendChart)
         pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
             override fun onValueSelected(e: Entry, h: Highlight) {
-                val legendEntry = ArrayList<LegendEntry>()
+                var legendEntry = ""
                 when((e as PieEntry).label){
                     "Income" -> {
                         if (incomeList != null){
                             for (item in incomeList){
-                                legendEntry.add(LegendEntry(
-                                    item.key + " : " + activityData.formatMoney(item.value),
-                                    Legend.LegendForm.CIRCLE,
-                                    10f,
-                                    2f,
-                                    null,
-                                    Color.TRANSPARENT
-                                ))
+                                legendEntry += item.key + " : " + activityData.formatMoney(item.value) + '\n'
                             }
                         }
                     }
                     "Expense" -> {
                         if (expenseList != null){
                             for (item in expenseList){
-                                legendEntry.add(LegendEntry(
-                                    item.key + " : " + activityData.formatMoney(item.value),
-                                    Legend.LegendForm.CIRCLE,
-                                    10f,
-                                    2f,
-                                    null,
-                                    Color.TRANSPARENT
-                                ))
+                                legendEntry += item.key + " : " + activityData.formatMoney(item.value) + '\n'
                             }
                         }
                     }
                 }
-                legend.setCustom(legendEntry)
-                legend.isEnabled = true
-                legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-                legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
-                legend.orientation = Legend.LegendOrientation.VERTICAL
-                legend.isWordWrapEnabled = true
+                legend.visibility = View.VISIBLE
+                legend.text = legendEntry
             }
 
             override fun onNothingSelected() {
-                legend.isEnabled = false
+                legend.visibility = View.GONE
             }
         })
 
