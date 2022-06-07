@@ -217,18 +217,18 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return ret
     }
 
-    override fun getUserPositiveTransactions(): Double? {
-        var income: Double?
+    override fun getUserPositiveTransactionsByCategory(): Map<String,Double>? {
+        var income: Map<String,Double>?
         runBlocking{
-            income = dao.getUserPositiveTransactions(userEmail)
+            income = dao.getUserPositiveTransactionsByCategory(userEmail)
         }
         return income
     }
 
-    override fun getUserNegativeTransactions(): Double? {
-        var expense: Double?
+    override fun getUserNegativeTransactionsByCategory(): Map<String,Double>? {
+        var expense: Map<String,Double>?
         runBlocking{
-            expense = dao.getUserNegativeTransactions(userEmail)
+            expense = dao.getUserNegativeTransactionsByCategory(userEmail)
         }
         return expense
     }

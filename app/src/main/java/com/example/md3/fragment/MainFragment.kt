@@ -2,16 +2,22 @@ package com.example.md3.fragment
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 import com.example.md3.events.IActivityData
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -20,6 +26,7 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.math.abs
 
@@ -74,7 +81,7 @@ class MainFragment : Fragment() {
         }
 
         //balanceChart
-        val pieChart : PieChart = inflateView.findViewById(R.id.incomeChart)
+        val pieChart : PieChart = inflateView.findViewById(R.id.balanceChart)
 
         //color
         val colors : ArrayList<Int> = ArrayList()
@@ -84,44 +91,89 @@ class MainFragment : Fragment() {
 
         //take data
         val balanceGraph : ArrayList<PieEntry> = ArrayList()
-        var income = activityData.getUserPositiveTransactions()
-        if (income == null) {
-            income = 0.0
-        }
-        var expense = activityData.getUserNegativeTransactions()
-        expense = if (expense == null) {
+        val incomeList = activityData.getUserPositiveTransactionsByCategory()
+        val income : Double = if (incomeList == null) {
             0.0
         }else{
-            abs(expense)
+            incomeList.values.sum()
         }
+
+        val expenseList = activityData.getUserNegativeTransactionsByCategory()
+        val expense = if (expenseList == null) {
+            0.0
+        }else{
+            abs(expenseList.values.sum())
+        }
+
         balanceGraph.add(PieEntry(income.toFloat(),"Income"))
         balanceGraph.add(PieEntry(expense.toFloat(),"Expense"))
 
-        val pieDataSet : PieDataSet = PieDataSet(balanceGraph,"Balance")
+        val pieDataSet = PieDataSet(balanceGraph,"Balance")
         pieDataSet.colors = colors
         pieDataSet.valueTextColor = Color.BLACK
         pieDataSet.valueTextSize = 16f
 
-        val pieData : PieData = PieData(pieDataSet)
+        val pieData = PieData(pieDataSet)
         pieChart.data = pieData
         pieChart.legend.isEnabled = false
         pieChart.description.isEnabled = false
         pieChart.centerText = "Balance"
+        pieChart.setHoleColor(Color.TRANSPARENT)
         pieChart.setEntryLabelColor(Color.BLACK)
         pieChart.animate()
-
         pieChart.setEntryLabelTextSize(12f)
         pieChart.holeRadius = 80f
         pieChart.setDrawEntryLabels(false)
         pieChart.contentDescription = ""
 
+        val legend = pieChart.legend
         pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
             override fun onValueSelected(e: Entry, h: Highlight) {
-
+                val legendEntry = ArrayList<LegendEntry>()
+                when((e as PieEntry).label){
+                    "Income" -> {
+                        if (incomeList != null){
+                            for (item in incomeList){
+                                legendEntry.add(LegendEntry(
+                                    item.key + " : " + activityData.formatMoney(item.value),
+                                    Legend.LegendForm.CIRCLE,
+                                    10f,
+                                    2f,
+                                    null,
+                                    Color.TRANSPARENT
+                                ))
+                            }
+                        }
+                    }
+                    "Expense" -> {
+                        if (expenseList != null){
+                            for (item in expenseList){
+                                legendEntry.add(LegendEntry(
+                                    item.key + " : " + activityData.formatMoney(item.value),
+                                    Legend.LegendForm.CIRCLE,
+                                    10f,
+                                    2f,
+                                    null,
+                                    Color.TRANSPARENT
+                                ))
+                            }
+                        }
+                    }
+                }
+                legend.setCustom(legendEntry)
+                legend.isEnabled = true
+                legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+                legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+                legend.orientation = Legend.LegendOrientation.VERTICAL
+                legend.isWordWrapEnabled = true
             }
 
-            override fun onNothingSelected() {}
+            override fun onNothingSelected() {
+                legend.isEnabled = false
+            }
         })
+
+
 
         // Inflate the layout for this fragment
         return inflateView

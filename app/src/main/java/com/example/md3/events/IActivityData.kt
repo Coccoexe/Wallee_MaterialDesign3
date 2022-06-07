@@ -18,8 +18,8 @@ interface IActivityData {
     fun getUserBalance(): Double
     fun getUserWithTransaction(): List<Transaction>?
     fun getUserWithTransactionFiltered(amount: String, category: String?, date : String?) : List<Transaction>?
-    fun getUserPositiveTransactions() : Double?
-    fun getUserNegativeTransactions() : Double?
+    fun getUserPositiveTransactionsByCategory() : Map<String,Double>?
+    fun getUserNegativeTransactionsByCategory() : Map<String,Double>?
     fun getUserBalanceCategory(category: String) : Double
     fun getGoalByCategory(category: String): Goal?
     fun getAllGoal() : List<Goal>?

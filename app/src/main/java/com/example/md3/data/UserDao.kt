@@ -2,14 +2,13 @@ package com.example.md3.data
 
 
 import android.graphics.Bitmap
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.example.md3.data.entity.AutoLogin
 import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 import com.example.md3.data.entity.User
+import java.util.*
 
 @Dao
 interface UserDao {
@@ -44,12 +43,14 @@ interface UserDao {
     suspend fun getUserWithTransactionsFiltered(userMail: String, filter: String): List<Transaction>?
 
     @androidx.room.Transaction
-    @Query("Select sum(amount) From `transaction` where userMail = :userMail and amount > 0.0")
-    suspend fun getUserPositiveTransactions(userMail: String): Double?
+    @MapInfo(keyColumn = "category", valueColumn = "income")
+    @Query("Select category,sum(amount) as income From `transaction` where userMail = :userMail and amount > 0.0 group by category")
+    suspend fun getUserPositiveTransactionsByCategory(userMail: String): Map<String,Double>?
 
     @androidx.room.Transaction
-    @Query("Select sum(amount) From `transaction` where userMail = :userMail and amount < 0.0")
-    suspend fun getUserNegativeTransactions(userMail: String): Double?
+    @MapInfo(keyColumn = "category", valueColumn = "expense")
+    @Query("Select category,sum(amount) as expense,category From `transaction` where userMail = :userMail and amount < 0.0 group by category")
+    suspend fun getUserNegativeTransactionsByCategory(userMail: String): Map<String,Double>?
 
     //getBalance
     @Query("Select sum(amount) as balance from `transaction` where userMail = :userMail")
