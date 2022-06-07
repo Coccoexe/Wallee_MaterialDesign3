@@ -92,6 +92,7 @@ class AddTransPopup : DialogFragment() {
 
         //textammount
         val amount : TextInputLayout = inflateView.findViewById(R.id.amount)
+        amount.suffixText = activityData.getCurrency()
 
         //confirmButton
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
