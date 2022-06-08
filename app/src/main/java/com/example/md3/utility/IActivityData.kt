@@ -30,6 +30,7 @@ interface IActivityData {
     fun removeSelectedTransaction(selected : ArrayList<Int>)
     fun removeSelectedGoal(selected: ArrayList<Int>)
     fun existMail(userMail: String): Boolean
+    fun existGoal(category: String): Boolean
 
     //utility
     fun getDrawable(category : String) : Int

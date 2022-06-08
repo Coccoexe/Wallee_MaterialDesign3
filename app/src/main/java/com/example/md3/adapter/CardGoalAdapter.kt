@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
 import com.example.md3.data.entity.Goal
 import com.example.md3.fragment.GoalFragment
+import kotlin.math.abs
 
 class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFragment) :
     RecyclerView.Adapter<CardGoalAdapter.CardViewHolder>() {
@@ -61,8 +62,8 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
         fun bind() {
             categoryCard.text = goal.category
             progressBar.max = goal.sum.toInt()
-            progressBar.progress = fragment.getBalanceGoal(goal.category).toInt()
-            points.text = "%s / %s".format(fragment.getFormattedMoney(fragment.getBalanceGoal(goal.category)),fragment.getFormattedMoney(goal.sum))
+            progressBar.progress = abs(fragment.getBalanceGoal(goal.category)).toInt()
+            points.text = "%s / %s".format(fragment.getFormattedMoney(abs(fragment.getBalanceGoal(goal.category))),fragment.getFormattedMoney(goal.sum))
         }
 
         override fun onLongClick(p0: View?): Boolean {

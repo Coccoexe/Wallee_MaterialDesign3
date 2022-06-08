@@ -295,6 +295,14 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return exist != null
     }
 
+    override fun existGoal(category: String): Boolean {
+        val exist: Goal?
+        runBlocking {
+            exist = dao.getGoalByCategory(category)
+        }
+        return exist != null
+    }
+
     override fun getDrawable(category: String): Int {
         val income = resources.getStringArray(R.array.income)
         val expense = resources.getStringArray(R.array.expenses)

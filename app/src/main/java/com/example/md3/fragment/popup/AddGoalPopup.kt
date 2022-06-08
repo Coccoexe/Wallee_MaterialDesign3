@@ -17,6 +17,7 @@ import com.example.md3.data.entity.Goal
 import com.example.md3.fragment.GoalFragment
 import com.example.md3.utility.IActivityData
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import java.util.ArrayList
 
@@ -81,21 +82,39 @@ class AddGoalPopup : DialogFragment() {
 
             if (goalAmount.editText!!.text.isEmpty() || categoryMenu.editText!!.text.isEmpty()) {
                 goalAmount.editText!!.text.clear()
-                Toast.makeText(context, "Transaction amount cannot be 0!", Toast.LENGTH_SHORT).show()
+                dismiss()
+                Toast.makeText(context, "Gaol amount cannot be 0!", Toast.LENGTH_SHORT).show()
             } else {
                 money = goalAmount.editText!!.text.toString().toDouble()
-                activityData.insertGoal(
-                    Goal(
-                        0,
-                        categoryMenu.editText!!.text.toString(),
-                        money
+                if (activityData.existGoal(categoryMenu.editText!!.text.toString()))
+                {
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Overwrite old Goal?")
+                        .setMessage("A goal with same category already exist, do you want to overwrite it?")
+                        .setNeutralButton("Cancel"){ dialog,which -> }
+                        .setNegativeButton("Decline"){ dialog,which -> }
+                        .setPositiveButton("Accept"){ dialog,which ->
+                            activityData.insertGoal(
+                                Goal(
+                                    activityData.getGoalByCategory(categoryMenu.editText!!.text.toString())!!.id,
+                                    categoryMenu.editText!!.text.toString(),
+                                    money
+                                )
+                            )
+                            updateView()
+                        }
+                        .show()
+                }else {
+                    activityData.insertGoal(
+                        Goal(
+                            0,
+                            categoryMenu.editText!!.text.toString(),
+                            money
+                        )
                     )
-                )
-                (parentFragment as GoalFragment).getGoalList()
-                (parentFragment as GoalFragment).setAdapter()
+                    updateView()
+                }
             }
-
-            dismiss()
         }
 
         //cancelButton
@@ -105,5 +124,12 @@ class AddGoalPopup : DialogFragment() {
         }
 
         return inflateView
+    }
+
+    private fun updateView()
+    {
+        (parentFragment as GoalFragment).getGoalList()
+        (parentFragment as GoalFragment).setAdapter()
+        dismiss()
     }
 }
