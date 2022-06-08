@@ -1,13 +1,12 @@
 package com.example.md3.fragment.popup
 
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.util.Log
+import android.view.*
 import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.DialogFragment
@@ -26,6 +25,13 @@ class AddTransPopup : DialogFragment() {
 
     private lateinit var activityData : IActivityData
 
+    override fun onStart() {
+        super.onStart()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            dialog!!.window!!.setLayout(1400, 800)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,8 +49,8 @@ class AddTransPopup : DialogFragment() {
         activityData = requireActivity() as IActivityData
 
         if (dialog != null && dialog?.window != null) {
-            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+            dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         }
 
         //date

@@ -108,14 +108,11 @@ class MainFragment : Fragment() {
             override fun onValueSelected(e: Entry, h: Highlight) {
                 legendEntry = ""
                 when((e as PieEntry).label){
-                    "Income" -> {
-                        if (incomeList != null){
-                            for (item in incomeList!!){
-                                legendEntry += item.key + " : " + activityData.formatMoney(item.value) + '\n'
-                            }
-                        }
+                    "Available" -> {
+                        legendEntry = "Available balance : " + activityData.formatMoney(activityData.getUserBalance())
                     }
                     "Expense" -> {
+                        legendEntry += "Expence :\n"
                         if (expenseList != null){
                             for (item in expenseList!!){
                                 legendEntry += item.key + " : " + activityData.formatMoney(item.value) + '\n'
@@ -158,7 +155,14 @@ class MainFragment : Fragment() {
         }else{
             abs(expenseList!!.values.sum())
         }
-        balanceGraph.add(PieEntry(income.toFloat(),"Income"))
+
+        var balance = if (expense > income){
+            0.0
+        }else{
+            income - expense
+        }
+
+        balanceGraph.add(PieEntry(balance.toFloat(),"Available"))
         balanceGraph.add(PieEntry(expense.toFloat(),"Expense"))
 
         val pieDataSet = PieDataSet(balanceGraph,"")
