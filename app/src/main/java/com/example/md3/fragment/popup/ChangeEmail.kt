@@ -1,4 +1,4 @@
-package com.example.md3.fragment
+package com.example.md3.fragment.popup
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,7 +15,10 @@ import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.utility.IActivityData
 
-class ChangeUserName : DialogFragment(){
+
+
+class ChangeEmail : DialogFragment() {
+
     private lateinit var activityData : IActivityData
 
     override fun onCreateView(
@@ -25,7 +28,7 @@ class ChangeUserName : DialogFragment(){
     ): View? {
 
         //inflater
-        val inflateView =  inflater.inflate(R.layout.user_popup, container, false)
+        val inflateView =  inflater.inflate(R.layout.mail_popup, container, false)
 
         //interface data
         if (requireActivity() !is IActivityData)
@@ -46,29 +49,37 @@ class ChangeUserName : DialogFragment(){
         }
 
         //confirmButton
-        val newU : EditText = inflateView.findViewById(R.id.newUser)
-        val newUC : EditText = inflateView.findViewById(R.id.newUserConfirm)
+        val newM : EditText = inflateView.findViewById(R.id.newMail)
+        val newMC : EditText = inflateView.findViewById(R.id.newMailConfirm)
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
         confirm.setOnClickListener{
 
-            //check if new user is empty
-            if(newU.text.toString() != "") {
-                //check if new user is correct
-                if (newU.text.toString() == newUC.text.toString()) {
-                    activityData.updateUser(newU.text.toString())
-                    activityData.removeAutoLog()
-                    val textUser : TextView? = activity?.findViewById(R.id.profileName)
-                    textUser?.text = newU.text.toString()
-                    dismiss()
+            //check if new mail is empty
+            if(newM.text.toString() != "") {
+                //check if new mail is correct
+                if (activityData.existMail(newM.text.toString())){
+                    Toast.makeText(context, "Email already used!", Toast.LENGTH_SHORT)
+                        .show()
+                    newM.text.clear()
+                    newMC.text.clear()
                 } else {
-                    Toast.makeText(context, "New Usernames must be equals!", Toast.LENGTH_SHORT).show()
+                    if (newM.text.toString() == newMC.text.toString()) {
+                        activityData.updateEmail(newM.text.toString())
+                        activityData.removeAutoLog()
+                        val textEmail: TextView? = activity?.findViewById(R.id.emailProfile)
+                        textEmail?.text = newM.text.toString()
+                        dismiss()
+                    } else {
+                        Toast.makeText(context, "New Mail must be equals!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
-            }
-            else{
-                Toast.makeText(context,"New Username cannot be empty!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context,"New Mail cannot be empty!", Toast.LENGTH_SHORT).show()
             }
         }
 
         return inflateView
     }
+
 }

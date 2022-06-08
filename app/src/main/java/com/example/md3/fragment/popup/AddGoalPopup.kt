@@ -1,4 +1,4 @@
-package com.example.md3.fragment
+package com.example.md3.fragment.popup
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.data.entity.Goal
+import com.example.md3.fragment.GoalFragment
 import com.example.md3.utility.IActivityData
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.textfield.TextInputLayout

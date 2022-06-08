@@ -11,6 +11,7 @@ import com.example.md3.activity.MainActivity
 import com.example.md3.R
 import com.example.md3.adapter.CardGoalAdapter
 import com.example.md3.data.entity.Goal
+import com.example.md3.fragment.popup.AddGoalPopup
 import com.example.md3.utility.IActivityData
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.floatingactionbutton.FloatingActionButton

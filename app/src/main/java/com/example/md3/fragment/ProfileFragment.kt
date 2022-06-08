@@ -16,6 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.md3.R
+import com.example.md3.fragment.popup.ChangeCurrency
+import com.example.md3.fragment.popup.ChangeEmail
+import com.example.md3.fragment.popup.ChangePassword
+import com.example.md3.fragment.popup.ChangeUserName
 import com.example.md3.utility.IActivityData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 

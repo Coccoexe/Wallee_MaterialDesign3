@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
+import com.example.md3.fragment.popup.AddTransPopup
 import com.example.md3.utility.IActivityData
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
