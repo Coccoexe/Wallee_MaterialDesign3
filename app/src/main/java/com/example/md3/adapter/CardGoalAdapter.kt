@@ -63,7 +63,16 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             categoryCard.text = goal.category
             progressBar.max = goal.sum.toInt()
             progressBar.progress = abs(fragment.getBalanceGoal(goal.category)).toInt()
-            points.text = "%s / %s".format(fragment.getFormattedMoney(abs(fragment.getBalanceGoal(goal.category))),fragment.getFormattedMoney(goal.sum))
+            if (fragment.getBalanceGoal(goal.category).toInt() >= goal.sum.toInt()) {
+                points.text = "Completed"
+            }
+            else {
+                points.text = "%s / %s".format(
+                    fragment.getFormattedMoney(abs(fragment.getBalanceGoal(goal.category))),
+                    fragment.getFormattedMoney(goal.sum)
+                )
+                //cambiare colore
+            }
         }
 
         override fun onLongClick(p0: View?): Boolean {
