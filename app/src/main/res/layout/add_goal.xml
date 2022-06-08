@@ -25,30 +25,32 @@
         android:id="@+id/addOrRemove"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:selectionRequired="true"
-        app:singleSelection="true"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/addGoal">
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addGoal"
+        app:selectionRequired="true"
+        app:singleSelection="true">
 
         <Button
             android:id="@+id/addButton"
-            android:text="add"
             style="?attr/materialButtonOutlinedStyle"
-            android:backgroundTint="@drawable/button_color_selector"
-            android:textColor="@drawable/button_text_color_selector"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:backgroundTint="@drawable/button_color_selector"
+            android:text="add"
+            android:textColor="@drawable/button_text_color_selector" />
 
         <Button
             android:id="@+id/removeButton"
-            android:text="remove"
             style="?attr/materialButtonOutlinedStyle"
-            android:backgroundTint="@drawable/button_color_selector"
-            android:textColor="@drawable/button_text_color_selector"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:backgroundTint="@drawable/button_color_selector"
+            android:text="remove"
+            android:textColor="@drawable/button_text_color_selector" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -95,22 +97,26 @@
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:text="Cancel"
-        app:layout_constraintTop_toBottomOf="@id/chooseCategory"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@+id/confirm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chooseCategory" />
 
     <Button
         android:id="@+id/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:text="Confirm"
+        app:layout_constraintStart_toEndOf="@id/cancel"
         app:layout_constraintTop_toBottomOf="@id/chooseCategory"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

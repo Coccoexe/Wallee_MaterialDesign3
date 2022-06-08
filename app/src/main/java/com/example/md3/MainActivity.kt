@@ -278,6 +278,14 @@ class MainActivity : AppCompatActivity(), IActivityData {
         }
     }
 
+    override fun removeSelectedGoal(selected: ArrayList<Int>) {
+        runBlocking {
+            for (t in selected) {
+                dao.removeGaol(t)
+            }
+        }
+    }
+
     override fun existMail(userMail: String) : Boolean{
         var exist: Int?
         runBlocking {

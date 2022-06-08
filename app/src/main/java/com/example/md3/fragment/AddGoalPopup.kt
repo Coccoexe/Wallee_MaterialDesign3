@@ -83,22 +83,16 @@ class AddGoalPopup : DialogFragment() {
                 Toast.makeText(context, "Transaction amount cannot be 0!", Toast.LENGTH_SHORT).show()
             } else {
                 money = goalAmount.editText!!.text.toString().toDouble()
-                /*if (radiogroup.checkedButtonId == R.id.addButton) {
-                    money = goalAmount.editText!!.text.toString().toDouble()
-                } else {
-                    money = 0 - goalAmount.editText!!.text.toString().toDouble()
-                }*/
-            }
-
-            activityData.insertGoal(
-                Goal(
-                    0,
-                    categoryMenu.editText!!.text.toString(),
-                    money
+                activityData.insertGoal(
+                    Goal(
+                        0,
+                        categoryMenu.editText!!.text.toString(),
+                        money
+                    )
                 )
-            )
-
-            Toast.makeText(this.context, "Goal is created", Toast.LENGTH_SHORT).show()
+                (parentFragment as GoalFragment).getGoalList()
+                (parentFragment as GoalFragment).setAdapter()
+            }
 
             dismiss()
         }

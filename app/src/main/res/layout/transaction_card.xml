@@ -16,13 +16,14 @@
         app:layout_constraintStart_toStartOf="@id/cardTrans"
         />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardTrans"
-        android:backgroundTint="?attr/colorPrimaryContainer"
-        android:layout_width="0dp"
+        style="?attr/materialCardViewElevatedStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="16dp"
         app:cardUseCompatPadding="true"
+        app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +63,6 @@
 
             </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
