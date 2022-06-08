@@ -54,12 +54,12 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_camera_24"
             app:fabCustomSize="35dp"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintVertical_bias="1.0"
             app:layout_constraintBottom_toBottomOf="@id/profileImage"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.381"
             app:layout_constraintStart_toStartOf="@id/profileImage"
-            app:layout_constraintTop_toTopOf="@id/profileImage"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="@id/profileImage" />
 
         <TextView
             android:id="@+id/profileName"
