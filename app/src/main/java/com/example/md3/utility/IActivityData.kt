@@ -1,8 +1,6 @@
-package com.example.md3.events
+package com.example.md3.utility
 
 import android.graphics.Bitmap
-import android.net.Uri
-import com.example.md3.data.UserDao
 import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 

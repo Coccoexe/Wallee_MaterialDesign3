@@ -1,9 +1,6 @@
 package com.example.md3.fragment
 
-import android.content.ContentResolver
-import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -19,7 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.md3.R
-import com.example.md3.events.IActivityData
+import com.example.md3.utility.IActivityData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 

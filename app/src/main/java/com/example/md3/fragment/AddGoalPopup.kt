@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.data.entity.Goal
-import com.example.md3.events.IActivityData
+import com.example.md3.utility.IActivityData
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.textfield.TextInputLayout
 import java.util.ArrayList

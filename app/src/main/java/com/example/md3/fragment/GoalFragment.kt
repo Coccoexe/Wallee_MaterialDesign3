@@ -7,12 +7,11 @@ import androidx.appcompat.view.ActionMode
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.md3.MainActivity
+import com.example.md3.activity.MainActivity
 import com.example.md3.R
 import com.example.md3.adapter.CardGoalAdapter
-import com.example.md3.adapter.TransactionAdapter
 import com.example.md3.data.entity.Goal
-import com.example.md3.events.IActivityData
+import com.example.md3.utility.IActivityData
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
