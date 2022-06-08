@@ -61,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:text="100/100"
                 android:layout_gravity="end"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="?attr/colorOnSurface"/>
 
 
         </LinearLayout>
