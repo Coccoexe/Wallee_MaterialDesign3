@@ -45,16 +45,6 @@ interface UserDao {
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail and category = (:filter)")
     suspend fun getUserWithTransactionsFiltered(userMail: String, filter: String): List<Transaction>
 
-    @androidx.room.Transaction
-    @MapInfo(keyColumn = "category", valueColumn = "income")
-    @Query("Select category,sum(amount) as income From `transaction` where userMail = :userMail and amount > 0.0 group by category")
-    suspend fun getUserPositiveTransactionsByCategory(userMail: String): Map<String,Double>?
-
-    @androidx.room.Transaction
-    @MapInfo(keyColumn = "category", valueColumn = "expense")
-    @Query("Select category,sum(amount) as expense,category From `transaction` where userMail = :userMail and amount < 0.0 group by category")
-    suspend fun getUserNegativeTransactionsByCategory(userMail: String): Map<String,Double>?
-
     //getBalance
     @Query("Select sum(amount) as balance from `transaction` where userMail = :userMail")
     suspend fun getUserBalance(userMail: String): Double

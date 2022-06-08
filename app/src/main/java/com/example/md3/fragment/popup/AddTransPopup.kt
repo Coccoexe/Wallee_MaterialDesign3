@@ -128,16 +128,14 @@ class AddTransPopup : DialogFragment() {
                     )
                 )
 
-                val balance : TextView = requireActivity().findViewById(R.id.balance)
                 val lastAmount : TextView = requireActivity().findViewById(R.id.lastAmount)
                 val lastDate : TextView = requireActivity().findViewById(R.id.lastDate)
                 val lastImage : ImageView = requireActivity().findViewById(R.id.lastImage)
-                val trans : List<Transaction>? = activityData.getUserWithTransaction()
-                balance.text = activityData.formatMoney(activityData.getUserBalance())
-                lastAmount.text = activityData.formatMoney(trans!!.last().amount)
+                val trans : List<Transaction> = activityData.getUserWithTransaction()
+                lastAmount.text = activityData.formatMoney(trans.last().amount)
                 lastDate.text = trans.last().date
                 lastImage.setImageResource(activityData.getDrawable(trans.last().category))
-                (parentFragment as MainFragment).updateChart()
+                (parentFragment as MainFragment).updateView()
                 dismiss()
             }
 

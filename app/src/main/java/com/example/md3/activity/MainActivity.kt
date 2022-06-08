@@ -245,22 +245,6 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return ret
     }
 
-    override fun getUserPositiveTransactionsByCategory(): Map<String,Double>? {
-        var income: Map<String,Double>?
-        runBlocking{
-            income = dao.getUserPositiveTransactionsByCategory(userEmail)
-        }
-        return income
-    }
-
-    override fun getUserNegativeTransactionsByCategory(): Map<String,Double>? {
-        var expense: Map<String,Double>?
-        runBlocking{
-            expense = dao.getUserNegativeTransactionsByCategory(userEmail)
-        }
-        return expense
-    }
-
     override fun updateUser(userName: String) {
         runBlocking {
             dao.updateUser(userName,userId)

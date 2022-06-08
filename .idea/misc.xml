@@ -3,12 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/activity_main.xml" value="0.1334853090172239" />
-        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/fragment_goal.xml" value="0.264" />
-        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/fragment_transaction.xml" value="0.264" />
-        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/goal_card.xml" value="0.264" />
-        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/transaction_card.xml" value="0.1334853090172239" />
-        <entry key="..\:/Users/8807f/Desktop/Anna/Programmazione di Sistemi Embedded/MaterialDesign3/app/src/main/res/layout/user_popup.xml" value="0.1334853090172239" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/currency_popup.xml" value="0.365625" />
@@ -40,10 +34,12 @@
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/drawable/ic_money_back.xml" value="0.3735" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/drawable/ic_selected_24.xml" value="0.3165" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/drawable/profile_opening.xml" value="0.333" />
-        <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout-land/fragment_main.xml" value="0.3776041666666667" />
+        <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout-land/fragment_main.xml" value="0.67" />
+        <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout-land/trans_popup.xml" value="0.4375" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout/activity_login.xml" value="0.5229166666666667" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout/activity_main.xml" value="0.20765027322404372" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout/activity_register.xml" value="0.5229166666666667" />
+        <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout/add_goal.xml" value="0.30117753623188404" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout/fragment_goal.xml" value="0.4995471014492754" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout/fragment_graph.xml" value="0.4995471014492754" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout/fragment_main.xml" value="0.5" />

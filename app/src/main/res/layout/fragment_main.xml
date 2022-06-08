@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:id="@+id/topLinearLayout"
-            android:background="?attr/colorPrimaryContainer"
+            android:background="?attr/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/user_welcome"
-                android:textColor="?attr/colorOnPrimaryContainer"
+                android:textColor="?attr/colorOnPrimary"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_gravity="left"/>
@@ -37,13 +37,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/balance"
-                android:textColor="?attr/colorOnPrimaryContainer"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="30sp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/balance"
-                android:textColor="?attr/colorOnPrimaryContainer"
+                android:textColor="?attr/colorOnPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="50sp"
@@ -51,6 +51,37 @@
                 android:layout_gravity="center"/>
 
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/selectDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topLinearLayout"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/last_month"
+                style="?attr/materialButtonOutlinedStyle"
+                android:backgroundTint="@drawable/button_color_selector"
+                android:textColor="@drawable/button_text_color_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/month" />
+
+            <Button
+                android:id="@+id/all_time"
+                style="?attr/materialButtonOutlinedStyle"
+                android:backgroundTint="@drawable/button_color_selector"
+                android:textColor="@drawable/button_text_color_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <androidx.constraintlayout.helper.widget.Flow
             android:layout_width="match_parent"
@@ -61,8 +92,8 @@
             app:flow_maxElementsWrap="1"
             app:flow_verticalGap="8dp"
             app:flow_wrapMode="aligned"
-            app:layout_constraintTop_toBottomOf="@id/topLinearLayout"
-            app:layout_constraintBottom_toTopOf="@id/navigationBar"/>
+            app:layout_constraintTop_toBottomOf="@id/selectDate"
+            app:layout_constraintBottom_toTopOf="@id/addTransaction"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTrans"
