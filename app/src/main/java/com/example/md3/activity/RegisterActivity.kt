@@ -1,12 +1,12 @@
-package com.example.md3
+package com.example.md3.activity
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import com.example.md3.R
 import com.example.md3.data.UserDao
 import com.example.md3.data.UserDatabase
 import com.example.md3.data.entity.User
@@ -40,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
                 userMail.editText!!.text.toString(),
                 userName.editText!!.text.toString(),
                 userPass.editText!!.text.toString(),
-                BitmapFactory.decodeResource(applicationContext.resources,R.drawable.no_image),
+                BitmapFactory.decodeResource(applicationContext.resources, R.drawable.no_image),
                 resources.getStringArray(R.array.currency)[0]
             )
             if(!validateInput(user))

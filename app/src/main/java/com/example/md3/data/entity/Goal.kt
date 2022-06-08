@@ -13,3 +13,6 @@ data class Goal(
     @ColumnInfo
     val sum: Double
 )
+{
+    var isSelected = false
+}

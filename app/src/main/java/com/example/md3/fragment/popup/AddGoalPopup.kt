@@ -1,4 +1,4 @@
-package com.example.md3.fragment
+package com.example.md3.fragment.popup
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,7 +14,8 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.data.entity.Goal
-import com.example.md3.events.IActivityData
+import com.example.md3.fragment.GoalFragment
+import com.example.md3.utility.IActivityData
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.textfield.TextInputLayout
 import java.util.ArrayList
@@ -83,22 +84,16 @@ class AddGoalPopup : DialogFragment() {
                 Toast.makeText(context, "Transaction amount cannot be 0!", Toast.LENGTH_SHORT).show()
             } else {
                 money = goalAmount.editText!!.text.toString().toDouble()
-                /*if (radiogroup.checkedButtonId == R.id.addButton) {
-                    money = goalAmount.editText!!.text.toString().toDouble()
-                } else {
-                    money = 0 - goalAmount.editText!!.text.toString().toDouble()
-                }*/
-            }
-
-            activityData.insertGoal(
-                Goal(
-                    0,
-                    categoryMenu.editText!!.text.toString(),
-                    money
+                activityData.insertGoal(
+                    Goal(
+                        0,
+                        categoryMenu.editText!!.text.toString(),
+                        money
+                    )
                 )
-            )
-
-            Toast.makeText(this.context, "Goal is created", Toast.LENGTH_SHORT).show()
+                (parentFragment as GoalFragment).getGoalList()
+                (parentFragment as GoalFragment).setAdapter()
+            }
 
             dismiss()
         }

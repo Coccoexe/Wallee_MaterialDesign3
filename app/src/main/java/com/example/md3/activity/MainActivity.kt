@@ -1,15 +1,16 @@
-package com.example.md3
+package com.example.md3.activity
 
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.md3.R
 import com.example.md3.data.UserDao
 import com.example.md3.data.UserDatabase
 import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
-import com.example.md3.events.IActivityData
+import com.example.md3.utility.IActivityData
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.runBlocking
 import java.text.DecimalFormat
@@ -274,6 +275,14 @@ class MainActivity : AppCompatActivity(), IActivityData {
         runBlocking {
             for (t in selected) {
                 dao.removeTransaction(t)
+            }
+        }
+    }
+
+    override fun removeSelectedGoal(selected: ArrayList<Int>) {
+        runBlocking {
+            for (t in selected) {
+                dao.removeGaol(t)
             }
         }
     }

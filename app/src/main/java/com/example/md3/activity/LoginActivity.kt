@@ -1,19 +1,15 @@
-package com.example.md3
+package com.example.md3.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import com.example.md3.R
 import com.example.md3.data.UserDatabase
 import com.example.md3.data.entity.AutoLogin
 import com.example.md3.data.entity.User
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class LoginActivity : AppCompatActivity() {

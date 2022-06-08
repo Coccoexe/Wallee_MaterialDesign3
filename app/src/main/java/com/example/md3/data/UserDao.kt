@@ -33,6 +33,9 @@ interface UserDao {
     @Query("DELETE FROM `transaction` Where id =:id ")
     suspend fun removeTransaction(id: Int)
 
+    @Query("DELETE FROM goal Where id =:id ")
+    suspend fun removeGaol(id: Int)
+
     //transaction
     @androidx.room.Transaction
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")

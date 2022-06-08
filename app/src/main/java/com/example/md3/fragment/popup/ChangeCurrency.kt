@@ -1,4 +1,4 @@
-package com.example.md3.fragment
+package com.example.md3.fragment.popup
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -7,15 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
-import com.example.md3.events.IActivityData
+import com.example.md3.utility.IActivityData
+import com.google.android.material.textfield.TextInputLayout
 
-class ChangeUserName : DialogFragment(){
+class ChangeCurrency : DialogFragment() {
+
     private lateinit var activityData : IActivityData
 
     override fun onCreateView(
@@ -25,7 +24,7 @@ class ChangeUserName : DialogFragment(){
     ): View? {
 
         //inflater
-        val inflateView =  inflater.inflate(R.layout.user_popup, container, false)
+        val inflateView =  inflater.inflate(R.layout.currency_popup, container, false)
 
         //interface data
         if (requireActivity() !is IActivityData)
@@ -45,30 +44,21 @@ class ChangeUserName : DialogFragment(){
             dismiss()
         }
 
+        //menu tendina
+        val categoryCurrency: TextInputLayout = inflateView.findViewById(R.id.selectCurrency)
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, resources.getStringArray(R.array.currency))
+        (categoryCurrency.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+
         //confirmButton
-        val newU : EditText = inflateView.findViewById(R.id.newUser)
-        val newUC : EditText = inflateView.findViewById(R.id.newUserConfirm)
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
         confirm.setOnClickListener{
-
-            //check if new user is empty
-            if(newU.text.toString() != "") {
-                //check if new user is correct
-                if (newU.text.toString() == newUC.text.toString()) {
-                    activityData.updateUser(newU.text.toString())
-                    activityData.removeAutoLog()
-                    val textUser : TextView? = activity?.findViewById(R.id.profileName)
-                    textUser?.text = newU.text.toString()
-                    dismiss()
-                } else {
-                    Toast.makeText(context, "New Usernames must be equals!", Toast.LENGTH_SHORT).show()
-                }
+            if(categoryCurrency.editText!!.text.isNotEmpty()){
+                activityData.updateCurrency(categoryCurrency.editText!!.text.toString())
             }
-            else{
-                Toast.makeText(context,"New Username cannot be empty!", Toast.LENGTH_SHORT).show()
-            }
+            dismiss()
         }
 
         return inflateView
     }
+
 }

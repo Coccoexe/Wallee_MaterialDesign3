@@ -1,8 +1,12 @@
 package com.example.md3.adapter
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -10,33 +14,15 @@ import com.example.md3.R
 import com.example.md3.data.entity.Goal
 import com.example.md3.fragment.GoalFragment
 
-class CardGoalAdapter(private val cards : List<Goal>, var fragment: GoalFragment) :
+class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFragment) :
     RecyclerView.Adapter<CardGoalAdapter.CardViewHolder>() {
 
-    inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val categoryCard : TextView = itemView.findViewById(R.id.textCard)
-        private val progressBar : ProgressBar = itemView.findViewById(R.id.progBar)
-        private val points : TextView = itemView.findViewById(R.id.points)
+    var inflater: LayoutInflater
+    var context = ctx
+    private var cards = goalList
 
-        fun bind(goal: Goal) {
-            var maximum = goal.sum
-            if (maximum < 0)
-                maximum = 0 - maximum
-
-            var amount = fragment.getBalanceGoal(goal.category)
-            if (amount < 0)
-                amount = 0 - amount
-
-            val percent = String.format("%.2f", (amount/maximum)*100)
-
-            categoryCard.text = goal.category
-            progressBar.max = maximum.toInt()
-            progressBar.setProgress(amount.toInt())
-            points.text = percent.plus("%")
-
-            //points.text = amount.toString().plus("/").plus(maximum.toString())
-        }
-    }
+    var selectionMode = false
+    var selected : ArrayList<Int>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -50,6 +36,110 @@ class CardGoalAdapter(private val cards : List<Goal>, var fragment: GoalFragment
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        holder.bind(cards[position])
+        holder.goal = cards[position]
+        holder.bind()
+        holder.selectionUpdateView()
+    }
+
+    inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) , View.OnLongClickListener, View.OnClickListener{
+        private val categoryCard : TextView
+        private val progressBar : ProgressBar
+        private val points : TextView
+        private var selectedImage : ImageView
+
+        lateinit var goal : Goal
+
+        init{
+            categoryCard = itemView.findViewById(R.id.textCard)
+            progressBar = itemView.findViewById(R.id.progBar)
+            points = itemView.findViewById(R.id.points)
+            selectedImage = itemView.findViewById(R.id.selectedGoal)
+            itemView.setOnLongClickListener(this)
+            itemView.setOnClickListener(this)
+        }
+
+        fun bind() {
+            categoryCard.text = goal.category
+            progressBar.max = goal.sum.toInt()
+            progressBar.progress = fragment.getBalanceGoal(goal.category).toInt()
+            points.text = "%s / %s".format(fragment.getFormattedMoney(fragment.getBalanceGoal(goal.category)),fragment.getFormattedMoney(goal.sum))
+        }
+
+        override fun onLongClick(p0: View?): Boolean {
+            if (selected.isEmpty()){
+                fragment.openContextBar()
+                selectionMode = true
+                updateView()
+            } else {
+                updateView()
+            }
+
+            if (selected.isEmpty()){
+                fragment.closeContextBar()
+                selectionMode = false
+            }
+            return true
+        }
+
+        override fun onClick(p0: View?) {
+            if(selectionMode) {
+                updateView()
+            }
+            if (selected.isEmpty()){
+                fragment.closeContextBar()
+                selectionMode = false
+            }
+        }
+
+        fun selectionUpdateView(){
+            if (goal.isSelected){
+                selectedImage.visibility = View.VISIBLE
+            }else{
+                selectedImage.visibility = View.INVISIBLE
+            }
+            fragment.updateContextBarTitle(selected.size)
+        }
+
+        private fun updateView(){
+            if (goal.isSelected) {
+                selected.remove(goal.id)
+                goal.isSelected = false
+                selectedImage.visibility = View.INVISIBLE
+            } else {
+                selected.add(goal.id)
+                goal.isSelected = true
+                selectedImage.visibility = View.VISIBLE
+            }
+            fragment.updateContextBarTitle(selected.size)
+        }
+    }
+
+    init{
+        inflater = LayoutInflater.from(ctx)
+        selected = ArrayList()
+        selected.clear()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun selectionAll(){
+        if (selected.size < itemCount) {
+            for (t in cards) {
+                if (!t.isSelected) {
+                    t.isSelected = true
+                    selected.add(t.id)
+                }
+            }
+        }else{
+            for (t in cards) {
+                if (t.isSelected) {
+                    t.isSelected = false
+                }
+            }
+            selected.clear()
+            selectionMode = true
+            fragment.closeContextBar()
+        }
+        //all list updated
+        this.notifyDataSetChanged()
     }
 }
