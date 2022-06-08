@@ -21,18 +21,24 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.abs
 
 
 class MainFragment : Fragment() {
 
     private lateinit var activityData : IActivityData
+    private val format : SimpleDateFormat = SimpleDateFormat("EE d MMM yyyy",Locale.getDefault())
 
     private lateinit var welcome : TextView
     private lateinit var balance : TextView
+    private lateinit var dateGroup : MaterialButtonToggleGroup
     private lateinit var addTrans : FloatingActionButton
     private lateinit var lastAmount : TextView
     private lateinit var lastDate : TextView
@@ -44,10 +50,12 @@ class MainFragment : Fragment() {
     private var color : Int = -1
     private var legendEntry : String = ""
 
+    private var filterDate : String? = null
     private lateinit var colors : ArrayList<Int>
     private lateinit var balanceGraph : ArrayList<PieEntry>
-    private var incomeList: Map<String,Double>? = null
-    private var expenseList: Map<String,Double>? = null
+    private var incomeList: List<Transaction>? = null
+    private var expenseList: List<Transaction>? = null
+    private var selectedSlice : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +75,7 @@ class MainFragment : Fragment() {
         //init
         welcome = inflateView.findViewById(R.id.welcome)
         balance = inflateView.findViewById(R.id.balance)
+        dateGroup = inflateView.findViewById(R.id.selectDate)
         addTrans= inflateView.findViewById(R.id.addTransaction)
         lastAmount = inflateView.findViewById(R.id.lastAmount)
         lastDate = inflateView.findViewById(R.id.lastDate)
@@ -77,6 +86,7 @@ class MainFragment : Fragment() {
         //default
         welcome.text = getString(R.string.user_welcome).format(activityData.getUserName())
         balance.text = activityData.formatMoney(activityData.getUserBalance())
+        dateGroup.check(R.id.all_time)
         color = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSecondaryContainer)
         trans = activityData.getUserWithTransaction()
         if (trans!!.isNotEmpty()) {
@@ -98,6 +108,22 @@ class MainFragment : Fragment() {
         getChartData()
 
         //listener
+        dateGroup.addOnButtonCheckedListener() { dateGroup, chekedId, isChecked ->
+            if (isChecked){
+                when (chekedId) {
+                    R.id.all_time -> {
+                        filterDate = null
+                    }
+                    R.id.last_month -> {
+                        val calendar: Calendar = Calendar.getInstance()
+                        calendar.add(Calendar.MONTH, -1)
+                        filterDate = format.format(calendar.time)
+                    }
+                }
+            }
+            updateView()
+        }
+
         addTrans.setOnClickListener{
             val popup = AddTransPopup()
             //popup.show(requireActivity().supportFragmentManager, "popupTransaction")
@@ -109,15 +135,12 @@ class MainFragment : Fragment() {
                 legendEntry = ""
                 when((e as PieEntry).label){
                     "Available" -> {
-                        legendEntry = "Available balance : " + activityData.formatMoney(activityData.getUserBalance())
+                        selectedSlice = "Available"
+                        legendEntry = updateLegend("Available")
                     }
                     "Expense" -> {
-                        legendEntry += "Expence :\n"
-                        if (expenseList != null){
-                            for (item in expenseList!!){
-                                legendEntry += item.key + " : " + activityData.formatMoney(item.value) + '\n'
-                            }
-                        }
+                        selectedSlice = "Expense"
+                        legendEntry = updateLegend("Expense")
                     }
                 }
                 legend.text = legendEntry
@@ -125,7 +148,8 @@ class MainFragment : Fragment() {
             }
 
             override fun onNothingSelected() {
-                legendEntry = ""
+                selectedSlice = null
+                legendEntry = updateLegend(null)
                 legend.visibility = View.GONE
             }
         })
@@ -134,26 +158,58 @@ class MainFragment : Fragment() {
         return inflateView
     }
 
-    fun updateChart(){
+    fun updateLegend(selected : String?) : String{
+        if (selected != null) {
+            when (selected) {
+                "Available" -> {
+                    return "Available balance : " + activityData.formatMoney(incomeList!!.sumOf { it.amount } + expenseList!!.sumOf { it.amount })
+                }
+                "Expense" -> {
+                    var ret = "Expence\n"
+                    for (category in resources.getStringArray(R.array.expenses)) {
+                        val negativeList = activityData.getUserWithTransactionFiltered(
+                            "negative",
+                            category,
+                            filterDate
+                        )
+                        if (negativeList.isNotEmpty()) {
+                            var amount = 0.0
+                            for (item in negativeList) {
+                                amount += item.amount
+                            }
+                            ret += "$category : %s\n".format(activityData.formatMoney(amount))
+                        }
+                    }
+                    return ret
+                }
+            }
+        }
+        return ""
+    }
+
+    fun updateView(){
         getChartData()
+        balance.text = activityData.formatMoney(incomeList!!.sumOf { it.amount } + expenseList!!.sumOf { it.amount })
+        legend.text = updateLegend(selectedSlice)
         pieChart.notifyDataSetChanged()
         pieChart.invalidate()
+        pieChart.animateXY(500,500)
     }
 
     private fun getChartData(){
         balanceGraph = ArrayList()
-        incomeList = activityData.getUserPositiveTransactionsByCategory()
-        val income : Double = if (incomeList == null) {
+        incomeList = activityData.getUserWithTransactionFiltered("positive",null,filterDate)
+        val income = if (incomeList.isNullOrEmpty()){
             0.0
         }else{
-            incomeList!!.values.sum()
+            incomeList!!.sumOf { it.amount }
         }
 
-        expenseList = activityData.getUserNegativeTransactionsByCategory()
-        val expense = if (expenseList == null) {
+        expenseList = activityData.getUserWithTransactionFiltered("negative",null,filterDate)
+        val expense = if (expenseList.isNullOrEmpty()) {
             0.0
         }else{
-            abs(expenseList!!.values.sum())
+            abs(expenseList!!.sumOf { it.amount })
         }
 
         var balance = if (expense > income){
