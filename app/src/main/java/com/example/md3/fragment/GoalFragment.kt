@@ -1,9 +1,11 @@
 package com.example.md3.fragment
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.view.ActionMode
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,21 +15,39 @@ import com.example.md3.adapter.CardGoalAdapter
 import com.example.md3.data.entity.Goal
 import com.example.md3.fragment.popup.AddGoalPopup
 import com.example.md3.utility.IActivityData
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.ArrayList
 
 class GoalFragment : Fragment() {
 
     private lateinit var activityData : IActivityData
     private var goalList : List<Goal>? = null
-
-    private lateinit var cardFAB : FloatingActionButton
-    private lateinit var recyclerView: RecyclerView
     private lateinit var gridLayoutManager: GridLayoutManager
+    private var filterToggle : Boolean = false
+    private var color: Int = -1
+
+    //view
+    private lateinit var topAppBar : MaterialToolbar
+    private lateinit var filterBar : ConstraintLayout
+    private lateinit var recyclerView: RecyclerView
     private lateinit var noGoalText : TextView
+    private lateinit var filterAmountText : TextView
+    private lateinit var transactionGroup : MaterialButtonToggleGroup
+    private lateinit var all : MaterialButton
+    private lateinit var positive : MaterialButton
+    private lateinit var negative : MaterialButton
+    private lateinit var cardFAB : FloatingActionButton
 
     //contextBar
     private var actionMode: ActionMode? = null
+
+    //amount -> "all", "positive", "negative"
+    private lateinit var filterAmount : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,15 +64,37 @@ class GoalFragment : Fragment() {
         }
         activityData = requireActivity() as IActivityData
 
-
+        topAppBar = inflateView.findViewById(R.id.topAppBarGoal)
+        filterBar = inflateView.findViewById(R.id.filterBarGoal)
+        filterAmountText = inflateView.findViewById(R.id.transactionFilterTextGoal)
         cardFAB = inflateView.findViewById(R.id.cardFAB)
-        recyclerView = inflateView.findViewById(R.id.recyclerViewCard)
-        noGoalText = inflateView.findViewById(R.id.noGoal)
         gridLayoutManager = GridLayoutManager(context,1, GridLayoutManager.VERTICAL,false)
-
+        //amount
+        transactionGroup = inflateView.findViewById(R.id.selectTransactionGoal)
+        all = inflateView.findViewById(R.id.allTransactionGoal)
+        positive = inflateView.findViewById(R.id.positiveTransactionGoal)
+        negative = inflateView.findViewById(R.id.negativeTransactionGoal)
+        color = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSecondaryContainer)
 
         //default
+
+        //filterBar
+        filterBar.visibility = View.GONE
+        //amount
+        filterAmount = "all"
+        filterAmountText.visibility = View.GONE
+        transactionGroup.visibility = View.GONE
+        transactionGroup.check(R.id.allTransactionGoal)
+        all.iconTint = null
+        all.setIconResource(R.drawable.money_in_out_color)
+
+        //recyclerview
+        recyclerView = inflateView.findViewById(R.id.recyclerViewCard)
+        //no view available
+        noGoalText = inflateView.findViewById(R.id.noGoal)
+        //gridLayout
         recyclerView.layoutManager = gridLayoutManager
+        //adapter
         getGoalList()
         setAdapter()
 
@@ -63,12 +105,103 @@ class GoalFragment : Fragment() {
             popup.show(childFragmentManager, "popupGoal")
         }
 
+        topAppBar.setOnMenuItemClickListener{menuItem ->
+            when(menuItem.itemId){
+                R.id.filterMenu -> {
+                    if (filterToggle)
+                    {
+                        topAppBar.menu.getItem(0).setIcon(R.drawable.ic_filter_down_24)
+                        filterBar.visibility = View.GONE
+                        filterAmountText.visibility = View.GONE
+                        transactionGroup.visibility = View.GONE
+
+                        filterToggle = false
+                    }
+                    else{
+                        topAppBar.menu.getItem(0).setIcon(R.drawable.ic_filter_up_24)
+                        filterBar.visibility = View.VISIBLE
+                        filterAmountText.visibility = View.VISIBLE
+                        transactionGroup.visibility = View.VISIBLE
+
+                        filterToggle = true
+                    }
+                    true
+                }
+                else -> false
+            }
+        }
+
+        transactionGroup.addOnButtonCheckedListener() { transactionGroup, checkedId, isChecked ->
+            if (isChecked){
+
+                val items = ArrayList<String>()
+
+                when(checkedId){
+                    R.id.allTransactionGoal -> {
+                        filterAmount = "all"
+
+                        all.iconTint = null
+                        all.setIconResource(R.drawable.money_in_out_color)
+
+                        positive.iconTint = ColorStateList.valueOf(color)
+                        positive.setIconResource(R.drawable.money_in)
+
+                        negative.iconTint = ColorStateList.valueOf(color)
+                        negative.setIconResource(R.drawable.money_out)
+
+                        items.addAll(resources.getStringArray(R.array.income))
+                        items.addAll(resources.getStringArray(R.array.expenses))
+
+                    }
+                    R.id.positiveTransactionGoal -> {
+                        filterAmount = "positive"
+
+                        all.iconTint = ColorStateList.valueOf(color)
+                        all.setIconResource(R.drawable.money_in_out)
+
+                        positive.iconTint = null
+                        positive.setIconResource(R.drawable.money_in_color)
+
+                        negative.iconTint = ColorStateList.valueOf(color)
+                        negative.setIconResource(R.drawable.money_out)
+
+                        items.addAll(resources.getStringArray(R.array.income))
+
+                    }
+                    R.id.negativeTransactionGoal -> {
+                        filterAmount = "negative"
+
+                        all.iconTint = ColorStateList.valueOf(color)
+                        all.setIconResource(R.drawable.money_in_out)
+
+                        positive.iconTint = ColorStateList.valueOf(color)
+                        positive.setIconResource(R.drawable.money_in)
+
+                        negative.iconTint = null
+                        negative.setIconResource(R.drawable.money_out_color)
+
+                        items.addAll(resources.getStringArray(R.array.expenses))
+                    }
+                }
+            }
+            getGoalList()
+            setAdapter()
+        }
+
         // Inflate the layout for this fragment
         return inflateView
     }
 
     fun openContextBar(){
         actionMode = (activity as MainActivity?)!!.startSupportActionMode(mActionModeCallback)
+
+        if (filterToggle) {
+            topAppBar.menu.getItem(0).setIcon(R.drawable.ic_filter_down_24)
+            filterBar.visibility = View.GONE
+            filterAmountText.visibility = View.GONE
+            transactionGroup.visibility = View.GONE
+            filterToggle = false
+        }
     }
 
     fun closeContextBar() {
@@ -133,11 +266,16 @@ class GoalFragment : Fragment() {
     fun setAdapter(){
         if (!goalList.isNullOrEmpty()) {
             noGoalText.visibility = View.INVISIBLE
-            recyclerView.adapter = CardGoalAdapter(context,goalList!!, this)
+            recyclerView.adapter = CardGoalAdapter(context, goalList!!, this)
         }
         else{
             noGoalText.visibility = View.VISIBLE
             recyclerView.adapter = null
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        actionMode?.finish()
     }
 }
