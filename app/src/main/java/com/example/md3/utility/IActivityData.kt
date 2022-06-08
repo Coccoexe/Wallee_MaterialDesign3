@@ -20,7 +20,7 @@ interface IActivityData {
     fun getUserNegativeTransactionsByCategory() : Map<String,Double>?
     fun getUserBalanceCategory(category: String) : Double
     fun getGoalByCategory(category: String): Goal?
-    fun getAllGoal() : List<Goal>?
+    fun getAllGoal(amount: String) : List<Goal>?
     fun updateUser(userName: String)
     fun updatePassword(password: String)
     fun updateEmail(userMail: String)

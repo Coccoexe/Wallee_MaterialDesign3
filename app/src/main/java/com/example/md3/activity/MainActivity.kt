@@ -147,13 +147,40 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return goal
     }
 
-    override fun getAllGoal(): List<Goal>? {
+    override fun getAllGoal(amount: String): List<Goal>? {
         var listGoal: List<Goal>?
+        val ret : ArrayList<Goal> = ArrayList()
+
         runBlocking {
             listGoal = dao.getAllGoal()
         }
 
-        return listGoal
+        val income = resources.getStringArray(R.array.income)
+        val expense = resources.getStringArray(R.array.expenses)
+
+        if (!listGoal.isNullOrEmpty()) {
+            when (amount) {
+                "all" -> {
+                    for (g in listGoal!!){
+                        ret.add(g)
+                    }
+                }
+                "positive" -> {
+                    for (g in listGoal!!){
+                        if (g.category in income)
+                            ret.add(g)
+                    }
+                }
+                "negative" -> {
+                    for (g in listGoal!!){
+                        if (g.category in expense)
+                            ret.add(g)
+                    }
+                }
+            }
+        }
+
+        return ret
     }
 
     override fun getUserWithTransaction(): List<Transaction> {

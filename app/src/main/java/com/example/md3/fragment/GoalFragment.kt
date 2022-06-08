@@ -132,11 +132,8 @@ class GoalFragment : Fragment() {
         }
 
         transactionGroup.addOnButtonCheckedListener() { transactionGroup, checkedId, isChecked ->
-            if (isChecked){
-
-                val items = ArrayList<String>()
-
-                when(checkedId){
+            if (isChecked) {
+                when(checkedId) {
                     R.id.allTransactionGoal -> {
                         filterAmount = "all"
 
@@ -148,10 +145,6 @@ class GoalFragment : Fragment() {
 
                         negative.iconTint = ColorStateList.valueOf(color)
                         negative.setIconResource(R.drawable.money_out)
-
-                        items.addAll(resources.getStringArray(R.array.income))
-                        items.addAll(resources.getStringArray(R.array.expenses))
-
                     }
                     R.id.positiveTransactionGoal -> {
                         filterAmount = "positive"
@@ -164,9 +157,6 @@ class GoalFragment : Fragment() {
 
                         negative.iconTint = ColorStateList.valueOf(color)
                         negative.setIconResource(R.drawable.money_out)
-
-                        items.addAll(resources.getStringArray(R.array.income))
-
                     }
                     R.id.negativeTransactionGoal -> {
                         filterAmount = "negative"
@@ -179,11 +169,10 @@ class GoalFragment : Fragment() {
 
                         negative.iconTint = null
                         negative.setIconResource(R.drawable.money_out_color)
-
-                        items.addAll(resources.getStringArray(R.array.expenses))
                     }
                 }
             }
+
             getGoalList()
             setAdapter()
         }
@@ -260,7 +249,7 @@ class GoalFragment : Fragment() {
     }
 
     fun getGoalList(){
-        goalList = activityData.getAllGoal()
+        goalList = activityData.getAllGoal(filterAmount)
     }
 
     fun setAdapter(){
