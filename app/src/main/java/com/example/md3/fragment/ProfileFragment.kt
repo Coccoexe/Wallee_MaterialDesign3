@@ -47,16 +47,6 @@ class ProfileFragment : Fragment() {
         val email = activityData.getEmail()
         val userName = activityData.getUserName()
 
-        //topbackbutton
-        val backButton : AppCompatImageView = inflaterView.findViewById(R.id.profileBack)
-        backButton.setOnClickListener{
-            val controller : NavController = requireActivity().findNavController(R.id.navigationController)
-            if(controller.backQueue.size > 2)
-            {
-                controller.popBackStack()
-            }
-        }
-
         //picture
         val profileImage : ImageView = inflaterView.findViewById(R.id.profileImage)
         profileImage.setImageBitmap(activityData.getImageUri())
