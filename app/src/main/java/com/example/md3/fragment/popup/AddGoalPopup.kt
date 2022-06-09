@@ -3,6 +3,7 @@ package com.example.md3.fragment.popup
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,15 +12,18 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.data.entity.Goal
 import com.example.md3.fragment.GoalFragment
 import com.example.md3.utility.IActivityData
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
-import java.util.ArrayList
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class AddGoalPopup : DialogFragment() {
@@ -44,6 +48,22 @@ class AddGoalPopup : DialogFragment() {
         if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        }
+
+        //date
+        val calendar : Calendar = Calendar.getInstance()
+        val format = SimpleDateFormat("EE d MMM yyyy", Locale.getDefault())
+        var standardDate = format.format(calendar.time)
+        val date : AppCompatImageView = inflateView.findViewById(R.id.selectDate)
+        date.setOnClickListener{
+            val picker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+            picker.show(requireActivity().supportFragmentManager,"datePicker")
+            picker.addOnPositiveButtonClickListener {
+                standardDate = format.format(picker.selection)
+            }
         }
 
         //menu tendina
@@ -95,7 +115,7 @@ class AddGoalPopup : DialogFragment() {
                 }else{
                     "negative"
                 }
-                if (activityData.existGoal(categoryMenu.editText!!.text.toString(),amount))
+                if (activityData.existGoal(categoryMenu.editText!!.text.toString(),standardDate,amount))
                 {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle("Overwrite old Goal?")
@@ -105,10 +125,11 @@ class AddGoalPopup : DialogFragment() {
                         .setPositiveButton("Accept"){ dialog,which ->
                             activityData.insertGoal(
                                 Goal(
-                                    activityData.getGoalByCategory(categoryMenu.editText!!.text.toString(),amount)!!.id,
+                                    activityData.getGoalByCategory(categoryMenu.editText!!.text.toString(),standardDate,amount)!!.id,
                                     activityData.getEmail(),
                                     categoryMenu.editText!!.text.toString(),
-                                    money
+                                    money,
+                                    standardDate
                                 )
                             )
                             updateView()
@@ -120,7 +141,8 @@ class AddGoalPopup : DialogFragment() {
                             0,
                             activityData.getEmail(),
                             categoryMenu.editText!!.text.toString(),
-                            money
+                            money,
+                            standardDate
                         )
                     )
                     updateView()

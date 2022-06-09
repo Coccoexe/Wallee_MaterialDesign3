@@ -16,8 +16,8 @@ interface IActivityData {
     fun getUserBalance(): Double
     fun getUserWithTransaction(): List<Transaction>
     fun getUserWithTransactionFiltered(amount: String, category: String?, date : String?) : List<Transaction>
-    fun getUserBalanceCategory(category: String) : Double
-    fun getGoalByCategory(category: String, amount: String): Goal?
+    fun getUserBalanceCategory(amount: String, category: String, date: String) : Double
+    fun getGoalByCategory(category: String,date: String, amount: String): Goal?
     fun getAllGoal(amount: String) : List<Goal>?
     fun updateUser(userName: String)
     fun updatePassword(password: String)
@@ -28,7 +28,7 @@ interface IActivityData {
     fun removeSelectedTransaction(selected : ArrayList<Int>)
     fun removeSelectedGoal(selected: ArrayList<Int>)
     fun existMail(userMail: String): Boolean
-    fun existGoal(category: String,amount: String): Boolean
+    fun existGoal(category: String,date: String, amount: String): Boolean
 
     //utility
     fun getDrawable(category : String) : Int

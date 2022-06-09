@@ -13,7 +13,9 @@ data class Goal(
     @ColumnInfo
     val category: String,
     @ColumnInfo
-    val sum: Double
+    val sum: Double,
+    @ColumnInfo
+    val date: String
 )
 {
     var isSelected = false

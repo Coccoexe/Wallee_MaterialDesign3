@@ -40,11 +40,8 @@ interface UserDao {
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")
     suspend fun getUserWithTransactions(userMail: String): List<Transaction>
 
-    @Query("SELECT * FROM `transaction` WHERE userMail = :userMail and category = (:filter)")
+    @Query("SELECT * FROM `transaction` WHERE userMail = :userMail and category = :filter")
     suspend fun getUserWithTransactionsFiltered(userMail: String, filter: String): List<Transaction>
-
-    @Query("Select sum(amount) as balanceCategory from `transaction` where userMail = :userMail and category = :category")
-    suspend fun getUserBalanceCategory(userMail: String, category: String): Double
 
     //getBalance
     @Query("Select sum(amount) as balance from `transaction` where userMail = :userMail")
@@ -100,11 +97,11 @@ interface UserDao {
     suspend fun getCurrency(id: Int) : String
 
     //goal
-    @Query("SELECT * FROM goal WHERE userMail = :userMail and category = :category and sum > 0")
-    suspend fun getPositiveGoalByCategory(userMail: String, category: String) : Goal?
+    @Query("SELECT * FROM goal WHERE userMail = :userMail and category = :category and date = :date and sum > 0")
+    suspend fun getPositiveGoalByCategory(userMail: String, category: String, date: String) : Goal?
 
-    @Query("SELECT * FROM goal WHERE userMail = :userMail and category = :category and sum < 0")
-    suspend fun getNegativeGoalByCategory(userMail: String, category: String) : Goal?
+    @Query("SELECT * FROM goal WHERE userMail = :userMail and category = :category and date = :date and sum < 0")
+    suspend fun getNegativeGoalByCategory(userMail: String, category: String, date: String) : Goal?
 
     @Query("SELECT * FROM goal where userMail = :userMail")
     suspend fun getAllGoal(userMail: String) : List<Goal>?

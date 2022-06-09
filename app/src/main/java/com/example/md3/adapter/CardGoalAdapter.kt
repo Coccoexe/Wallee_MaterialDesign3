@@ -52,8 +52,12 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
         private var progressBar : LinearProgressIndicator
         private val points : TextView
         private var selectedImage : ImageView
+        private val date : TextView
         private val goalCard : MaterialCardView
         private val completedText : TextView
+
+        private var balace = 0.0
+        private lateinit var filterAmount : String
 
         lateinit var goal : Goal
 
@@ -62,6 +66,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             progressBar = itemView.findViewById(R.id.progBar)
             points = itemView.findViewById(R.id.points)
             selectedImage = itemView.findViewById(R.id.selectedGoal)
+            date = itemView.findViewById(R.id.date)
             goalCard = itemView.findViewById(R.id.card)
             completedText = itemView.findViewById(R.id.goalReached)
             itemView.setOnLongClickListener(this)
@@ -70,18 +75,26 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
 
         fun bind() {
             categoryCard.text = goal.category
+            date.text = goal.date
             progressBar.max = abs(goal.sum).toInt()
-            progressBar.progress = abs(fragment.getBalanceGoal(goal.category)).toInt()
-            if (abs(fragment.getBalanceGoal(goal.category)).toInt() >= abs(goal.sum).toInt()) {
+            filterAmount = if (goal.sum > 0){
+                "positive"
+            }else{
+                "negative"
+            }
+            balace = abs(fragment.getBalanceGoal(filterAmount,goal.category,goal.date))
+            progressBar.progress = balace.toInt()
+            if (balace >= abs(goal.sum).toInt()) {
                 goalCard.setCardBackgroundColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorError))
                 categoryCard.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
+                date.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
                 points.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
                 progressBar.visibility = View.INVISIBLE
                 completedText.visibility = View.VISIBLE
             }
 
             points.text = "%s / %s".format(
-                fragment.getFormattedMoney(fragment.getBalanceGoal(goal.category)),
+                fragment.getFormattedMoney(balace),
                 fragment.getFormattedMoney(goal.sum)
             )
         }

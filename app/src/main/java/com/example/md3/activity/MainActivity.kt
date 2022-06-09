@@ -126,27 +126,21 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return balance!!
     }
 
-    override fun getUserBalanceCategory(category: String): Double {
-        var balance: Double?
-        runBlocking {
-            balance = dao.getUserBalanceCategory(userEmail, category)
-        }
-        if (balance == null) {
-            balance = 0.0
-        }
+    override fun getUserBalanceCategory(amount: String, category: String, date: String): Double {
+        val balanceCategory = getUserWithTransactionFiltered(amount, category, date)
 
-        return balance!!
+        return balanceCategory.sumOf { it.amount }
     }
 
-    override fun getGoalByCategory(category: String, amount: String): Goal? {
+    override fun getGoalByCategory(category: String,date: String, amount: String): Goal? {
         var goal: Goal?
         runBlocking {
             when(amount){
                 "positive" -> {
-                    goal = dao.getPositiveGoalByCategory(userEmail,category)
+                    goal = dao.getPositiveGoalByCategory(userEmail,category,date)
                 }
                 "negative" -> {
-                    goal = dao.getNegativeGoalByCategory(userEmail,category)
+                    goal = dao.getNegativeGoalByCategory(userEmail,category,date)
                 }
                 else -> goal = null
             }
@@ -216,7 +210,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
             when (amount) {
                 "all" -> {
                     for (t in transactionList!!){
-                        if (date == null || format.parse(t.date)!! > format.parse(date))
+                        if (date == null || format.parse(t.date)!! >= format.parse(date))
                         {
                             ret.add(t)
                         }
@@ -226,7 +220,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
                     for (t in transactionList!!){
                         if (t.amount > 0.0)
                         {
-                            if (date == null || format.parse(t.date)!! > format.parse(date))
+                            if (date == null || format.parse(t.date)!! >= format.parse(date))
                             {
                                 ret.add(t)
                             }
@@ -237,7 +231,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
                     for (t in transactionList!!){
                         if (t.amount < 0.0)
                         {
-                            if (date == null || format.parse(t.date)!! > format.parse(date))
+                            if (date == null || format.parse(t.date)!! >= format.parse(date))
                             {
                                 ret.add(t)
                             }
@@ -311,15 +305,15 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return exist != null
     }
 
-    override fun existGoal(category: String, amount: String): Boolean {
+    override fun existGoal(category: String, date: String, amount: String): Boolean {
         val exist: Goal?
         runBlocking {
             when(amount){
                 "positive" -> {
-                    exist = dao.getPositiveGoalByCategory(userEmail,category)
+                    exist = dao.getPositiveGoalByCategory(userEmail,category,date)
                 }
                 "negative" -> {
-                    exist = dao.getNegativeGoalByCategory(userEmail,category)
+                    exist = dao.getNegativeGoalByCategory(userEmail,category,date)
                 }
                 else -> exist = null
             }

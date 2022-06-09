@@ -210,8 +210,8 @@ class GoalFragment : Fragment() {
         return activityData.formatMoney(num)
     }
 
-    fun getBalanceGoal(category: String) : Double {
-        return activityData.getUserBalanceCategory(category)
+    fun getBalanceGoal(filterAmount : String, category: String, date: String) : Double {
+        return activityData.getUserBalanceCategory(filterAmount, category, date)
     }
 
     private val mActionModeCallback = object : ActionMode.Callback {
