@@ -104,8 +104,11 @@ class MainFragment : Fragment() {
         for (color in ColorTemplate.MATERIAL_COLORS){
             colors.add(color)
         }
+
         //initialize chart
         getChartData()
+        checkCompletedGoal()
+        activityData.updateBadge()
 
         //listener
         dateGroup.addOnButtonCheckedListener() { dateGroup, chekedId, isChecked ->
@@ -188,12 +191,30 @@ class MainFragment : Fragment() {
     }
 
     fun updateView(){
+        //aggiornare badge
+        checkCompletedGoal()
+        activityData.updateBadge()
+
         getChartData()
         balance.text = activityData.formatMoney(incomeList!!.sumOf { it.amount } + expenseList!!.sumOf { it.amount })
         legend.text = updateLegend(selectedSlice)
         pieChart.notifyDataSetChanged()
         pieChart.invalidate()
         pieChart.animateXY(500,500)
+    }
+
+    private fun checkCompletedGoal(){
+        val allGoal = activityData.getAllGoal("all")
+        for (g in allGoal!!){
+            val amountFilter = if (g.sum > 0.0){
+                "positive"
+            }else{
+                "negative"
+            }
+            if (abs(activityData.getUserBalanceCategory(amountFilter,g.category,g.date)) >= abs(g.sum)){
+                activityData.setCompletedGoal(g.id)
+            }
+        }
     }
 
     private fun getChartData(){

@@ -129,7 +129,9 @@ class AddGoalPopup : DialogFragment() {
                                     activityData.getEmail(),
                                     categoryMenu.editText!!.text.toString(),
                                     money,
-                                    standardDate
+                                    standardDate,
+                                    false,
+                                    true
                                 )
                             )
                             updateView()
@@ -142,7 +144,9 @@ class AddGoalPopup : DialogFragment() {
                             activityData.getEmail(),
                             categoryMenu.editText!!.text.toString(),
                             money,
-                            standardDate
+                            standardDate,
+                            false,
+                            true
                         )
                     )
                     updateView()

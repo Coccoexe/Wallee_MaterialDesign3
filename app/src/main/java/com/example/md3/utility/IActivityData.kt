@@ -24,6 +24,8 @@ interface IActivityData {
     fun updateEmail(userMail: String)
     fun updateImageUri(imageUri: Bitmap)
     fun updateCurrency(currency: String)
+    fun setCompletedGoal(id : Int)
+    fun setNotified(id : Int)
     fun removeAutoLog()
     fun removeSelectedTransaction(selected : ArrayList<Int>)
     fun removeSelectedGoal(selected: ArrayList<Int>)
@@ -33,4 +35,5 @@ interface IActivityData {
     //utility
     fun getDrawable(category : String) : Int
     fun formatMoney(num : Double) : String
+    fun updateBadge()
 }

@@ -98,6 +98,9 @@ class GoalFragment : Fragment() {
         getGoalList()
         setAdapter()
 
+        //updateBadgeStatus
+        checkToNotify()
+        activityData.updateBadge()
 
         //listener
         cardFAB.setOnClickListener {
@@ -260,6 +263,15 @@ class GoalFragment : Fragment() {
         else{
             noGoalText.visibility = View.VISIBLE
             recyclerView.adapter = null
+        }
+    }
+
+    private fun checkToNotify(){
+        val allGoal = activityData.getAllGoal("all")
+        for (g in allGoal!!){
+            if (g.completed and g.toNotify){
+                activityData.setNotified(g.id)
+            }
         }
     }
 

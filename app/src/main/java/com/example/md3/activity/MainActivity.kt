@@ -11,6 +11,7 @@ import com.example.md3.data.UserDatabase
 import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 import com.example.md3.utility.IActivityData
+import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.runBlocking
 import java.text.DecimalFormat
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
 
     private lateinit var userEmail : String
     private lateinit var dao : UserDao
+    private lateinit var goalBadge : BadgeDrawable
     private var userId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,11 @@ class MainActivity : AppCompatActivity(), IActivityData {
         runBlocking {
             userId = dao.getId(userEmail)
         }
+
+        //badge
+        val navigationBar : BottomNavigationView = findViewById(R.id.navigationBar)
+        goalBadge = navigationBar.getOrCreateBadge(R.id.goalFragment)
+        updateBadge()
 
     }
 
@@ -149,7 +156,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return goal
     }
 
-    override fun getAllGoal(amount: String): List<Goal>? {
+    override fun getAllGoal(amount: String): List<Goal> {
         var listGoal: List<Goal>?
         val ret : ArrayList<Goal> = ArrayList()
 
@@ -275,6 +282,18 @@ class MainActivity : AppCompatActivity(), IActivityData {
         }
     }
 
+    override fun setCompletedGoal(id : Int) {
+        runBlocking {
+            dao.setCompletedGoal(true,id)
+        }
+    }
+
+    override fun setNotified(id: Int) {
+        runBlocking {
+            dao.setNotified(false,id)
+        }
+    }
+
     override fun removeAutoLog() {
         runBlocking {
             dao.removeAutoLog()
@@ -343,7 +362,6 @@ class MainActivity : AppCompatActivity(), IActivityData {
     }
 
     override fun formatMoney(num: Double): String {
-
         val suffix = arrayOf(' ', 'k', 'M', 'B', 'T', 'P', 'E')
         val value =log10(abs(num))
         val base = (value / 3).toInt()
@@ -352,8 +370,21 @@ class MainActivity : AppCompatActivity(), IActivityData {
         } else {
             return DecimalFormat("#,##0.00").format(num) + getCurrency()
         }
-
-
     }
 
+    override fun updateBadge() {
+        val allGoal = getAllGoal("all")
+        var badgeNum = 0
+        for (g in allGoal){
+            if (g.completed and g.toNotify)
+                badgeNum++
+        }
+        if (badgeNum > 0) {
+            goalBadge.number = badgeNum
+            goalBadge.isVisible = true
+        }else{
+            goalBadge.clearNumber()
+            goalBadge.isVisible = false
+        }
+    }
 }

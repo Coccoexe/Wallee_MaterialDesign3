@@ -106,4 +106,10 @@ interface UserDao {
     @Query("SELECT * FROM goal where userMail = :userMail")
     suspend fun getAllGoal(userMail: String) : List<Goal>?
 
+    @Query("Update goal set completed = :completed where id = :id")
+    suspend fun setCompletedGoal(completed : Boolean, id: Int)
+
+    @Query("Update goal set toNotify = :toNotify where id = :id")
+    suspend fun setNotified(toNotify : Boolean, id: Int)
+
 }
