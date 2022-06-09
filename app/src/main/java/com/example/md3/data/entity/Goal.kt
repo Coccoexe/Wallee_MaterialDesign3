@@ -9,6 +9,8 @@ data class Goal(
     @PrimaryKey(autoGenerate = true)
     val id : Int,
     @ColumnInfo
+    val userMail: String,
+    @ColumnInfo
     val category: String,
     @ColumnInfo
     val sum: Double

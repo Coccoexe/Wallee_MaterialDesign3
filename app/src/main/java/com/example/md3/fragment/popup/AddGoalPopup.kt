@@ -97,6 +97,7 @@ class AddGoalPopup : DialogFragment() {
                             activityData.insertGoal(
                                 Goal(
                                     activityData.getGoalByCategory(categoryMenu.editText!!.text.toString())!!.id,
+                                    activityData.getEmail(),
                                     categoryMenu.editText!!.text.toString(),
                                     money
                                 )
@@ -108,6 +109,7 @@ class AddGoalPopup : DialogFragment() {
                     activityData.insertGoal(
                         Goal(
                             0,
+                            activityData.getEmail(),
                             categoryMenu.editText!!.text.toString(),
                             money
                         )

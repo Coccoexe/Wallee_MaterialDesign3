@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     override fun getGoalByCategory(category: String): Goal? {
         var goal: Goal?
         runBlocking {
-            goal = dao.getGoalByCategory(category)
+            goal = dao.getGoalByCategory(userEmail,category)
         }
 
         return goal
@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
         val ret : ArrayList<Goal> = ArrayList()
 
         runBlocking {
-            listGoal = dao.getAllGoal()
+            listGoal = dao.getAllGoal(userEmail)
         }
 
         val income = resources.getStringArray(R.array.income)
@@ -309,7 +309,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
     override fun existGoal(category: String): Boolean {
         val exist: Goal?
         runBlocking {
-            exist = dao.getGoalByCategory(category)
+            exist = dao.getGoalByCategory(userEmail,category)
         }
         return exist != null
     }

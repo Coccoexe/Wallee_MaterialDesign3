@@ -37,13 +37,14 @@ interface UserDao {
     suspend fun removeGaol(id: Int)
 
     //transaction
-    @androidx.room.Transaction
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail")
     suspend fun getUserWithTransactions(userMail: String): List<Transaction>
 
-    @androidx.room.Transaction
     @Query("SELECT * FROM `transaction` WHERE userMail = :userMail and category = (:filter)")
     suspend fun getUserWithTransactionsFiltered(userMail: String, filter: String): List<Transaction>
+
+    @Query("Select sum(amount) as balanceCategory from `transaction` where userMail = :userMail and category = :category")
+    suspend fun getUserBalanceCategory(userMail: String, category: String): Double
 
     //getBalance
     @Query("Select sum(amount) as balance from `transaction` where userMail = :userMail")
@@ -55,15 +56,6 @@ interface UserDao {
 
     @Query("SELECT * FROM autologin")
     suspend fun getAutoLogin() : AutoLogin?
-
-    @Query("Select sum(amount) as balanceCategory from `transaction` where userMail = :userMail and category = :category")
-    suspend fun getUserBalanceCategory(userMail: String, category: String): Double
-
-    @Query("SELECT * FROM goal WHERE category = :category")
-    suspend fun getGoalByCategory(category: String) : Goal?
-
-    @Query("SELECT * FROM goal")
-    suspend fun getAllGoal() : List<Goal>?
 
     //id
     @Query("Select id from user where userMail = :userMail")
@@ -106,5 +98,12 @@ interface UserDao {
 
     @Query("Select currency From user where id = :id")
     suspend fun getCurrency(id: Int) : String
+
+    //goal
+    @Query("SELECT * FROM goal WHERE userMail = :userMail and category = :category")
+    suspend fun getGoalByCategory(userMail: String, category: String) : Goal?
+
+    @Query("SELECT * FROM goal where userMail = :userMail")
+    suspend fun getAllGoal(userMail: String) : List<Goal>?
 
 }
