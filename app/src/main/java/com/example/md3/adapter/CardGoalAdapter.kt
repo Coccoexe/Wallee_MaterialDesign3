@@ -3,6 +3,7 @@ package com.example.md3.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.example.md3.data.entity.Goal
 import com.example.md3.fragment.GoalFragment
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlin.math.abs
 
 class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFragment) :
@@ -47,10 +49,11 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) , View.OnLongClickListener, View.OnClickListener{
         private val categoryCard : TextView
-        private val progressBar : ProgressBar
+        private var progressBar : LinearProgressIndicator
         private val points : TextView
         private var selectedImage : ImageView
         private val goalCard : MaterialCardView
+        private val completedText : TextView
 
         lateinit var goal : Goal
 
@@ -60,6 +63,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             points = itemView.findViewById(R.id.points)
             selectedImage = itemView.findViewById(R.id.selectedGoal)
             goalCard = itemView.findViewById(R.id.card)
+            completedText = itemView.findViewById(R.id.goalReached)
             itemView.setOnLongClickListener(this)
             itemView.setOnClickListener(this)
         }
@@ -72,7 +76,8 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
                 goalCard.setCardBackgroundColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorError))
                 categoryCard.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
                 points.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
-                progressBar.progressTintList(ColorStateList.valueOf(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError)))
+                progressBar.visibility = View.INVISIBLE
+                completedText.visibility = View.VISIBLE
             }
 
             points.text = "%s / %s".format(

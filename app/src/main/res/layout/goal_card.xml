@@ -9,16 +9,18 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_selected_24"
+        android:elevation="20dp"
         android:translationZ="90dp"
-        app:layout_constraintTop_toTopOf="@id/card"
-        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         style="?attr/materialCardViewElevatedStyle"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         app:cardCornerRadius="16dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="6dp"
@@ -26,7 +28,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
             android:layout_gravity="center">
@@ -42,18 +44,39 @@
                 android:textColor="?attr/colorOnSurface"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
-
-            <com.google.android.material.progressindicator.LinearProgressIndicator
-                android:id="@+id/progBar"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:trackCornerRadius="6dp"
-                style="@style/Widget.Material3.LinearProgressIndicator"
-                android:progressBackgroundTint="?attr/colorPrimaryContainer"
-                android:progressTint="?attr/colorPrimary"
-                android:progress="0"/>
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/goalReached"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Goal Reached"
+                    android:textColor="?attr/colorOnError"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toTopOf="@id/progBar"
+                    app:layout_constraintBottom_toBottomOf="@id/progBar"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:trackCornerRadius="6dp"
+                    style="@style/Widget.Material3.LinearProgressIndicator"
+                    android:progressBackgroundTint="?attr/colorPrimaryContainer"
+                    android:progressTint="?attr/colorPrimary"
+                    android:progress="0"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/points"
