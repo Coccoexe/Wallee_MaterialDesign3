@@ -82,9 +82,9 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             }else{
                 "negative"
             }
-            balace = abs(fragment.getBalanceGoal(filterAmount,goal.category,goal.date))
-            progressBar.progress = balace.toInt()
-            if (balace >= abs(goal.sum).toInt()) {
+            balace = fragment.getBalanceGoal(filterAmount,goal.category,goal.date)
+            progressBar.progress = abs(balace).toInt()
+            if (abs(balace) >= abs(goal.sum).toInt()) {
                 goalCard.setCardBackgroundColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorError))
                 categoryCard.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
                 date.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
