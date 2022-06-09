@@ -100,8 +100,11 @@ interface UserDao {
     suspend fun getCurrency(id: Int) : String
 
     //goal
-    @Query("SELECT * FROM goal WHERE userMail = :userMail and category = :category")
-    suspend fun getGoalByCategory(userMail: String, category: String) : Goal?
+    @Query("SELECT * FROM goal WHERE userMail = :userMail and category = :category and sum > 0")
+    suspend fun getPositiveGoalByCategory(userMail: String, category: String) : Goal?
+
+    @Query("SELECT * FROM goal WHERE userMail = :userMail and category = :category and sum < 0")
+    suspend fun getNegativeGoalByCategory(userMail: String, category: String) : Goal?
 
     @Query("SELECT * FROM goal where userMail = :userMail")
     suspend fun getAllGoal(userMail: String) : List<Goal>?

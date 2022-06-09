@@ -78,15 +78,24 @@ class AddGoalPopup : DialogFragment() {
         //confirmButton
         val confirm : Button = inflateView.findViewById(R.id.confirm)
         confirm.setOnClickListener {
-            var money = 0.0
+            val money: Double
 
             if (goalAmount.editText!!.text.isEmpty() || categoryMenu.editText!!.text.isEmpty()) {
                 goalAmount.editText!!.text.clear()
                 dismiss()
                 Toast.makeText(context, "Gaol amount cannot be 0!", Toast.LENGTH_SHORT).show()
             } else {
-                money = goalAmount.editText!!.text.toString().toDouble()
-                if (activityData.existGoal(categoryMenu.editText!!.text.toString()))
+                money = if (radiogroup.checkedButtonId == R.id.addButton){
+                    goalAmount.editText!!.text.toString().toDouble()
+                }else{
+                    0.0 - goalAmount.editText!!.text.toString().toDouble()
+                }
+                val amount = if (money > 0.0){
+                    "positive"
+                }else{
+                    "negative"
+                }
+                if (activityData.existGoal(categoryMenu.editText!!.text.toString(),amount))
                 {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle("Overwrite old Goal?")
@@ -96,7 +105,7 @@ class AddGoalPopup : DialogFragment() {
                         .setPositiveButton("Accept"){ dialog,which ->
                             activityData.insertGoal(
                                 Goal(
-                                    activityData.getGoalByCategory(categoryMenu.editText!!.text.toString())!!.id,
+                                    activityData.getGoalByCategory(categoryMenu.editText!!.text.toString(),amount)!!.id,
                                     activityData.getEmail(),
                                     categoryMenu.editText!!.text.toString(),
                                     money

@@ -138,10 +138,18 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return balance!!
     }
 
-    override fun getGoalByCategory(category: String): Goal? {
+    override fun getGoalByCategory(category: String, amount: String): Goal? {
         var goal: Goal?
         runBlocking {
-            goal = dao.getGoalByCategory(userEmail,category)
+            when(amount){
+                "positive" -> {
+                    goal = dao.getPositiveGoalByCategory(userEmail,category)
+                }
+                "negative" -> {
+                    goal = dao.getNegativeGoalByCategory(userEmail,category)
+                }
+                else -> goal = null
+            }
         }
 
         return goal
@@ -155,9 +163,6 @@ class MainActivity : AppCompatActivity(), IActivityData {
             listGoal = dao.getAllGoal(userEmail)
         }
 
-        val income = resources.getStringArray(R.array.income)
-        val expense = resources.getStringArray(R.array.expenses)
-
         if (!listGoal.isNullOrEmpty()) {
             when (amount) {
                 "all" -> {
@@ -167,13 +172,13 @@ class MainActivity : AppCompatActivity(), IActivityData {
                 }
                 "positive" -> {
                     for (g in listGoal!!){
-                        if (g.category in income)
+                        if (g.sum > 0.0)
                             ret.add(g)
                     }
                 }
                 "negative" -> {
                     for (g in listGoal!!){
-                        if (g.category in expense)
+                        if (g.sum < 0.0)
                             ret.add(g)
                     }
                 }
@@ -306,10 +311,18 @@ class MainActivity : AppCompatActivity(), IActivityData {
         return exist != null
     }
 
-    override fun existGoal(category: String): Boolean {
+    override fun existGoal(category: String, amount: String): Boolean {
         val exist: Goal?
         runBlocking {
-            exist = dao.getGoalByCategory(userEmail,category)
+            when(amount){
+                "positive" -> {
+                    exist = dao.getPositiveGoalByCategory(userEmail,category)
+                }
+                "negative" -> {
+                    exist = dao.getNegativeGoalByCategory(userEmail,category)
+                }
+                else -> exist = null
+            }
         }
         return exist != null
     }

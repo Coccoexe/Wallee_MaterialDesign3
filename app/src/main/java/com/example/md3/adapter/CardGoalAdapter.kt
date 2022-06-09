@@ -70,9 +70,9 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
 
         fun bind() {
             categoryCard.text = goal.category
-            progressBar.max = goal.sum.toInt()
+            progressBar.max = abs(goal.sum).toInt()
             progressBar.progress = abs(fragment.getBalanceGoal(goal.category)).toInt()
-            if (fragment.getBalanceGoal(goal.category).toInt() >= goal.sum.toInt()) {
+            if (abs(fragment.getBalanceGoal(goal.category)).toInt() >= abs(goal.sum).toInt()) {
                 goalCard.setCardBackgroundColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorError))
                 categoryCard.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
                 points.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
@@ -81,7 +81,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             }
 
             points.text = "%s / %s".format(
-                fragment.getFormattedMoney(abs(fragment.getBalanceGoal(goal.category))),
+                fragment.getFormattedMoney(fragment.getBalanceGoal(goal.category)),
                 fragment.getFormattedMoney(goal.sum)
             )
         }
