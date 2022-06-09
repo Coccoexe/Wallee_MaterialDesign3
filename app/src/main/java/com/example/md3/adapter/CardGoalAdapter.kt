@@ -2,6 +2,7 @@ package com.example.md3.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
 import com.example.md3.data.entity.Goal
 import com.example.md3.fragment.GoalFragment
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.color.MaterialColors
 import kotlin.math.abs
 
 class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFragment) :
@@ -47,6 +50,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
         private val progressBar : ProgressBar
         private val points : TextView
         private var selectedImage : ImageView
+        private val goalCard : MaterialCardView
 
         lateinit var goal : Goal
 
@@ -55,6 +59,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             progressBar = itemView.findViewById(R.id.progBar)
             points = itemView.findViewById(R.id.points)
             selectedImage = itemView.findViewById(R.id.selectedGoal)
+            goalCard = itemView.findViewById(R.id.card)
             itemView.setOnLongClickListener(this)
             itemView.setOnClickListener(this)
         }
@@ -64,15 +69,16 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             progressBar.max = goal.sum.toInt()
             progressBar.progress = abs(fragment.getBalanceGoal(goal.category)).toInt()
             if (fragment.getBalanceGoal(goal.category).toInt() >= goal.sum.toInt()) {
-                points.text = "Completed"
+                goalCard.setCardBackgroundColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorError))
+                categoryCard.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
+                points.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
+                progressBar.progressTintList(ColorStateList.valueOf(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError)))
             }
-            else {
-                points.text = "%s / %s".format(
-                    fragment.getFormattedMoney(abs(fragment.getBalanceGoal(goal.category))),
-                    fragment.getFormattedMoney(goal.sum)
-                )
-                //cambiare colore
-            }
+
+            points.text = "%s / %s".format(
+                fragment.getFormattedMoney(abs(fragment.getBalanceGoal(goal.category))),
+                fragment.getFormattedMoney(goal.sum)
+            )
         }
 
         override fun onLongClick(p0: View?): Boolean {
