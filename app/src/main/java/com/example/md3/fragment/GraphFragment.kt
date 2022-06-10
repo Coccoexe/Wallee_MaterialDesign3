@@ -13,9 +13,7 @@ import com.example.md3.utility.IActivityData
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
@@ -29,6 +27,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.abs
 
 
 class GraphFragment : Fragment() {
@@ -216,12 +215,85 @@ class GraphFragment : Fragment() {
 
     }
 
-    private fun drawChartPositive(){
+    private fun drawChartPositive() {
+        val transactionList =
+            activityData.getUserWithTransactionFiltered("positive", null, filterDate)
+        val entry: ArrayList<RadarEntry> = ArrayList()
+        val formatArray: ArrayList<String> = ArrayList()
+
+        //controllo ogni transazione, sommo le categorie uguali
+
+        val monthBalance: MutableMap<String, Double> =
+            resources.getStringArray(R.array.income).associateBy({ it }, { 0.0 }).toMutableMap()
+
+        for (t in transactionList) {
+            monthBalance[t.category] =
+                monthBalance[t.category]!!.plus(t.amount)
+        }
+        for (i in monthBalance) {
+            formatArray.add(i.key)
+            entry.add(RadarEntry(i.value.toFloat(),formatArray.indexOf(i.key).toFloat()))
+        }
+
+        val radarDataSet = RadarDataSet(entry,"Balance")
+        radarDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
+        radarDataSet.colors = colors
+        radarDataSet.setDrawValues(false)
+        radarDataSet.lineWidth = 2f
+        radarDataSet.valueTextColor = color
+        radarDataSet.valueTextSize = 12f
+
+        val radarData = RadarData(radarDataSet)
+        positiveChart.scaleX = 1.2f
+        positiveChart.scaleY = 1.2f
+        positiveChart.xAxis.textColor = color
+        positiveChart.xAxis.valueFormatter = IndexAxisValueFormatter(formatArray)
+        positiveChart.yAxis.setDrawLabels(false)
+        positiveChart.legend.isEnabled = false
+        positiveChart.description.isEnabled = false
+        positiveChart.data = radarData
+        positiveChart.animateY(2000)
 
     }
 
     private fun drawChartNegative(){
+        val transactionList =
+            activityData.getUserWithTransactionFiltered("negative", null, filterDate)
+        val entry: ArrayList<RadarEntry> = ArrayList()
+        val formatArray: ArrayList<String> = ArrayList()
 
+        //controllo ogni transazione, sommo le categorie uguali
+
+        val monthBalance: MutableMap<String, Double> =
+            resources.getStringArray(R.array.expenses).associateBy({ it }, { 0.0 }).toMutableMap()
+
+        for (t in transactionList) {
+            monthBalance[t.category] =
+                monthBalance[t.category]!!.plus(t.amount)
+        }
+        for (i in monthBalance) {
+            formatArray.add(i.key)
+            entry.add(RadarEntry(abs(i.value).toFloat(),formatArray.indexOf(i.key).toFloat()))
+        }
+
+        val radarDataSet = RadarDataSet(entry,"Balance")
+        radarDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
+        radarDataSet.colors = colors
+        radarDataSet.setDrawValues(false)
+        radarDataSet.lineWidth = 2f
+        radarDataSet.valueTextColor = color
+        radarDataSet.valueTextSize = 12f
+
+        val radarData = RadarData(radarDataSet)
+        negativeChart.scaleX = 1.2f
+        negativeChart.scaleY = 1.2f
+        negativeChart.xAxis.textColor = color
+        negativeChart.xAxis.valueFormatter = IndexAxisValueFormatter(formatArray)
+        negativeChart.yAxis.setDrawLabels(false)
+        negativeChart.legend.isEnabled = false
+        negativeChart.description.isEnabled = false
+        negativeChart.data = radarData
+        negativeChart.animateY(2000)
     }
 
 }
