@@ -1,5 +1,6 @@
 package com.example.md3.fragment.popup
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -30,6 +31,13 @@ import java.util.*
 
 class AddGoalPopup : DialogFragment() {
     private lateinit var activityData : IActivityData
+
+    override fun onStart() {
+        super.onStart()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            dialog!!.window!!.setLayout(1400, 800)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,6 +108,7 @@ class AddGoalPopup : DialogFragment() {
         }
 
         val goalAmount : TextInputLayout = inflateView.findViewById(R.id.chooseAmount)
+        goalAmount.suffixText = activityData.getCurrency()
 
         //confirmButton
         val confirm : Button = inflateView.findViewById(R.id.confirm)
