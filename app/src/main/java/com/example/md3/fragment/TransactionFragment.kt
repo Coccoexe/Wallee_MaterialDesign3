@@ -23,6 +23,7 @@ import com.google.android.material.divider.MaterialDivider
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 
 class TransactionFragment : Fragment(){
@@ -396,6 +397,8 @@ class TransactionFragment : Fragment(){
                 }
                 R.id.deleteSelected -> {
                     activityData.removeSelectedTransaction((dataList.adapter as TransactionAdapter).selected)
+                    activityData.checkCompletedGoal()
+                    activityData.updateBadge()
                     mode.finish()
                     true
                 }

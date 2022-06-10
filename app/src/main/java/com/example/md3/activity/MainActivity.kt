@@ -282,9 +282,9 @@ class MainActivity : AppCompatActivity(), IActivityData {
         }
     }
 
-    override fun setCompletedGoal(id : Int) {
+    override fun setCompletedGoal(completed: Boolean, id : Int) {
         runBlocking {
-            dao.setCompletedGoal(true,id)
+            dao.setCompletedGoal(completed,id)
         }
     }
 
@@ -369,6 +369,22 @@ class MainActivity : AppCompatActivity(), IActivityData {
             return DecimalFormat("#0.00").format(num / 10.0.pow((base * 3).toDouble())) + suffix[base] + getCurrency()
         } else {
             return DecimalFormat("#,##0.00").format(num) + getCurrency()
+        }
+    }
+
+    override fun checkCompletedGoal() {
+        val allGoal = getAllGoal("all")
+        for (g in allGoal){
+            val amountFilter = if (g.sum > 0.0){
+                "positive"
+            }else{
+                "negative"
+            }
+            if (abs(getUserBalanceCategory(amountFilter,g.category,g.date)) >= abs(g.sum)){
+                setCompletedGoal(true,g.id)
+            }else{
+                setCompletedGoal(false,g.id)
+            }
         }
     }
 

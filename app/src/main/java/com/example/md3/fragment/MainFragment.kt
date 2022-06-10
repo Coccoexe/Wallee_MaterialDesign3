@@ -107,7 +107,7 @@ class MainFragment : Fragment() {
 
         //initialize chart
         getChartData()
-        checkCompletedGoal()
+        activityData.checkCompletedGoal()
         activityData.updateBadge()
 
         //listener
@@ -192,7 +192,7 @@ class MainFragment : Fragment() {
 
     fun updateView(){
         //aggiornare badge
-        checkCompletedGoal()
+        activityData.checkCompletedGoal()
         activityData.updateBadge()
 
         getChartData()
@@ -201,20 +201,6 @@ class MainFragment : Fragment() {
         pieChart.notifyDataSetChanged()
         pieChart.invalidate()
         pieChart.animateXY(500,500)
-    }
-
-    private fun checkCompletedGoal(){
-        val allGoal = activityData.getAllGoal("all")
-        for (g in allGoal!!){
-            val amountFilter = if (g.sum > 0.0){
-                "positive"
-            }else{
-                "negative"
-            }
-            if (abs(activityData.getUserBalanceCategory(amountFilter,g.category,g.date)) >= abs(g.sum)){
-                activityData.setCompletedGoal(g.id)
-            }
-        }
     }
 
     private fun getChartData(){
