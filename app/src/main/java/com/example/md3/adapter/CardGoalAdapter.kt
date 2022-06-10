@@ -31,9 +31,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
     var selected : ArrayList<Int>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.goal_card, parent, false)
-
+        val view = inflater.inflate(R.layout.goal_card, parent, false)
         return CardViewHolder(view)
     }
 
@@ -56,7 +54,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
         private val goalCard : MaterialCardView
         private val completedText : TextView
 
-        private var balace = 0.0
+        private var balance = 0.0
         private lateinit var filterAmount : String
 
         lateinit var goal : Goal
@@ -82,9 +80,9 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             }else{
                 "negative"
             }
-            balace = fragment.getBalanceGoal(filterAmount,goal.category,goal.date)
-            progressBar.progress = abs(balace).toInt()
-            if (abs(balace) >= abs(goal.sum).toInt()) {
+            balance = fragment.getBalanceGoal(filterAmount,goal.category,goal.date)
+            progressBar.progress = abs(balance).toInt()
+            if (abs(balance) >= abs(goal.sum).toInt()) {
                 goalCard.setCardBackgroundColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorError))
                 categoryCard.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
                 date.setTextColor(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorOnError))
@@ -94,7 +92,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             }
 
             points.text = "%s / %s".format(
-                fragment.getFormattedMoney(balace),
+                fragment.getFormattedMoney(balance),
                 fragment.getFormattedMoney(goal.sum)
             )
         }
