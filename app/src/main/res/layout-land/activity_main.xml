@@ -22,7 +22,8 @@
         android:id="@+id/navigationBar"
         app:menu="@menu/bottom_navigation_menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
