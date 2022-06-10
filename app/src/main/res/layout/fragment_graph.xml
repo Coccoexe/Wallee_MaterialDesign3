@@ -10,56 +10,157 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/title"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarGraph"
+            android:backgroundTint="?attr/colorSurface"
+            app:liftOnScroll="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Graphes"
-            android:textColor="?attr/colorOnPrimary"
-            android:gravity="center"
-            android:textSize="26sp"
-            android:background="?attr/colorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/subtitle"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBarGoal"
+                app:title="Chart"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/transaction_app_bar">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.helper.widget.Flow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My transactions"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            android:layout_marginHorizontal="4dp"
+            app:constraint_referenced_ids="cardBalance, cardPositive, cardNegative"
+            app:flow_horizontalGap="8dp"
+            app:flow_maxElementsWrap="1"
+            app:flow_wrapMode="aligned"
+            app:layout_constraintTop_toBottomOf="@id/appBarGraph"
+            app:layout_constraintBottom_toTopOf="@id/navigationBar"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/allTransactions"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/money_in_out_color"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            app:layout_constraintEnd_toStartOf="@id/positiveTransactions"
-            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBalance"
+            style="?attr/materialCardViewElevatedStyle"
+            app:cardElevation="6dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardUseCompatPadding="true">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/positiveTransactions"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/money_in_color"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            app:layout_constraintEnd_toStartOf="@id/negativeTransactions"
-            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/negativeTransactions"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/money_out_color"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+                <TextView
+                    android:id="@+id/legendChart"
+                    android:gravity="center"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/balanceChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPositive"
+            style="?attr/materialCardViewElevatedStyle"
+            app:cardElevation="6dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardUseCompatPadding="true"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/legendPositive"
+                    android:gravity="center"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/positiveChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardNegative"
+            style="?attr/materialCardViewElevatedStyle"
+            app:cardElevation="6dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardUseCompatPadding="true"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/legendNegative"
+                    android:gravity="center"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/negativeChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigationBar"
@@ -69,7 +170,4 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </FrameLayout>
