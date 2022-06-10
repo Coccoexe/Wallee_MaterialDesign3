@@ -19,6 +19,8 @@ import com.example.md3.data.entity.Goal
 import com.example.md3.fragment.GoalFragment
 import com.example.md3.utility.IActivityData
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
@@ -56,9 +58,13 @@ class AddGoalPopup : DialogFragment() {
         var standardDate = format.format(calendar.time)
         val date : AppCompatImageView = inflateView.findViewById(R.id.selectDate)
         date.setOnClickListener{
+            val constraints = CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointBackward.now())
+
             val picker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Select date")
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .setCalendarConstraints(constraints.build())
                 .build()
             picker.show(requireActivity().supportFragmentManager,"datePicker")
             picker.addOnPositiveButtonClickListener {
