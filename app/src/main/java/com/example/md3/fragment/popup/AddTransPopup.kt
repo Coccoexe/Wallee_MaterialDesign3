@@ -15,6 +15,8 @@ import com.example.md3.data.entity.Transaction
 import com.example.md3.fragment.MainFragment
 import com.example.md3.utility.IActivityData
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
@@ -59,8 +61,12 @@ class AddTransPopup : DialogFragment() {
         var standardDate = format.format(calendar.time)
         val date : AppCompatImageView = inflateView.findViewById(R.id.selectDate)
         date.setOnClickListener{
+            val constraints = CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointBackward.now())
+
             val picker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Select date")
+                .setCalendarConstraints(constraints.build())
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                 .build()
             picker.show(requireActivity().supportFragmentManager,"datePicker")
