@@ -102,6 +102,7 @@ class AddGoalPopup : DialogFragment() {
         }
 
         val goalAmount : TextInputLayout = inflateView.findViewById(R.id.chooseAmount)
+        goalAmount.suffixText = activityData.getCurrency()
 
         //confirmButton
         val confirm : Button = inflateView.findViewById(R.id.confirm)
