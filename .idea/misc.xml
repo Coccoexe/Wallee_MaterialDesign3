@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/drawable/ic_goal_24.xml" value="0.166" />
+        <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout-land/add_goal.xml" value="0.33" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout-land/fragment_goal.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout-land/fragment_profile.xml" value="0.31040564373897706" />
-        <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout-land/trans_popup.xml" value="0.3015625" />
+        <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout-land/trans_popup.xml" value="0.33" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/add_goal.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/currency_popup.xml" value="0.365625" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/fragment_goal.xml" value="0.26222826086956524" />
         <entry key="..\:/Users/Andrea/StudioProjects/MaterialDesign3/app/src/main/res/layout/fragment_graph.xml" value="0.36666666666666664" />
