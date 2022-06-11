@@ -208,7 +208,7 @@
             android:src="@drawable/ic_help_24"
             android:layout_margin="25dp"
             android:elevation="10dp"
-            app:tint="?attr/colorOnPrimaryContainer"
+            app:tint="?attr/colorOnSecondaryContainer"
             app:layout_constraintTop_toTopOf="@id/cardGraph"
             app:layout_constraintEnd_toEndOf="@id/cardGraph"/>
 

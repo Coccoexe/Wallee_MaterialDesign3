@@ -243,7 +243,7 @@ class GraphFragment : Fragment() {
         balanceChart.axisRight.setDrawGridLines(false)
         balanceChart.axisLeft.textColor = color
         balanceChart.xAxis.setDrawGridLines(false)
-        balanceChart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
+        balanceChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         balanceChart.xAxis.textColor = color
         balanceChart.xAxis.granularity = 1f
         balanceChart.xAxis.valueFormatter = IndexAxisValueFormatter(formatArray)
