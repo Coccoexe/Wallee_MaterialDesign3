@@ -1,12 +1,14 @@
 package com.example.md3.fragment.popup
 
 
+import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.DialogFragment
@@ -106,6 +108,11 @@ class AddTransPopup : DialogFragment() {
         //textammount
         val amount : TextInputLayout = inflateView.findViewById(R.id.amount)
         amount.suffixText = activityData.getCurrency()
+        amount.editText!!.setOnFocusChangeListener{ view, hasFocus ->
+            if (view.id == R.id.amountBox && !hasFocus){
+                (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken,0)
+            }
+        }
 
         //confirmButton
         val confirm : Button = inflateView.findViewById(R.id.popupOk)

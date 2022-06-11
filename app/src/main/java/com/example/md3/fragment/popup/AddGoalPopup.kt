@@ -1,5 +1,6 @@
 package com.example.md3.fragment.popup
 
+import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -110,6 +112,11 @@ class AddGoalPopup : DialogFragment() {
 
         val goalAmount : TextInputLayout = inflateView.findViewById(R.id.chooseAmount)
         goalAmount.suffixText = activityData.getCurrency()
+        goalAmount.editText!!.setOnFocusChangeListener{ view, hasFocus ->
+            if (view.id == R.id.amountBox && !hasFocus){
+                (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken,0)
+            }
+        }
 
         //confirmButton
         val confirm : Button = inflateView.findViewById(R.id.confirm)

@@ -101,6 +101,7 @@
                 app:suffixText="$">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amountBox"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"

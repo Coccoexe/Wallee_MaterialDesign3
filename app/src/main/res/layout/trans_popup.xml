@@ -79,6 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/amountBox"
             android:inputType="numberDecimal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
