@@ -124,12 +124,15 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardEmail"
+                    style="?attr/materialCardViewElevatedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="16dp"
-                    app:cardUseCompatPadding="true">
+                    app:cardUseCompatPadding="true"
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -153,14 +156,17 @@
                             android:textSize="12sp"
                             android:textStyle="italic"/>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardPassword"
+                    style="?attr/materialCardViewElevatedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="16dp"
                     app:cardUseCompatPadding="true"
+                    app:cardElevation="6dp"
                     tools:ignore="MissingConstraints">
 
                     <LinearLayout
@@ -185,14 +191,17 @@
                             android:textSize="12sp"
                             android:textStyle="italic"/>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardCurrency"
+                    style="?attr/materialCardViewElevatedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="16dp"
                     app:cardUseCompatPadding="true"
+                    app:cardElevation="6dp"
                     tools:ignore="MissingConstraints">
 
                     <LinearLayout
@@ -210,14 +219,17 @@
                             android:textStyle="bold"/>
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardLogout"
+                    style="?attr/materialCardViewElevatedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="16dp"
                     app:cardUseCompatPadding="true"
+                    app:cardElevation="6dp"
                     android:backgroundTint="?attr/colorError"
                     tools:ignore="MissingConstraints">
 
@@ -237,7 +249,7 @@
                             android:textStyle="bold"/>
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
