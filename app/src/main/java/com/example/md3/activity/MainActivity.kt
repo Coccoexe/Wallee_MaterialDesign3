@@ -288,9 +288,9 @@ class MainActivity : AppCompatActivity(), IActivityData {
         }
     }
 
-    override fun setNotified(id: Int) {
+    override fun setNotified(toNotify : Boolean, id: Int) {
         runBlocking {
-            dao.setNotified(false,id)
+            dao.setNotified(toNotify,id)
         }
     }
 
@@ -384,6 +384,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
                 setCompletedGoal(true,g.id)
             }else{
                 setCompletedGoal(false,g.id)
+                setNotified(true,g.id)
             }
         }
     }

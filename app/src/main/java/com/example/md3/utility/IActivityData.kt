@@ -25,7 +25,7 @@ interface IActivityData {
     fun updateImageUri(imageUri: Bitmap)
     fun updateCurrency(currency: String)
     fun setCompletedGoal(completed : Boolean, id : Int)
-    fun setNotified(id : Int)
+    fun setNotified(toNotify : Boolean, id : Int)
     fun removeAutoLog()
     fun removeSelectedTransaction(selected : ArrayList<Int>)
     fun removeSelectedGoal(selected: ArrayList<Int>)

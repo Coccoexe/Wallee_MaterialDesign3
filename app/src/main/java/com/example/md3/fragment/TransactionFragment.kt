@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.activity.MainActivity
 import com.example.md3.R
 import com.example.md3.adapter.TransactionAdapter
+import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 import com.example.md3.utility.IActivityData
 import com.google.android.material.appbar.MaterialToolbar
@@ -19,6 +20,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.divider.MaterialDivider
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
@@ -396,10 +398,22 @@ class TransactionFragment : Fragment(){
                     true
                 }
                 R.id.deleteSelected -> {
-                    activityData.removeSelectedTransaction((dataList.adapter as TransactionAdapter).selected)
-                    activityData.checkCompletedGoal()
-                    activityData.updateBadge()
-                    mode.finish()
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Delete Selected?")
+                        .setMessage("${(dataList.adapter as TransactionAdapter).selected.size} selected transaction/s will be deleted. Confirm?")
+                        .setNeutralButton("Cancel"){ dialog,which ->
+                            mode.finish()
+                        }
+                        .setNegativeButton("Decline"){ dialog,which ->
+                            mode.finish()
+                        }
+                        .setPositiveButton("Accept"){ dialog,which ->
+                            activityData.removeSelectedTransaction((dataList.adapter as TransactionAdapter).selected)
+                            activityData.checkCompletedGoal()
+                            activityData.updateBadge()
+                            mode.finish()
+                        }
+                        .show()
                     true
                 }
                 else -> false
