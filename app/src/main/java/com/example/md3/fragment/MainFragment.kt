@@ -111,7 +111,7 @@ class MainFragment : Fragment() {
         activityData.updateBadge()
 
         //listener
-        dateGroup.addOnButtonCheckedListener() { dateGroup, chekedId, isChecked ->
+        dateGroup.addOnButtonCheckedListener { _, chekedId, isChecked ->
             if (isChecked){
                 when (chekedId) {
                     R.id.all_time -> {
@@ -219,7 +219,7 @@ class MainFragment : Fragment() {
             abs(expenseList!!.sumOf { it.amount })
         }
 
-        var balance = if (expense > income){
+        val balance = if (expense > income){
             0.0
         }else{
             income - expense

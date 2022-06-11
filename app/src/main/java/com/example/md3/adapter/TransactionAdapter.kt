@@ -2,7 +2,6 @@ package com.example.md3.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
 import com.example.md3.fragment.TransactionFragment
-import com.google.android.material.color.MaterialColors
 
 class TransactionAdapter(ctx: Context?, transList : List<Transaction>,
                          var fragment: TransactionFragment

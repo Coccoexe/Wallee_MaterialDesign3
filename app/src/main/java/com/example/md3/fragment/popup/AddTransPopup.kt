@@ -30,7 +30,8 @@ class AddTransPopup : DialogFragment() {
     override fun onStart() {
         super.onStart()
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            dialog!!.window!!.setLayout(1400, 800)
+            dialog!!.window!!.setLayout((resources.displayMetrics.widthPixels * 0.6).toInt(),(resources.displayMetrics.heightPixels * 0.9).toInt())
+            //dialog!!.window!!.setLayout(1400, 800)
         }
     }
 

@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:id="@+id/topLinearLayout"
-            android:background="?attr/colorPrimaryContainer"
+            android:background="?attr/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:orientation="vertical"
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/user_welcome"
-                android:textColor="?attr/colorOnPrimaryContainer"
+                android:textColor="?attr/colorOnPrimary"
                 android:layout_marginTop="10dp"
                 android:gravity="top"
                 android:layout_gravity="left"/>
@@ -40,13 +40,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/balance"
-                android:textColor="?attr/colorOnPrimaryContainer"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="30sp"
                 android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/balance"
-                android:textColor="?attr/colorOnPrimaryContainer"
+                android:textColor="?attr/colorOnPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="50sp"
