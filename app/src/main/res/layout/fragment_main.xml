@@ -85,7 +85,7 @@
 
         <androidx.constraintlayout.helper.widget.Flow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="4dp"
             app:constraint_referenced_ids="cardTrans, cardGraph"
             app:flow_horizontalGap="8dp"
@@ -191,6 +191,17 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:id="@+id/help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_help_24"
+            android:layout_margin="25dp"
+            android:elevation="10dp"
+            app:tint="?attr/colorOnPrimaryContainer"
+            app:layout_constraintTop_toTopOf="@id/cardGraph"
+            app:layout_constraintEnd_toEndOf="@id/cardGraph"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addTransaction"

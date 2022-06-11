@@ -99,85 +99,136 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardBalance"
-                    style="?attr/materialCardViewElevatedStyle"
-                    app:cardElevation="6dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="16dp"
-                    app:cardUseCompatPadding="true"
-                    tools:ignore="MissingConstraints">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardBalance"
+                        style="?attr/materialCardViewElevatedStyle"
+                        app:cardElevation="6dp"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="16dp"
+                        app:cardUseCompatPadding="true"
+                        tools:ignore="MissingConstraints">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Balance History"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_height="250dp"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                        <com.github.mikephil.charting.charts.BarChart
-                            android:id="@+id/balanceChart"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Balance History"
+                                android:layout_marginBottom="5dp"/>
 
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardPositive"
-                    style="?attr/materialCardViewElevatedStyle"
-                    app:cardElevation="6dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="16dp"
-                    app:cardUseCompatPadding="true"
-                    tools:ignore="MissingConstraints">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="220dp"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
-
-                            <com.github.mikephil.charting.charts.RadarChart
-                                android:id="@+id/positiveChart"
+                            <com.github.mikephil.charting.charts.BarChart
+                                android:id="@+id/balanceChart"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
-                    </LinearLayout>
+                        </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardNegative"
-                    style="?attr/materialCardViewElevatedStyle"
-                    app:cardElevation="6dp"
+                    <ImageView
+                        android:id="@+id/helpBalance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_help_24"
+                        android:layout_margin="25dp"
+                        android:elevation="10dp"
+                        app:tint="?attr/colorOnPrimaryContainer"
+                        app:layout_constraintTop_toTopOf="@id/cardBalance"
+                        app:layout_constraintEnd_toEndOf="@id/cardBalance"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="16dp"
-                    app:cardUseCompatPadding="true"
-                    tools:ignore="MissingConstraints">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardPositive"
+                        style="?attr/materialCardViewElevatedStyle"
+                        app:cardElevation="6dp"
                         android:layout_width="match_parent"
-                        android:layout_height="220dp"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
-                            <com.github.mikephil.charting.charts.RadarChart
-                                android:id="@+id/negativeChart"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="16dp"
+                        app:cardUseCompatPadding="true"
+                        tools:ignore="MissingConstraints">
 
-                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="220dp"
+                            android:orientation="horizontal"
+                            android:padding="16dp">
 
-                </com.google.android.material.card.MaterialCardView>
+                                <com.github.mikephil.charting.charts.RadarChart
+                                    android:id="@+id/positiveChart"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"/>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <ImageView
+                        android:id="@+id/helpPositive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_help_24"
+                        android:layout_margin="25dp"
+                        android:elevation="10dp"
+                        app:tint="?attr/colorOnPrimaryContainer"
+                        app:layout_constraintTop_toTopOf="@id/cardPositive"
+                        app:layout_constraintEnd_toEndOf="@id/cardPositive"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardNegative"
+                        style="?attr/materialCardViewElevatedStyle"
+                        app:cardElevation="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="16dp"
+                        app:cardUseCompatPadding="true"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="220dp"
+                            android:orientation="horizontal"
+                            android:padding="16dp">
+                                <com.github.mikephil.charting.charts.RadarChart
+                                    android:id="@+id/negativeChart"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"/>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <ImageView
+                        android:id="@+id/helpNegative"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_help_24"
+                        android:layout_margin="25dp"
+                        android:elevation="10dp"
+                        app:tint="?attr/colorOnPrimaryContainer"
+                        app:layout_constraintTop_toTopOf="@id/cardNegative"
+                        app:layout_constraintEnd_toEndOf="@id/cardNegative"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 

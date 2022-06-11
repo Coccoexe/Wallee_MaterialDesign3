@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
@@ -49,6 +51,9 @@ class GraphFragment : Fragment() {
     private lateinit var balanceChart : BarChart
     private lateinit var positiveChart : RadarChart
     private lateinit var negativeChart : RadarChart
+    private lateinit var helpBalance : ImageView
+    private lateinit var helpPositive : ImageView
+    private lateinit var helpNegative : ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +80,9 @@ class GraphFragment : Fragment() {
         balanceChart = inflateView.findViewById(R.id.balanceChart)
         positiveChart = inflateView.findViewById(R.id.positiveChart)
         negativeChart = inflateView.findViewById(R.id.negativeChart)
+        helpBalance = inflateView.findViewById(R.id.helpBalance)
+        helpPositive = inflateView.findViewById(R.id.helpPositive)
+        helpNegative = inflateView.findViewById(R.id.helpNegative)
 
         //default
         filterBar.visibility = View.GONE
@@ -129,6 +137,37 @@ class GraphFragment : Fragment() {
                 }
                 updateView()
             }
+        }
+
+        helpBalance.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Help reading chart")
+                .setMessage("This Bar Chart shows the trend of balance according to the date filter applied.\n"+
+                        "Above 0 the balance is positive, below it is negative")
+                .setPositiveButton("Thanks") { _, _ ->
+                    // Respond to positive button press
+                }
+                .show()
+        }
+        helpPositive.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Help reading chart")
+                .setMessage("This Radar Chart shows the sum of every income transactions grouped by category.\n" +
+                        "The farther the value is from the center, the greater the effective value of the single category will be.")
+                .setPositiveButton("Thanks") { _, _ ->
+                    // Respond to positive button press
+                }
+                .show()
+        }
+        helpNegative.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Help reading chart")
+                .setMessage("This Radar Chart shows the sum of every expense transactions grouped by category.\n" +
+                        "The farther the value is from the center, the greater the effective value of the single category will be.")
+                .setPositiveButton("Thanks") { _, _ ->
+                    // Respond to positive button press
+                }
+                .show()
         }
 
         return inflateView

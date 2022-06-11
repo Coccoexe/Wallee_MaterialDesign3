@@ -24,6 +24,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,6 +44,7 @@ class MainFragment : Fragment() {
     private lateinit var lastAmount : TextView
     private lateinit var lastDate : TextView
     private lateinit var lastImage : ImageView
+    private lateinit var helpButton : ImageView
     private lateinit var pieChart : PieChart
     private lateinit var legend : TextView
 
@@ -80,6 +82,7 @@ class MainFragment : Fragment() {
         lastAmount = inflateView.findViewById(R.id.lastAmount)
         lastDate = inflateView.findViewById(R.id.lastDate)
         lastImage  = inflateView.findViewById(R.id.lastImage)
+        helpButton = inflateView.findViewById(R.id.help)
         pieChart = inflateView.findViewById(R.id.balanceChart)
         legend = inflateView.findViewById(R.id.legendChart)
 
@@ -131,6 +134,17 @@ class MainFragment : Fragment() {
             val popup = AddTransPopup()
             //popup.show(requireActivity().supportFragmentManager, "popupTransaction")
             popup.show(childFragmentManager, "popupTransaction")
+        }
+
+        helpButton.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Help reading chart")
+                .setMessage("This Pie Chart shows the available balance and the expenses made.\n" +
+                        "You can click the graph to see in detail the remaining budget or check the categories of the various expenses")
+                .setPositiveButton("Thanks") { _, _ ->
+                    // Respond to positive button press
+                }
+                .show()
         }
 
         pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
