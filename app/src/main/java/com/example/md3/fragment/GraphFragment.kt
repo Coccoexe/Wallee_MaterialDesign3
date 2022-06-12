@@ -185,47 +185,51 @@ class GraphFragment : Fragment() {
         val formatArray : ArrayList<String> = ArrayList()
         val calendar = Calendar.getInstance()
 
+        if (transactionList.isNotEmpty()) {
+            if (filterDate != null) {
+                //controllo ogni transazione, sommo i giorni uguali
 
-        if (filterDate != null) {
-            //controllo ogni transazione, sommo i giorni uguali
+                val day = SimpleDateFormat("dd", Locale.getDefault())
 
-            val day = SimpleDateFormat("dd", Locale.getDefault())
+                val monthBalance: MutableMap<Int, Double> =
+                    (1..LocalDate.now().lengthOfMonth()).toList().associateBy({ it }, { 0.0 })
+                        .toMutableMap()
 
-            val monthBalance : MutableMap<Int, Double> =
-                (1..LocalDate.now().lengthOfMonth()).toList().associateBy({it},{0.0}).toMutableMap()
-
-            for (t in transactionList){
-                monthBalance[day.format(format.parse(t.date)!!).toInt()] =
-                    monthBalance[day.format(format.parse(t.date)!!).toInt()]!!.plus(t.amount)
-            }
-            for (i in monthBalance) {
-                formatArray.add(i.key.toString())
-                entry.add(BarEntry(i.key.toFloat(),i.value.toFloat()))
-            }
-
-        }else{
-            //controllo ogni transazione, sommo i mesi uguali
-
-            val month = SimpleDateFormat("MMM yyyy",Locale.getDefault())
-            val monthList : ArrayList<String> = ArrayList()
-            val now = calendar.time
-            calendar.time = transactionList.minOf { format.parse(it.date) }
-            while (calendar.time <= now){
-                monthList.add(month.format(calendar.time))
-                calendar.add(Calendar.MONTH,1)
-            }
-
-            val allBalance : MutableMap<String,Double> = monthList.associateBy({it}, {0.0}).toMutableMap()
-
-            for (t in transactionList){
-                if (allBalance[month.format(format.parse(t.date)!!)] == null){
-                    allBalance[month.format(format.parse(t.date)!!)] = 0.0
+                for (t in transactionList) {
+                    monthBalance[day.format(format.parse(t.date)!!).toInt()] =
+                        monthBalance[day.format(format.parse(t.date)!!).toInt()]!!.plus(t.amount)
                 }
-                allBalance[month.format(format.parse(t.date)!!)] = allBalance[month.format(format.parse(t.date)!!)]!!.plus(t.amount)
-            }
-            for (i in allBalance) {
-                formatArray.add(i.key)
-                entry.add(BarEntry(formatArray.indexOf(i.key).toFloat(),i.value.toFloat()))
+                for (i in monthBalance) {
+                    formatArray.add(i.key.toString())
+                    entry.add(BarEntry(i.key.toFloat(), i.value.toFloat()))
+                }
+
+            } else {
+                //controllo ogni transazione, sommo i mesi uguali
+
+                val month = SimpleDateFormat("MMM yyyy", Locale.getDefault())
+                val monthList: ArrayList<String> = ArrayList()
+                val now = calendar.time
+                calendar.time = transactionList.minOf { format.parse(it.date) }
+                while (calendar.time <= now) {
+                    monthList.add(month.format(calendar.time))
+                    calendar.add(Calendar.MONTH, 1)
+                }
+
+                val allBalance: MutableMap<String, Double> =
+                    monthList.associateBy({ it }, { 0.0 }).toMutableMap()
+
+                for (t in transactionList) {
+                    if (allBalance[month.format(format.parse(t.date)!!)] == null) {
+                        allBalance[month.format(format.parse(t.date)!!)] = 0.0
+                    }
+                    allBalance[month.format(format.parse(t.date)!!)] =
+                        allBalance[month.format(format.parse(t.date)!!)]!!.plus(t.amount)
+                }
+                for (i in allBalance) {
+                    formatArray.add(i.key)
+                    entry.add(BarEntry(formatArray.indexOf(i.key).toFloat(), i.value.toFloat()))
+                }
             }
         }
 
