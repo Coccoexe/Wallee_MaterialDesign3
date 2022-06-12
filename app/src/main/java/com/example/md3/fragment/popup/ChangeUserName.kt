@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.utility.IActivityData
+import com.google.android.material.textfield.TextInputLayout
 
 class ChangeUserName : DialogFragment(){
     private lateinit var activityData : IActivityData
@@ -46,26 +47,27 @@ class ChangeUserName : DialogFragment(){
         }
 
         //confirmButton
-        val newU : EditText = inflateView.findViewById(R.id.newUser)
-        val newUC : EditText = inflateView.findViewById(R.id.newUserConfirm)
+        val newU : TextInputLayout = inflateView.findViewById(R.id.newUser)
+        val newUC : TextInputLayout = inflateView.findViewById(R.id.newUserConfirm)
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
         confirm.setOnClickListener{
-
+            newU.error = null
+            newUC.error = null
             //check if new user is empty
-            if(newU.text.toString() != "") {
+            if(newU.editText!!.text.toString() != "") {
                 //check if new user is correct
-                if (newU.text.toString() == newUC.text.toString()) {
-                    activityData.updateUser(newU.text.toString())
+                if (newU.editText!!.text.toString() == newUC.editText!!.text.toString()) {
+                    activityData.updateUser(newU.editText!!.text.toString())
                     activityData.removeAutoLog()
                     val textUser : TextView? = activity?.findViewById(R.id.profileName)
-                    textUser?.text = newU.text.toString()
+                    textUser?.text = newU.editText!!.text.toString()
                     dismiss()
                 } else {
-                    Toast.makeText(context, "New Usernames must be equals!", Toast.LENGTH_SHORT).show()
+                    newUC.error = "PUsername Confirm must be same as New Username"
                 }
             }
             else{
-                Toast.makeText(context,"New Username cannot be empty!", Toast.LENGTH_SHORT).show()
+                newU.error = "Fill this field!"
             }
         }
 
