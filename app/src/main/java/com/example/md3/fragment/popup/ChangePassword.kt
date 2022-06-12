@@ -67,14 +67,14 @@ class ChangePassword : DialogFragment() {
                         activityData.removeAutoLog()
                         dismiss()
                     } else {
-                        newPC.error = "Password Confirm must be same as New Password"
+                        newPC.error = resources.getString(R.string.password_equals)
                     }
                 }
                 else{
-                    newP.error = "Fill this field!"
+                    newP.error = resources.getString(R.string.fill_this_field)
                 }
             }else{
-                oldP.error = "Old password is incorrect!"
+                oldP.error = resources.getString(R.string.old_password_wrong)
             }
         }
 

@@ -55,18 +55,18 @@ class LoginActivity : AppCompatActivity() {
 
             if (mail.isEmpty() || pass.isEmpty()){
                 if(mail.isEmpty()) {
-                    userMail.error = "Fill this field"
+                    userMail.error = resources.getString(R.string.fill_this_field)
                 }
                 if(pass.isEmpty()){
-                    userPass.error = "Fill this field"
+                    userPass.error = resources.getString(R.string.fill_this_field)
                 }
             }
             else{
                 runBlocking{
                     val user: User? = dao.login(mail,pass)
                     if (user == null){
-                        userMail.error = "Invalid Mail"
-                        userPass.error = "Invalid Password"
+                        userMail.error = resources.getString(R.string.invalid_mail)
+                        userPass.error = resources.getString(R.string.invalid_password)
                     }
                     else
                     {

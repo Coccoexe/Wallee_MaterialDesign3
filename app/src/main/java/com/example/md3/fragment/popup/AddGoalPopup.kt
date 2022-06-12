@@ -71,7 +71,7 @@ class AddGoalPopup : DialogFragment() {
                 .setValidator(DateValidatorPointBackward.now())
 
             val picker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select date")
+                .setTitleText(resources.getString(R.string.select_date))
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                 .setCalendarConstraints(constraints.build())
                 .build()
@@ -124,7 +124,7 @@ class AddGoalPopup : DialogFragment() {
             if (goalAmount.editText!!.text.isEmpty() || categoryMenu.editText!!.text.isEmpty()) {
                 goalAmount.editText!!.text.clear()
                 dismiss()
-                Toast.makeText(context, "Gaol amount cannot be 0!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, resources.getString(R.string.goal_amount_zero), Toast.LENGTH_SHORT).show()
             } else {
                 money = if (radioGroup.checkedButtonId == R.id.addButton){
                     goalAmount.editText!!.text.toString().toDouble()
@@ -139,10 +139,10 @@ class AddGoalPopup : DialogFragment() {
                 if (activityData.existGoal(categoryMenu.editText!!.text.toString(),standardDate,amount))
                 {
                     MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Overwrite old Goal?")
-                        .setMessage("A goal with same category already exist, do you want to overwrite it?")
-                        .setNeutralButton("Cancel"){ _, _ -> }
-                        .setPositiveButton("Accept"){ _, _ ->
+                        .setTitle(resources.getString(R.string.overwrite_goal))
+                        .setMessage(resources.getString(R.string.goal_exist))
+                        .setNeutralButton(resources.getString(R.string.cancel)){ _, _ -> }
+                        .setPositiveButton(resources.getString(R.string.accept)){ _, _ ->
                             activityData.insertGoal(
                                 Goal(
                                     activityData.getGoalByCategory(categoryMenu.editText!!.text.toString(),standardDate,amount)!!.id,

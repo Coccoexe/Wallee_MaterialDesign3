@@ -201,7 +201,7 @@ class GoalFragment : Fragment() {
     }
 
     fun updateContextBarTitle(n : Int){
-        actionMode?.title = "$n Item Selected"
+        actionMode?.title = resources.getString(R.string.n_item_selected).format(n)
         if (n == goalList!!.size) {
             actionMode?.menu?.getItem(0)?.setIcon(R.drawable.ic_check_all_24)
         } else {
@@ -235,12 +235,12 @@ class GoalFragment : Fragment() {
                 }
                 R.id.deleteSelected -> {
                     MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Delete Selected?")
-                        .setMessage("${(recyclerView.adapter as CardGoalAdapter).selected.size} selected goal/s will be deleted. Confirm?")
-                        .setNeutralButton("Cancel"){ _, _ ->
+                        .setTitle(resources.getString(R.string.delete_selected))
+                        .setMessage(resources.getString(R.string.n_selected_deleted).format((recyclerView.adapter as CardGoalAdapter).selected.size))
+                        .setNeutralButton(resources.getString(R.string.cancel)){ _, _ ->
                             mode.finish()
                         }
-                        .setPositiveButton("Accept"){ _, _ ->
+                        .setPositiveButton(resources.getString(R.string.accept)){ _, _ ->
                             activityData.removeSelectedGoal((recyclerView.adapter as CardGoalAdapter).selected)
                             mode.finish()
                         }

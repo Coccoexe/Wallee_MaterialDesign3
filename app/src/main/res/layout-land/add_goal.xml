@@ -11,7 +11,7 @@
         android:id="@+id/addGoal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Goal"
+        android:text="@string/add_goal"
         android:textColor="?attr/colorOnPrimaryContainer"
         android:textSize="26sp"
         android:gravity="center"
@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@drawable/button_color_selector"
-                    android:text="add"
+                    android:text="@string/add"
                     android:textColor="@drawable/button_text_color_selector" />
 
                 <Button
@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@drawable/button_color_selector"
-                    android:text="remove"
+                    android:text="@string/remove"
                     android:textColor="@drawable/button_text_color_selector" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -92,7 +92,7 @@
                 android:id="@+id/chooseAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Goal"
+                android:hint="@string/goal"
                 app:suffixText="$"
                 app:errorEnabled="true"
                 android:layout_marginTop="10dp"
@@ -147,7 +147,7 @@
             android:id="@+id/cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/cancel"
             app:layout_constraintEnd_toStartOf="@id/confirm"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -156,7 +156,7 @@
             android:id="@+id/confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm"
+            android:text="@string/confirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cancel"
             app:layout_constraintTop_toTopOf="parent" />

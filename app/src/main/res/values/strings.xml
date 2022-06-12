@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">MD3</string>
     <string name="balance">Balance</string>
-    <string name="transaction">Add Transaction</string>
+    <string name="transaction">Transaction</string>
+    <string name="add_transaction">Add Transaction</string>
     <string name="my_profile">My Profile</string>
     <string name="my_name">My Name</string>
     <string name="user_welcome">Hi %s,</string>
@@ -29,6 +30,68 @@
     <string name="category">Category</string>
     <string name="no_transaction_found">No transaction found</string>
     <string name="filter_by_transaction_type">Filter by Transaction Type:</string>
+    <string name="fill_this_field">Fill this field</string>
+    <string name="invalid_mail">Invalid Mail</string>
+    <string name="invalid_password">Invalid Password</string>
+    <string name="password_equals">Password Confirm must be same as New Password</string>
+    <string name="username_equals">Username Confirm must be same as New Username</string>
+    <string name="old_password_wrong">Old password is incorrect</string>
+    <string name="user_registered">User Registered!</string>
+    <string name="email_already_used">Email already used</string>
+    <string name="mail_equals">Mail Confirm must be same as New Mail</string>
+    <string name="n_item_selected">%s Item Selected</string>
+    <string name="delete_selected">Delete Selected?</string>
+    <string name="n_selected_deleted">%s selected goal/s will be deleted. Confirm?</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="thanks">Thanks</string>
+    <string name="help_reading_chart">Help to read chart</string>
+    <string name="help_bar_chart">"This Bar Chart shows the trend of balance according to the date filter applied.\n
+        Above 0 the balance is positive, below it is negative"</string>
+    <string name="help_radar_income">"This Radar Chart shows the sum of every income transactions grouped by category.\n
+                        The farther the value is from the center, the greater the effective value of the single category will be."</string>
+    <string name="help_radar_expense">"This Radar Chart shows the sum of every expense transactions grouped by category.\n
+                        The farther the value is from the center, the greater the effective value of the single category will be."</string>
+    <string name="help_pie">"This Pie Chart shows the available balance and the expenses made.\n" +
+                        "You can click the graph to see in detail the remaining budget or check the categories of the various expenses"</string>
+    <string name="available">Available</string>
+    <string name="expense">Expense</string>
+    <string name="available_balance">Available balance: %s</string>
+    <string name="select_date">Select Date</string>
+    <string name="goal_amount_zero">Goal amount cannot be 0!</string>
+    <string name="overwrite_goal">Overwrite old Goal?</string>
+    <string name="goal_exist">A Goal with same category already exist, do you want to overwrite it?</string>
+    <string name="transaction_amount_zero">Transaction amount cannot be 0!</string>
+    <string name="add_goal">Add Goal</string>
+    <string name="add">add</string>
+    <string name="remove">remove</string>
+    <string name="goal">Goal</string>
+    <string name="confirm">Confirm</string>
+    <string name="change_currency">Change Currency</string>
+    <string name="no_goal_found">No Goal Found</string>
+    <string name="balance_history">Balance History</string>
+    <string name="income_radar_chart">Income Radar Chart</string>
+    <string name="expense_radar_chart">Expense Radar Chart</string>
+    <string name="available_balance_pie_chart">Available Balance Pie Chart</string>
+    <string name="hidden_password">*********</string>
+    <string name="goal_reached">Goal Reached</string>
+    <string name="change_mail">Change Mail</string>
+    <string name="new_mail">New Mail</string>
+    <string name="confirm_mail">Confirm Mail</string>
+    <string name="change_password">Change Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="amount">Amount</string>
+    <string name="change_username">Change Username</string>
+    <string name="new_username">New Username</string>
+    <string name="confirm_new_username">Confirm New Username</string>
+    <string name="home">Home</string>
+    <string name="graph">Graph</string>
+    <string name="profile">Profile</string>
+    <string name="select_deselect_all">Select/Deselect All</string>
+    <string name="deleteSelected">Delete Selected</string>
+    <string name="filters">Filters</string>
 
     <string-array name="expenses">
         <item>Bills</item>

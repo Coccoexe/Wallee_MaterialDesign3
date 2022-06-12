@@ -57,7 +57,7 @@ class ChangeEmail : DialogFragment() {
             if(newM.editText!!.text.toString() != "") {
                 //check if new mail is correct
                 if (activityData.existMail(newM.editText!!.text.toString())){
-                    newM.error = "Email already used!"
+                    newM.error = resources.getString(R.string.email_already_used)
                     newM.editText!!.text.clear()
                     newMC.editText!!.text.clear()
                 } else {
@@ -69,11 +69,11 @@ class ChangeEmail : DialogFragment() {
                         dismiss()
                     } else {
                         newMC.editText!!.text.clear()
-                        newMC.error = "Mail Confirm must be same as New Mail"
+                        newMC.error = resources.getString(R.string.mail_equals)
                     }
                 }
             } else {
-                newM.error = "Fill this field!"
+                newM.error = resources.getString(R.string.fill_this_field)
             }
         }
 

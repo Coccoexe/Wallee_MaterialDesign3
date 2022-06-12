@@ -33,7 +33,7 @@
                 android:textColor="?attr/colorOnPrimary"
                 android:layout_marginTop="10dp"
                 android:gravity="top"
-                android:layout_gravity="left"/>
+                android:layout_gravity="start"/>
 
             <TextView
                 android:id="@+id/balanceTitle"

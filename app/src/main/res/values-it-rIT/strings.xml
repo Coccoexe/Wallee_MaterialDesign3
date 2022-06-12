@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">MD3</string>
     <string name="balance">Saldo</string>
-    <string name="transaction">Aggiungi Movimento</string>
+    <string name="transaction">Transazione</string>
     <string name="my_profile">Il mio Profilo</string>
     <string name="my_name">Il mio Nome</string>
     <string name="user_welcome">Ciao %s,</string>

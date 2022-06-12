@@ -66,7 +66,7 @@ class AddTransPopup : DialogFragment() {
                 .setValidator(DateValidatorPointBackward.now())
 
             val picker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select date")
+                .setTitleText(resources.getString(R.string.select_date))
                 .setCalendarConstraints(constraints.build())
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                 .build()
@@ -122,7 +122,7 @@ class AddTransPopup : DialogFragment() {
                 dismiss()
             }else if(amount.editText!!.text.toString().toDouble() == 0.0){
                 amount.editText!!.text.clear()
-                Toast.makeText(context, "Transaction amount cannot be 0!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, resources.getString(R.string.transaction_amount_zero), Toast.LENGTH_SHORT).show()
             }else {
                 money = if (radioGroup.checkedButtonId == R.id.add) {
                     amount.editText!!.text.toString().toDouble()

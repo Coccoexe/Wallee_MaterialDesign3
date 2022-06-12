@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/transaction"
+        android:text="@string/add_transaction"
         android:textColor="?attr/colorOnPrimaryContainer"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@drawable/button_color_selector"
-                    android:text="add"
+                    android:text="@string/add"
                     android:textColor="@drawable/button_text_color_selector" />
 
                 <Button
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@drawable/button_color_selector"
-                    android:text="remove"
+                    android:text="@string/remove"
                     android:textColor="@drawable/button_text_color_selector" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -92,7 +92,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="Amount"
+                android:hint="@string/amount"
                 app:errorEnabled="true"
                 app:layout_constraintBottom_toTopOf="@id/categoryMenu"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -146,7 +146,7 @@
             android:id="@+id/popupBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/cancel"
             app:layout_constraintEnd_toStartOf="@id/popupOk"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -155,7 +155,7 @@
             android:id="@+id/popupOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm"
+            android:text="@string/confirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/popupBack"
             app:layout_constraintTop_toTopOf="parent" />

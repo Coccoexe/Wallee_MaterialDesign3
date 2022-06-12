@@ -116,7 +116,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:text="Balance History"
+                            android:text="@string/balance_history"
                             android:layout_marginBottom="5dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/helpBalance"
@@ -163,7 +163,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:text="Income Radar Chart"
+                            android:text="@string/income_radar_chart"
                             android:layout_marginBottom="5dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/helpPositive"
@@ -210,7 +210,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:text="Expense Radar Chart"
+                            android:text="@string/expense_radar_chart"
                             android:layout_marginBottom="5dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/helpNegative"

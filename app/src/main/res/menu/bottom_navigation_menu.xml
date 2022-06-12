@@ -3,26 +3,26 @@
         android:id="@+id/mainFragment"
         android:enabled="true"
         android:icon="@drawable/ic_home_24"
-        android:title="Home"/>
+        android:title="@string/home"/>
     <item
         android:id="@+id/transactionFragment"
         android:enabled="true"
         android:icon="@drawable/ic_list_24"
-        android:title="Transaction"/>
+        android:title="@string/transaction"/>
     <item
         android:id="@+id/graphFragment"
         android:enabled="true"
         android:icon="@drawable/ic_bar_chart_24"
-        android:title="Graph"/>
+        android:title="@string/graph"/>
     <item
         android:id="@+id/goalFragment"
         android:enabled="true"
         android:icon="@drawable/ic_flag_24"
-        android:title="Goal"/>
+        android:title="@string/goal"/>
     <item
         android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/ic_user_24"
-        android:title="Profile"/>
+        android:title="@string/profile"/>
 
 </menu>

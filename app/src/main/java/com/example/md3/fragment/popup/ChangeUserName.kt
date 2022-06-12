@@ -61,11 +61,11 @@ class ChangeUserName : DialogFragment(){
                     textUser?.text = newU.editText!!.text.toString()
                     dismiss()
                 } else {
-                    newUC.error = "PUsername Confirm must be same as New Username"
+                    newUC.error = resources.getString(R.string.username_equals)
                 }
             }
             else{
-                newU.error = "Fill this field!"
+                newU.error = resources.getString(R.string.fill_this_field)
             }
         }
 

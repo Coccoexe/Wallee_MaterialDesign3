@@ -138,10 +138,9 @@ class MainFragment : Fragment() {
 
         helpButton.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Help reading chart")
-                .setMessage("This Pie Chart shows the available balance and the expenses made.\n" +
-                        "You can click the graph to see in detail the remaining budget or check the categories of the various expenses")
-                .setPositiveButton("Thanks") { _, _ ->
+                .setTitle(resources.getString(R.string.help_reading_chart))
+                .setMessage(resources.getString(R.string.help_pie))
+                .setPositiveButton(resources.getString(R.string.thanks)) { _, _ ->
                     // Respond to positive button press
                 }
                 .show()
@@ -151,13 +150,13 @@ class MainFragment : Fragment() {
             override fun onValueSelected(e: Entry, h: Highlight) {
                 legendEntry = ""
                 when((e as PieEntry).label){
-                    "Available" -> {
-                        selectedSlice = "Available"
-                        legendEntry = updateLegend("Available")
+                    resources.getString(R.string.available) -> {
+                        selectedSlice = resources.getString(R.string.available)
+                        legendEntry = updateLegend(resources.getString(R.string.available))
                     }
-                    "Expense" -> {
-                        selectedSlice = "Expense"
-                        legendEntry = updateLegend("Expense")
+                    resources.getString(R.string.expense) -> {
+                        selectedSlice = resources.getString(R.string.expense)
+                        legendEntry = updateLegend(resources.getString(R.string.expense))
                     }
                 }
                 legend.text = legendEntry
@@ -178,11 +177,11 @@ class MainFragment : Fragment() {
     fun updateLegend(selected : String?) : String{
         if (selected != null) {
             when (selected) {
-                "Available" -> {
-                    return "Available balance : " + activityData.formatMoney(incomeList!!.sumOf { it.amount } + expenseList!!.sumOf { it.amount })
+                resources.getString(R.string.available) -> {
+                    return resources.getString(R.string.available_balance).format(activityData.formatMoney(incomeList!!.sumOf { it.amount } + expenseList!!.sumOf { it.amount }))
                 }
-                "Expense" -> {
-                    var ret = "Expense\n"
+                resources.getString(R.string.expense) -> {
+                    var ret = resources.getString(R.string.expense) + '\n'
                     for (category in resources.getStringArray(R.array.expenses)) {
                         val negativeList = activityData.getUserWithTransactionFiltered(
                             "negative",
@@ -239,8 +238,8 @@ class MainFragment : Fragment() {
             income - expense
         }
 
-        balanceGraph.add(PieEntry(balance.toFloat(),"Available"))
-        balanceGraph.add(PieEntry(expense.toFloat(),"Expense"))
+        balanceGraph.add(PieEntry(balance.toFloat(),resources.getString(R.string.available)))
+        balanceGraph.add(PieEntry(expense.toFloat(),resources.getString(R.string.expense)))
 
         val pieDataSet = PieDataSet(balanceGraph,"")
         pieDataSet.setDrawValues(false)
@@ -255,7 +254,7 @@ class MainFragment : Fragment() {
         pieChart.legend.isEnabled = true
         pieChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
         pieChart.description.isEnabled = false
-        pieChart.centerText = "Balance"
+        pieChart.centerText = resources.getString(R.string.balance)
         pieChart.setCenterTextColor(color)
         pieChart.setHoleColor(Color.TRANSPARENT)
         pieChart.animate()

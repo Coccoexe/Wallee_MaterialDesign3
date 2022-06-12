@@ -138,30 +138,27 @@ class GraphFragment : Fragment() {
 
         helpBalance.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Help reading chart")
-                .setMessage("This Bar Chart shows the trend of balance according to the date filter applied.\n"+
-                        "Above 0 the balance is positive, below it is negative")
-                .setPositiveButton("Thanks") { _, _ ->
+                .setTitle(resources.getString(R.string.help_reading_chart))
+                .setMessage(resources.getString(R.string.help_bar_chart))
+                .setPositiveButton(resources.getString(R.string.thanks)) { _, _ ->
                     // Respond to positive button press
                 }
                 .show()
         }
         helpPositive.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Help reading chart")
-                .setMessage("This Radar Chart shows the sum of every income transactions grouped by category.\n" +
-                        "The farther the value is from the center, the greater the effective value of the single category will be.")
-                .setPositiveButton("Thanks") { _, _ ->
+                .setTitle(resources.getString(R.string.help_reading_chart))
+                .setMessage(resources.getString(R.string.help_radar_income))
+                .setPositiveButton(resources.getString(R.string.thanks)) { _, _ ->
                     // Respond to positive button press
                 }
                 .show()
         }
         helpNegative.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Help reading chart")
-                .setMessage("This Radar Chart shows the sum of every expense transactions grouped by category.\n" +
-                        "The farther the value is from the center, the greater the effective value of the single category will be.")
-                .setPositiveButton("Thanks") { _, _ ->
+                .setTitle(resources.getString(R.string.help_reading_chart))
+                .setMessage(resources.getString(R.string.help_radar_expense))
+                .setPositiveButton(resources.getString(R.string.thanks)) { _, _ ->
                     // Respond to positive button press
                 }
                 .show()
@@ -228,7 +225,7 @@ class GraphFragment : Fragment() {
             }
         }
 
-        val barDataSet = BarDataSet(entry,"Balance")
+        val barDataSet = BarDataSet(entry,resources.getString(R.string.balance))
         barDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
         barDataSet.colors = colors
         barDataSet.setDrawValues(false)
@@ -271,7 +268,7 @@ class GraphFragment : Fragment() {
             entry.add(RadarEntry(i.value.toFloat(),formatArray.indexOf(i.key).toFloat()))
         }
 
-        val radarDataSet = RadarDataSet(entry,"Balance")
+        val radarDataSet = RadarDataSet(entry,resources.getString(R.string.balance))
         radarDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
         radarDataSet.colors = colors
         radarDataSet.setDrawValues(false)
@@ -310,7 +307,7 @@ class GraphFragment : Fragment() {
             entry.add(RadarEntry(abs(i.value).toFloat(),formatArray.indexOf(i.key).toFloat()))
         }
 
-        val radarDataSet = RadarDataSet(entry,"Balance")
+        val radarDataSet = RadarDataSet(entry,resources.getString(R.string.balance))
         radarDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
         radarDataSet.colors = colors
         radarDataSet.setDrawValues(false)

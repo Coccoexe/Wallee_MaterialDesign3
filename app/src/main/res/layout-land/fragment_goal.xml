@@ -103,7 +103,7 @@
             android:id="@+id/noGoal"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="No Goal Found"
+            android:text="@string/no_goal_found"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/filterBarGoal"

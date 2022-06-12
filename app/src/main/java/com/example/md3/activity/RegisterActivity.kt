@@ -47,25 +47,25 @@ class RegisterActivity : AppCompatActivity() {
             {
                 if (userMail.editText!!.text.isEmpty())
                 {
-                    userMail.error = "Fill this field"
+                    userMail.error = resources.getString(R.string.fill_this_field)
                 }
                 if (userPass.editText!!.text.isEmpty())
                 {
-                    userPass.error = "Fill this field"
+                    userPass.error = resources.getString(R.string.fill_this_field)
                 }
                 if (userName.editText!!.text.isEmpty())
                 {
-                    userName.error = "Fill this field"
+                    userName.error = resources.getString(R.string.fill_this_field)
                 }
             }else{
                 if (existMail(dao,user)) {
-                    userMail.error = "Email already used"
+                    userMail.error = resources.getString(R.string.email_already_used)
                     userMail.editText!!.text.clear()
                 }else{
                     runBlocking {
                         dao.insertUser(user)
                     }
-                    Toast.makeText(applicationContext, "User Registered!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, resources.getString(R.string.user_registered), Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }
