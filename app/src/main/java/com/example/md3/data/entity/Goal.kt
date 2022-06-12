@@ -23,12 +23,4 @@ data class Goal(
 )
 {
     var isSelected = false
-
-    //completed controlla se il goal e' completato
-    //viene aggiornato solo nell addTransaction
-
-
-    //controllo se devo ancora notificare l'utente del goal completato
-    //viene aggiornato nel goalFragment
-
 }

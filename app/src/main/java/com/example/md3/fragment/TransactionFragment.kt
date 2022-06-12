@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.activity.MainActivity
 import com.example.md3.R
 import com.example.md3.adapter.TransactionAdapter
-import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 import com.example.md3.utility.IActivityData
 import com.google.android.material.appbar.MaterialToolbar
@@ -25,7 +24,6 @@ import com.google.android.material.divider.MaterialDivider
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.abs
 
 
 class TransactionFragment : Fragment(){
@@ -192,13 +190,13 @@ class TransactionFragment : Fragment(){
             }
         }
 
-        transactionGroup.addOnButtonCheckedListener() { trasactionGroup, chekedId, isChecked ->
+        transactionGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked){
 
                 val items = ArrayList<String>()
                 (categoryMenu.editText as? AutoCompleteTextView)?.text?.clear()
 
-                when(chekedId){
+                when(checkedId){
                     R.id.all_transaction -> {
                         filterAmount = "all"
 
@@ -266,9 +264,9 @@ class TransactionFragment : Fragment(){
             setAdapter()
         }
 
-        dateGroup.addOnButtonCheckedListener() { dateGroup, chekedId, isChecked ->
+        dateGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked){
-                when (chekedId) {
+                when (checkedId) {
                     R.id.all_time -> {
                         filterDate = null
                     }
@@ -401,13 +399,10 @@ class TransactionFragment : Fragment(){
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle("Delete Selected?")
                         .setMessage("${(dataList.adapter as TransactionAdapter).selected.size} selected transaction/s will be deleted. Confirm?")
-                        .setNeutralButton("Cancel"){ dialog,which ->
+                        .setNeutralButton("Cancel"){ _, _ ->
                             mode.finish()
                         }
-                        .setNegativeButton("Decline"){ dialog,which ->
-                            mode.finish()
-                        }
-                        .setPositiveButton("Accept"){ dialog,which ->
+                        .setPositiveButton("Accept"){ _, _ ->
                             activityData.removeSelectedTransaction((dataList.adapter as TransactionAdapter).selected)
                             activityData.checkCompletedGoal()
                             activityData.updateBadge()

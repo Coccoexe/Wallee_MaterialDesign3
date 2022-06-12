@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +37,6 @@ class AddGoalPopup : DialogFragment() {
         super.onStart()
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             dialog!!.window!!.setLayout((resources.displayMetrics.widthPixels * 0.6).toInt(),(resources.displayMetrics.heightPixels * 0.9).toInt())
-            //dialog!!.window!!.setLayout(1400, 800)
         }
     }
 
@@ -83,21 +81,21 @@ class AddGoalPopup : DialogFragment() {
             }
         }
 
-        //menu tendina
+        //menu spinner
         val categoryMenu : TextInputLayout = inflateView.findViewById(R.id.chooseCategory)
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, resources.getStringArray(R.array.income))
         (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
-        //radiogroup
-        val radiogroup : MaterialButtonToggleGroup = inflateView.findViewById(R.id.addOrRemove)
-        radiogroup.check(R.id.addButton)
-        radiogroup.addOnButtonCheckedListener() { dateGroup, chekedId, isChecked ->
+        //radioGroup
+        val radioGroup : MaterialButtonToggleGroup = inflateView.findViewById(R.id.addOrRemove)
+        radioGroup.check(R.id.addButton)
+        radioGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if(isChecked){
 
                 val items = ArrayList<String>()
                 (categoryMenu.editText as? AutoCompleteTextView)?.text?.clear()
 
-                when (chekedId) {
+                when (checkedId) {
                     R.id.addButton -> {
                         items.addAll(resources.getStringArray(R.array.income))
                     }
@@ -105,8 +103,8 @@ class AddGoalPopup : DialogFragment() {
                         items.addAll(resources.getStringArray(R.array.expenses))
                     }
                 }
-                val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
-                (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+                val menuAdapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+                (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(menuAdapter)
             }
         }
 
@@ -128,7 +126,7 @@ class AddGoalPopup : DialogFragment() {
                 dismiss()
                 Toast.makeText(context, "Gaol amount cannot be 0!", Toast.LENGTH_SHORT).show()
             } else {
-                money = if (radiogroup.checkedButtonId == R.id.addButton){
+                money = if (radioGroup.checkedButtonId == R.id.addButton){
                     goalAmount.editText!!.text.toString().toDouble()
                 }else{
                     0.0 - goalAmount.editText!!.text.toString().toDouble()
@@ -143,9 +141,8 @@ class AddGoalPopup : DialogFragment() {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle("Overwrite old Goal?")
                         .setMessage("A goal with same category already exist, do you want to overwrite it?")
-                        .setNeutralButton("Cancel"){ dialog,which -> }
-                        .setNegativeButton("Decline"){ dialog,which -> }
-                        .setPositiveButton("Accept"){ dialog,which ->
+                        .setNeutralButton("Cancel"){ _, _ -> }
+                        .setPositiveButton("Accept"){ _, _ ->
                             activityData.insertGoal(
                                 Goal(
                                     activityData.getGoalByCategory(categoryMenu.editText!!.text.toString(),standardDate,amount)!!.id,
@@ -153,8 +150,8 @@ class AddGoalPopup : DialogFragment() {
                                     categoryMenu.editText!!.text.toString(),
                                     money,
                                     standardDate,
-                                    false,
-                                    true
+                                    completed = false,
+                                    toNotify = true
                                 )
                             )
                             updateView()
@@ -168,8 +165,8 @@ class AddGoalPopup : DialogFragment() {
                             categoryMenu.editText!!.text.toString(),
                             money,
                             standardDate,
-                            false,
-                            true
+                            completed = false,
+                            toNotify = true
                         )
                     )
                     updateView()
