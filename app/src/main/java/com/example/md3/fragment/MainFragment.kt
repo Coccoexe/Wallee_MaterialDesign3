@@ -114,9 +114,9 @@ class MainFragment : Fragment() {
         activityData.updateBadge()
 
         //listener
-        dateGroup.addOnButtonCheckedListener { _, chekedId, isChecked ->
+        dateGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked){
-                when (chekedId) {
+                when (checkedId) {
                     R.id.all_time -> {
                         filterDate = null
                     }
@@ -182,7 +182,7 @@ class MainFragment : Fragment() {
                     return "Available balance : " + activityData.formatMoney(incomeList!!.sumOf { it.amount } + expenseList!!.sumOf { it.amount })
                 }
                 "Expense" -> {
-                    var ret = "Expence\n"
+                    var ret = "Expense\n"
                     for (category in resources.getStringArray(R.array.expenses)) {
                         val negativeList = activityData.getUserWithTransactionFiltered(
                             "negative",
@@ -205,7 +205,7 @@ class MainFragment : Fragment() {
     }
 
     fun updateView(){
-        //aggiornare badge
+        //update badge
         activityData.checkCompletedGoal()
         activityData.updateBadge()
 

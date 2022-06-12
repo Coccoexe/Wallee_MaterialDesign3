@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.md3.activity.MainActivity
 import com.example.md3.R
 import com.example.md3.adapter.CardGoalAdapter
-import com.example.md3.adapter.TransactionAdapter
 import com.example.md3.data.entity.Goal
 import com.example.md3.fragment.popup.AddGoalPopup
 import com.example.md3.utility.IActivityData
@@ -23,7 +22,6 @@ import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.ArrayList
 
 class GoalFragment : Fragment() {
 
@@ -136,7 +134,7 @@ class GoalFragment : Fragment() {
             }
         }
 
-        transactionGroup.addOnButtonCheckedListener() { transactionGroup, checkedId, isChecked ->
+        transactionGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 when(checkedId) {
                     R.id.allTransactionGoal -> {
@@ -239,13 +237,10 @@ class GoalFragment : Fragment() {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle("Delete Selected?")
                         .setMessage("${(recyclerView.adapter as CardGoalAdapter).selected.size} selected goal/s will be deleted. Confirm?")
-                        .setNeutralButton("Cancel"){ dialog,which ->
+                        .setNeutralButton("Cancel"){ _, _ ->
                             mode.finish()
                         }
-                        .setNegativeButton("Decline"){ dialog,which ->
-                            mode.finish()
-                        }
-                        .setPositiveButton("Accept"){ dialog,which ->
+                        .setPositiveButton("Accept"){ _, _ ->
                             activityData.removeSelectedGoal((recyclerView.adapter as CardGoalAdapter).selected)
                             mode.finish()
                         }

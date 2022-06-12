@@ -142,14 +142,14 @@ class MainActivity : AppCompatActivity(), IActivityData {
     override fun getGoalByCategory(category: String,date: String, amount: String): Goal? {
         var goal: Goal?
         runBlocking {
-            when(amount){
+            goal = when(amount){
                 "positive" -> {
-                    goal = dao.getPositiveGoalByCategory(userEmail,category,date)
+                    dao.getPositiveGoalByCategory(userEmail,category,date)
                 }
                 "negative" -> {
-                    goal = dao.getNegativeGoalByCategory(userEmail,category,date)
+                    dao.getNegativeGoalByCategory(userEmail,category,date)
                 }
-                else -> goal = null
+                else -> null
             }
         }
 
@@ -205,11 +205,10 @@ class MainActivity : AppCompatActivity(), IActivityData {
         val format = SimpleDateFormat("EE d MMM yyyy", Locale.getDefault())
 
         runBlocking {
-            if (category == null){
-                transactionList = dao.getUserWithTransactions(userEmail)
-            }
-            else {
-                transactionList = dao.getUserWithTransactionsFiltered(userEmail, category)
+            transactionList = if (category == null){
+                dao.getUserWithTransactions(userEmail)
+            } else {
+                dao.getUserWithTransactionsFiltered(userEmail, category)
             }
         }
 
@@ -327,14 +326,14 @@ class MainActivity : AppCompatActivity(), IActivityData {
     override fun existGoal(category: String, date: String, amount: String): Boolean {
         val exist: Goal?
         runBlocking {
-            when(amount){
+            exist = when(amount){
                 "positive" -> {
-                    exist = dao.getPositiveGoalByCategory(userEmail,category,date)
+                    dao.getPositiveGoalByCategory(userEmail,category,date)
                 }
                 "negative" -> {
-                    exist = dao.getNegativeGoalByCategory(userEmail,category,date)
+                    dao.getNegativeGoalByCategory(userEmail,category,date)
                 }
-                else -> exist = null
+                else -> null
             }
         }
         return exist != null
@@ -365,10 +364,10 @@ class MainActivity : AppCompatActivity(), IActivityData {
         val suffix = arrayOf(' ', 'k', 'M', 'B', 'T', 'P', 'E')
         val value =log10(abs(num))
         val base = (value / 3).toInt()
-        if (value >= 4 && base < suffix.size){
-            return DecimalFormat("#0.00").format(num / 10.0.pow((base * 3).toDouble())) + suffix[base] + getCurrency()
+        return if (value >= 4 && base < suffix.size){
+            DecimalFormat("#0.00").format(num / 10.0.pow((base * 3).toDouble())) + suffix[base] + getCurrency()
         } else {
-            return DecimalFormat("#,##0.00").format(num) + getCurrency()
+            DecimalFormat("#,##0.00").format(num) + getCurrency()
         }
     }
 

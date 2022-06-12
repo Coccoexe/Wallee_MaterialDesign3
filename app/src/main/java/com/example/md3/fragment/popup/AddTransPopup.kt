@@ -6,7 +6,6 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -33,7 +32,6 @@ class AddTransPopup : DialogFragment() {
         super.onStart()
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             dialog!!.window!!.setLayout((resources.displayMetrics.widthPixels * 0.6).toInt(),(resources.displayMetrics.heightPixels * 0.9).toInt())
-            //dialog!!.window!!.setLayout(1400, 800)
         }
     }
 
@@ -78,21 +76,21 @@ class AddTransPopup : DialogFragment() {
             }
         }
 
-        //menu tendina
+        //menu spinner
         val categoryMenu: TextInputLayout = inflateView.findViewById(R.id.categoryMenu)
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, resources.getStringArray(R.array.income))
         (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
-        //radiogroup
-        val radiogroup : MaterialButtonToggleGroup = inflateView.findViewById(R.id.selectTransaction)
-        radiogroup.check(R.id.add)
-        radiogroup.addOnButtonCheckedListener() { dateGroup, chekedId, isChecked ->
+        //radioGroup
+        val radioGroup : MaterialButtonToggleGroup = inflateView.findViewById(R.id.selectTransaction)
+        radioGroup.check(R.id.add)
+        radioGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if(isChecked){
 
                 val items = ArrayList<String>()
                 (categoryMenu.editText as? AutoCompleteTextView)?.text?.clear()
 
-                when (chekedId) {
+                when (checkedId) {
                     R.id.add -> {
                         items.addAll(resources.getStringArray(R.array.income))
                     }
@@ -100,12 +98,12 @@ class AddTransPopup : DialogFragment() {
                         items.addAll(resources.getStringArray(R.array.expenses))
                     }
                 }
-                val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
-                (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+                val menuAdapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+                (categoryMenu.editText as? AutoCompleteTextView)?.setAdapter(menuAdapter)
             }
         }
 
-        //textammount
+        //text amount
         val amount : TextInputLayout = inflateView.findViewById(R.id.amount)
         amount.suffixText = activityData.getCurrency()
         amount.editText!!.setOnFocusChangeListener{ view, hasFocus ->
@@ -118,7 +116,7 @@ class AddTransPopup : DialogFragment() {
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
         confirm.setOnClickListener{
 
-            var money = 0.0
+            val money: Double
 
             if(amount.editText!!.text.isEmpty() || categoryMenu.editText!!.text.isEmpty()){
                 dismiss()
@@ -126,10 +124,10 @@ class AddTransPopup : DialogFragment() {
                 amount.editText!!.text.clear()
                 Toast.makeText(context, "Transaction amount cannot be 0!", Toast.LENGTH_SHORT).show()
             }else {
-                if (radiogroup.checkedButtonId == R.id.add) {
-                    money = amount.editText!!.text.toString().toDouble()
+                money = if (radioGroup.checkedButtonId == R.id.add) {
+                    amount.editText!!.text.toString().toDouble()
                 } else {
-                    money = 0 - amount.editText!!.text.toString().toDouble()
+                    0 - amount.editText!!.text.toString().toDouble()
                 }
 
                 activityData.insertTransaction(

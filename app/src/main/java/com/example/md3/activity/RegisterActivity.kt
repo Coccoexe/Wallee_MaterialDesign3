@@ -77,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun existMail(dao: UserDao, user: User): Boolean {
-        var exist : Int? = null
+        var exist: Int?
         runBlocking {
             exist = dao.getId(user.userMail)
         }

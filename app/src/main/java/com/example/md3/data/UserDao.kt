@@ -2,13 +2,11 @@ package com.example.md3.data
 
 
 import android.graphics.Bitmap
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.md3.data.entity.AutoLogin
 import com.example.md3.data.entity.Goal
 import com.example.md3.data.entity.Transaction
 import com.example.md3.data.entity.User
-import java.util.*
 
 @Dao
 interface UserDao {

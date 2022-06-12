@@ -1,9 +1,9 @@
 package com.example.md3.fragment
 
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +13,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import com.example.md3.R
 import com.example.md3.fragment.popup.ChangeCurrency
 import com.example.md3.fragment.popup.ChangeEmail
@@ -43,7 +41,6 @@ class ProfileFragment : Fragment() {
         activityData = requireActivity() as IActivityData
 
         //user
-        val id = activityData.getId()
         val email = activityData.getEmail()
         val userName = activityData.getUserName()
 
@@ -54,9 +51,12 @@ class ProfileFragment : Fragment() {
         val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             // Handle the returned Uri
             if(uri != null) {
-                var bitmap: Bitmap =
-                    MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
+                //deprecated
+                //var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
+
+                var bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver,uri))
                 bitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, true)
+
                 profileImage.setImageBitmap(bitmap)
                 activityData.updateImageUri(bitmap)
             }

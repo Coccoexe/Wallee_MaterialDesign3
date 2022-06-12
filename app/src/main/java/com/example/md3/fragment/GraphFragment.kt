@@ -1,7 +1,6 @@
 package com.example.md3.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.appbar.MaterialToolbar
@@ -26,7 +24,6 @@ import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
@@ -123,9 +120,9 @@ class GraphFragment : Fragment() {
             }
         }
 
-        dateGroup.addOnButtonCheckedListener() { dateGroup, chekedId, isChecked ->
+        dateGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked){
-                when (chekedId) {
+                when (checkedId) {
                     R.id.all_time -> {
                         filterDate = null
                     }
@@ -187,7 +184,6 @@ class GraphFragment : Fragment() {
 
         if (transactionList.isNotEmpty()) {
             if (filterDate != null) {
-                //controllo ogni transazione, sommo i giorni uguali
 
                 val day = SimpleDateFormat("dd", Locale.getDefault())
 
@@ -205,7 +201,6 @@ class GraphFragment : Fragment() {
                 }
 
             } else {
-                //controllo ogni transazione, sommo i mesi uguali
 
                 val month = SimpleDateFormat("MMM yyyy", Locale.getDefault())
                 val monthList: ArrayList<String> = ArrayList()
@@ -264,8 +259,6 @@ class GraphFragment : Fragment() {
         val entry: ArrayList<RadarEntry> = ArrayList()
         val formatArray: ArrayList<String> = ArrayList()
 
-        //controllo ogni transazione, sommo le categorie uguali
-
         val monthBalance: MutableMap<String, Double> =
             resources.getStringArray(R.array.income).associateBy({ it }, { 0.0 }).toMutableMap()
 
@@ -304,8 +297,6 @@ class GraphFragment : Fragment() {
             activityData.getUserWithTransactionFiltered("negative", null, filterDate)
         val entry: ArrayList<RadarEntry> = ArrayList()
         val formatArray: ArrayList<String> = ArrayList()
-
-        //controllo ogni transazione, sommo le categorie uguali
 
         val monthBalance: MutableMap<String, Double> =
             resources.getStringArray(R.array.expenses).associateBy({ it }, { 0.0 }).toMutableMap()
