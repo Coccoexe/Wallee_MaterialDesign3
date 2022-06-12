@@ -84,6 +84,10 @@
     <string name="select_deselect_all">Seleziona/Deseleziona Tutto</string>
     <string name="deleteSelected">Elimina Selezionati</string>
     <string name="filters">Filtri</string>
+    <string name="help_bar_chart">Questo grafico a barre mostra l\'andamento del saldo in base al filtro data applicato. Sopra lo 0 il bilancio e\' positivo, negativo altrimenti</string>
+    <string name="help_radar_income">Questo grafico a radar mostra la somma di tutte le entrate raggruppate per categoria. Piu\' si allontana dal centro, maggiore e\' il valore associato alla singola categoria.</string>
+    <string name="help_radar_expense">Questo grafico a radar mostra la somma di tutte le spese raggruppate per categoria. Piu\' si allontana dal centro, maggiore e\' il valore associato alla singola categoria.</string>
+    <string name="help_pie">Questo grafico a torta mostra il saldo disponibile e le spese effettuate. Puoi cliccare sulla fetta del grafico per vedere in dettaglio il budget rimanente o controllare le spese per ogni categoria.</string>
 
     <string-array name="expenses">
         <item>Bollette</item>
@@ -103,10 +107,4 @@
         <item>Regali</item>
         <item>Altro</item>
     </string-array>
-    <string name="help_bar_chart">Questo grafico a barre mostra l\'andamento del saldo in base al filtro data applicato. Sopra lo 0 il bilancio e\' positivo, negativo altrimenti</string>
-    <string name="help_radar_income">Questo grafico a radar mostra la somma di tutte le entrate raggruppate per categoria. Piu\' si allontana dal centro, maggiore e\' il valore associato alla singola categoria.</string>
-    <string name="help_radar_income">Q</string>
-    <string name="help_radar_expense">Questo grafico a radar mostra la somma di tutte le spese raggruppate per categoria. Piu\' si allontana dal centro, maggiore e\' il valore associato alla singola categoria.</string>
-    <string name="help_pie">Questo grafico a torta mostra il saldo disponibile e le spese effettuate. Puoi cliccare sulla fetta del grafico per vedere in dettaglio il budget rimanente o controllare le spese per ogni categoria.</string>
-
 </resources>
