@@ -126,7 +126,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:id="@+id/lastImage"
@@ -134,12 +135,13 @@
                         android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_close_24"
-                        app:tint="?attr/colorOnPrimaryContainer" />
+                        app:tint="?attr/colorOnPrimaryContainer"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/lastAmount"
                         android:textColor="?attr/colorOnPrimaryContainer"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -210,7 +212,8 @@
             android:elevation="10dp"
             app:tint="?attr/colorOnSecondaryContainer"
             app:layout_constraintTop_toTopOf="@id/cardGraph"
-            app:layout_constraintEnd_toEndOf="@id/cardGraph"/>
+            app:layout_constraintEnd_toEndOf="@id/cardGraph"
+            tools:ignore="ContentDescription" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addTransaction"
@@ -219,7 +222,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/navigationBar"/>
+            app:layout_constraintBottom_toTopOf="@id/navigationBar"
+            tools:ignore="ContentDescription" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigationBar"

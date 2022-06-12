@@ -127,7 +127,8 @@
                             android:elevation="10dp"
                             app:tint="?attr/colorOnSecondaryContainer"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:ignore="ContentDescription" />
 
                         <com.github.mikephil.charting.charts.BarChart
                             android:id="@+id/balanceChart"
@@ -174,7 +175,8 @@
                             android:elevation="10dp"
                             app:tint="?attr/colorOnSecondaryContainer"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:ignore="ContentDescription" />
 
                         <com.github.mikephil.charting.charts.RadarChart
                             android:id="@+id/positiveChart"
@@ -221,7 +223,8 @@
                             android:elevation="10dp"
                             app:tint="?attr/colorOnSecondaryContainer"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:ignore="ContentDescription" />
 
                         <com.github.mikephil.charting.charts.RadarChart
                             android:id="@+id/negativeChart"

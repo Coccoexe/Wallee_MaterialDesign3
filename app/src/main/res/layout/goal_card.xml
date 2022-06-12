@@ -14,7 +14,7 @@
         android:translationZ="90dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
