@@ -44,7 +44,7 @@ class ChangeCurrency : DialogFragment() {
             dismiss()
         }
 
-        //menu tendina
+        //menu spinner
         val categoryCurrency: TextInputLayout = inflateView.findViewById(R.id.selectCurrency)
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, resources.getStringArray(R.array.currency))
         (categoryCurrency.editText as? AutoCompleteTextView)?.setAdapter(adapter)
