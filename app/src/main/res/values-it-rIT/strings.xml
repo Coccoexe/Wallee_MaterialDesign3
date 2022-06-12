@@ -17,7 +17,7 @@
     <string name="e_mail">Mail</string>
     <string name="password">Password</string>
     <string name="log_out">Esci</string>
-    <string name="more_filters">Piu filtri</string>
+    <string name="more_filters">Piu\' filtri</string>
     <string name="filter_by_date">Filtra per data:</string>
     <string name="month">Mese</string>
     <string name="_3_month">3 mesi</string>
@@ -46,6 +46,10 @@
     <string name="accept">Accetta</string>
     <string name="thanks">Grazie</string>
     <string name="help_reading_chart">Come leggere il Grafico</string>
+    <string name="help_bar_chart">Questo grafico a barre mostra l\'andamento del saldo in base al filtro data applicato. Sopra lo 0 il bilancio e\' positivo, negativo altrimenti</string>
+    <string name="help_radar_income">Questo grafico a radar mostra la somma di tutte le entrate raggruppate per categoria. Piu\' si allontana dal centro, maggiore e\' il valore associato alla singola categoria.</string>
+    <string name="help_radar_expense">Questo grafico a radar mostra la somma di tutte le spese raggruppate per categoria. Piu\' si allontana dal centro, maggiore e\' il valore associato alla singola categoria.</string>
+    <string name="help_pie">Questo grafico a torta mostra il saldo disponibile e le spese effettuate. Puoi cliccare sulla fetta del grafico per vedere in dettaglio il budget rimanente o controllare le spese per ogni categoria.</string>
     <string name="available">Disponibile</string>
     <string name="expense">Spese</string>
     <string name="available_balance">Saldo Disponibile: %s</string>
@@ -84,10 +88,6 @@
     <string name="select_deselect_all">Seleziona/Deseleziona Tutto</string>
     <string name="deleteSelected">Elimina Selezionati</string>
     <string name="filters">Filtri</string>
-    <string name="help_bar_chart">Questo grafico a barre mostra l\'andamento del saldo in base al filtro data applicato. Sopra lo 0 il bilancio e\' positivo, negativo altrimenti</string>
-    <string name="help_radar_income">Questo grafico a radar mostra la somma di tutte le entrate raggruppate per categoria. Piu\' si allontana dal centro, maggiore e\' il valore associato alla singola categoria.</string>
-    <string name="help_radar_expense">Questo grafico a radar mostra la somma di tutte le spese raggruppate per categoria. Piu\' si allontana dal centro, maggiore e\' il valore associato alla singola categoria.</string>
-    <string name="help_pie">Questo grafico a torta mostra il saldo disponibile e le spese effettuate. Puoi cliccare sulla fetta del grafico per vedere in dettaglio il budget rimanente o controllare le spese per ogni categoria.</string>
 
     <string-array name="expenses">
         <item>Bollette</item>
