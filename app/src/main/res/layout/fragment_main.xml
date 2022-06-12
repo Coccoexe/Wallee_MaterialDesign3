@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp"
-            android:elevation="10dp"
+            android:elevation="4dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -98,10 +98,10 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTrans"
             style="?attr/materialCardViewElevatedStyle"
-            app:cardElevation="6dp"
+            android:elevation="1dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="12dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -154,10 +154,10 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardGraph"
             style="?attr/materialCardViewElevatedStyle"
-            app:cardElevation="6dp"
+            app:cardElevation="1dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="12dp"
             app:cardUseCompatPadding="true"
             tools:ignore="MissingConstraints">
 
@@ -206,6 +206,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addTransaction"
             app:srcCompat="@drawable/ic_add_24"
+            android:elevation="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -214,6 +215,7 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigationBar"
+            android:elevation="16dp"
             app:menu="@menu/bottom_navigation_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
