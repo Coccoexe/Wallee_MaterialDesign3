@@ -1,5 +1,6 @@
 package com.example.md3.fragment.popup
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,7 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.md3.R
 import com.example.md3.utility.IActivityData
-
+import com.google.android.material.textfield.TextInputLayout
 
 
 class ChangeEmail : DialogFragment() {
@@ -49,33 +50,33 @@ class ChangeEmail : DialogFragment() {
         }
 
         //confirmButton
-        val newM : EditText = inflateView.findViewById(R.id.newMail)
-        val newMC : EditText = inflateView.findViewById(R.id.newMailConfirm)
+        val newM : TextInputLayout = inflateView.findViewById(R.id.newMail)
+        val newMC : TextInputLayout = inflateView.findViewById(R.id.newMailConfirm)
         val confirm : Button = inflateView.findViewById(R.id.popupOk)
         confirm.setOnClickListener{
-
+            newM.error = null
+            newMC.error = null
             //check if new mail is empty
-            if(newM.text.toString() != "") {
+            if(newM.editText!!.text.toString() != "") {
                 //check if new mail is correct
-                if (activityData.existMail(newM.text.toString())){
-                    Toast.makeText(context, "Email already used!", Toast.LENGTH_SHORT)
-                        .show()
-                    newM.text.clear()
-                    newMC.text.clear()
+                if (activityData.existMail(newM.editText!!.text.toString())){
+                    newM.error = "Email already used!"
+                    newM.editText!!.text.clear()
+                    newMC.editText!!.text.clear()
                 } else {
-                    if (newM.text.toString() == newMC.text.toString()) {
-                        activityData.updateEmail(newM.text.toString())
+                    if (newM.editText!!.text.toString() == newMC.editText!!.text.toString()) {
+                        activityData.updateEmail(newM.editText!!.text.toString())
                         activityData.removeAutoLog()
                         val textEmail: TextView? = activity?.findViewById(R.id.emailProfile)
-                        textEmail?.text = newM.text.toString()
+                        textEmail?.text = newM.editText!!.text.toString()
                         dismiss()
                     } else {
-                        Toast.makeText(context, "New Mail must be equals!", Toast.LENGTH_SHORT)
-                            .show()
+                        newMC.editText!!.text.clear()
+                        newMC.error = "Mail Confirm must be same as New Mail"
                     }
                 }
             } else {
-                Toast.makeText(context,"New Mail cannot be empty!", Toast.LENGTH_SHORT).show()
+                newM.error = "Fill this field!"
             }
         }
 

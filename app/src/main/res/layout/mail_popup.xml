@@ -21,23 +21,37 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newMail"
         android:layout_width="200dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:hint="New Mail"
+        app:errorEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/popupTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newMailConfirm"
         android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:hint="Confirm New Mail"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Mail"
+        app:errorEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/newMail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/popupBack"

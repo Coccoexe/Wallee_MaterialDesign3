@@ -21,33 +21,53 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/oldPass"
         android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
         android:hint="Old Password"
+        app:errorEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/popupTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/popupBack">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newPass"
         android:layout_width="200dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:hint="New Password"
+        app:errorEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/oldPass"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="@id/oldPass"
+        app:layout_constraintEnd_toEndOf="@id/oldPass">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newPassConfirm"
         android:layout_width="200dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Confirm New Password"
+        app:errorEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/newPass"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="@id/newPass"
+        app:layout_constraintEnd_toEndOf="@id/newPass">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/popupBack"
@@ -55,10 +75,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="Cancel"
-        app:layout_constraintEnd_toStartOf="@id/popupOk"
-        app:layout_constraintTop_toBottomOf="@id/newPassConfirm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/oldPass"
+        app:layout_constraintStart_toEndOf="@id/oldPass"
+        app:layout_constraintBottom_toTopOf="@id/popupOk"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/popupOk"
@@ -66,9 +86,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="Confirm"
-        app:layout_constraintStart_toEndOf="@id/popupBack"
-        app:layout_constraintTop_toBottomOf="@id/newPassConfirm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/popupBack"
+        app:layout_constraintBottom_toBottomOf="@id/newPassConfirm"
+        app:layout_constraintStart_toStartOf="@id/popupBack"
+        app:layout_constraintEnd_toEndOf="@id/popupBack"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
