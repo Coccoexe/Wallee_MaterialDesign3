@@ -49,4 +49,8 @@
     <string name="no_transaction_found">Nessuna transazione trovata</string>
     <string name="currency">Valuta</string>
     <string name="filter_by_transaction_type">Filtra per tipo di transazione:</string>
+    <string name="help_bar_chart">"Questo grafico a barre mostra l'andamento del bilancio in base al filtro data applicato.\\nSopra lo 0 il bilancio e' positivo, negativo altrimenti. "</string>
+    <string name="help_radar_income">Questo grafico a radar mostra la somma di ogni entrata raggruppata per categoria. Piu\' ci si allontana dal centro, piu\' grande sara\' il valore della singola categoria.</string>
+    <string name="help_radar_expense">Questo grafico a radar mostra la somma di ogni spese raggruppata per categoria. Piu\' ci si allontana dal centro, piu\' grande sara\' il valore della singola categoria.</string>
+    <string name="help_pie">Questo grafico a torta mostra il saldo disponibile e le spese effettute. Puoi cliccare in una fetta per vedere in dettaglio il budget rimanente o controllare le categorie delle varie spese.</string>
 </resources>
