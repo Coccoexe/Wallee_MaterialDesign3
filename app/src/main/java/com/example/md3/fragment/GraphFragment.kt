@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.md3.R
 import com.example.md3.utility.IActivityData
@@ -25,7 +26,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.abs
 
 
@@ -88,9 +88,8 @@ class GraphFragment : Fragment() {
         dateGroup.check(R.id.all_time)
         color = MaterialColors.getColor(inflateView,com.google.android.material.R.attr.colorOnSecondaryContainer)
         colors = ArrayList()
-        for (color in ColorTemplate.MATERIAL_COLORS){
-            colors.add(color)
-        }
+        colors.add(ContextCompat.getColor(requireContext(),R.color.color_green_chart))
+        colors.add(ContextCompat.getColor(requireContext(),R.color.color_red_chart))
         updateView()
 
         //listener
@@ -225,8 +224,7 @@ class GraphFragment : Fragment() {
             }
         }
 
-        val barDataSet = BarDataSet(entry,resources.getString(R.string.balance))
-        barDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
+        val barDataSet = MyBarDataSet(entry,resources.getString(R.string.balance))
         barDataSet.colors = colors
         barDataSet.setDrawValues(false)
         barDataSet.valueTextColor = color
@@ -269,8 +267,7 @@ class GraphFragment : Fragment() {
         }
 
         val radarDataSet = RadarDataSet(entry,resources.getString(R.string.balance))
-        radarDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
-        radarDataSet.colors = colors
+        radarDataSet.colors = colors.asReversed()
         radarDataSet.setDrawValues(false)
         radarDataSet.lineWidth = 2f
         radarDataSet.valueTextColor = color
@@ -309,7 +306,7 @@ class GraphFragment : Fragment() {
 
         val radarDataSet = RadarDataSet(entry,resources.getString(R.string.balance))
         radarDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
-        radarDataSet.colors = colors
+        radarDataSet.colors = colors.asReversed()
         radarDataSet.setDrawValues(false)
         radarDataSet.lineWidth = 2f
         radarDataSet.valueTextColor = color
@@ -327,4 +324,16 @@ class GraphFragment : Fragment() {
         negativeChart.animateY(2000)
     }
 
+    class MyBarDataSet(yVals: List<BarEntry?>?, label: String?) : BarDataSet(yVals, label) {
+
+        override fun getEntryIndex(e: BarEntry?): Int {
+            return super.getEntryIndex(e)
+        }
+
+        override fun getColor(index: Int): Int {
+            return if (getEntryForIndex(index).y > 0)
+                mColors[0] else
+                mColors[1]
+        }
+    }
 }

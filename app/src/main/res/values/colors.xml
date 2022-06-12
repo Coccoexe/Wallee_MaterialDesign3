@@ -56,4 +56,8 @@
     <color name="md_theme_dark_inversePrimary">#7C31D3</color>
     <color name="md_theme_dark_shadow">#000000</color>
     <color name="md_theme_dark_primaryInverse">#7C31D3</color>
+    
+    <color name="color_red_chart">#EA4335</color>
+    <color name="color_green_chart">#34A853</color>
+    <color name="color_empty_chart">#535353</color>
 </resources>

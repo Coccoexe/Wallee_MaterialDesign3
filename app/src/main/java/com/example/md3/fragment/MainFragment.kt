@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.md3.R
 import com.example.md3.data.entity.Transaction
@@ -104,9 +105,6 @@ class MainFragment : Fragment() {
         //chart
         //color
         colors = ArrayList()
-        for (color in ColorTemplate.MATERIAL_COLORS){
-            colors.add(color)
-        }
 
         //initialize chart
         getChartData()
@@ -238,8 +236,17 @@ class MainFragment : Fragment() {
             income - expense
         }
 
-        balanceGraph.add(PieEntry(balance.toFloat(),resources.getString(R.string.available)))
-        balanceGraph.add(PieEntry(expense.toFloat(),resources.getString(R.string.expense)))
+        if (incomeList!!.isNotEmpty() || expenseList!!.isNotEmpty()) {
+            colors.clear()
+            colors.add(ContextCompat.getColor(requireContext(),R.color.color_green_chart))
+            colors.add(ContextCompat.getColor(requireContext(),R.color.color_red_chart))
+            balanceGraph.add(PieEntry(balance.toFloat(), resources.getString(R.string.available)))
+            balanceGraph.add(PieEntry(expense.toFloat(), resources.getString(R.string.expense)))
+        }else{
+            colors.clear()
+            colors.add(ContextCompat.getColor(requireContext(),R.color.color_empty_chart))
+            balanceGraph.add(PieEntry(1f,resources.getString(R.string.no_transaction_found)))
+        }
 
         val pieDataSet = PieDataSet(balanceGraph,"")
         pieDataSet.setDrawValues(false)
