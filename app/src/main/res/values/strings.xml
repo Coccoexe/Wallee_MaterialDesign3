@@ -7,7 +7,7 @@
     <string name="my_name">My Name</string>
     <string name="user_welcome">Hi %s,</string>
     <string name="goals">Goals</string>
-    <string name="insert_email">Insert Email</string>
+    <string name="insert_email">Insert Mail</string>
     <string name="insert_password">Insert Password</string>
     <string name="auto_login">Auto Login</string>
     <string name="login">Login</string>
@@ -34,25 +34,21 @@
     <string name="invalid_password">Invalid Password</string>
     <string name="password_equals">Password Confirm must be same as New Password</string>
     <string name="username_equals">Username Confirm must be same as New Username</string>
-    <string name="old_password_wrong">Old password is incorrect</string>
+    <string name="old_password_wrong">Old Password is incorrect</string>
     <string name="user_registered">User Registered!</string>
     <string name="email_already_used">Mail already used</string>
     <string name="mail_equals">Mail Confirm must be same as New Mail</string>
     <string name="n_item_selected">%s Items Selected</string>
     <string name="delete_selected">Delete Items Selected?</string>
-    <string name="n_selected_deleted">%s selected goal/s will be deleted. Confirm?</string>
+    <string name="n_selected_deleted">%s selected Goal/s will be deleted. Confirm?</string>
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
     <string name="thanks">Thanks</string>
-    <string name="help_reading_chart">Help to read chart</string>
-    <string name="help_bar_chart">"This Bar Chart shows the trend of balance according to the date filter applied.\n
-        Above 0 the balance is positive, below it is negative"</string>
-    <string name="help_radar_income">"This Radar Chart shows the sum of every income transactions grouped by category.\n
-                        The farther the value is from the center, the greater the effective value of the single category will be."</string>
-    <string name="help_radar_expense">"This Radar Chart shows the sum of every expense transactions grouped by category.\n
-                        The farther the value is from the center, the greater the effective value of the single category will be."</string>
-    <string name="help_pie">"This Pie Chart shows the available balance and the expenses made.\n" +
-                        "You can click the graph to see in detail the remaining budget or check the categories of the various expenses"</string>
+    <string name="help_reading_chart">How to read Chart</string>
+    <string name="help_bar_chart">"This Bar Chart shows the trend of balance according to the date filter applied.\nAbove 0 the balance is positive, below it is negative."</string>
+    <string name="help_radar_income">"This Radar Chart shows the sum of every income transactions grouped by category.\nThe farther the value is from the center, the greater the effective value of the single category will be."</string>
+    <string name="help_radar_expense">"This Radar Chart shows the sum of every expense transactions grouped by category.\nThe farther the value is from the center, the greater the effective value of the single category will be."</string>
+    <string name="help_pie">"This Pie Chart shows the available balance and the expenses made.\nYou can click the graph to see in detail the remaining budget or check the categories of the various expenses."</string>
     <string name="available">Available</string>
     <string name="expense">Expenses</string>
     <string name="available_balance">Available balance: %s</string>
