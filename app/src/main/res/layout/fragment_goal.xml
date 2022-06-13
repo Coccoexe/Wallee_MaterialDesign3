@@ -20,7 +20,7 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBarGoal"
-                app:title="Goal"
+                app:title="@string/goals"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/transaction_app_bar">

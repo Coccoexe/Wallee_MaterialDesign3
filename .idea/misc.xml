@@ -45,6 +45,7 @@
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/drawable/menu_home_selector.xml" value="0.1495" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/drawable/profile_opening.xml" value="0.333" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/drawable/receipt_long-40px.xml" value="0.1" />
+        <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/drawable/splash_screen.xml" value="0.334" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout-land/activity_main.xml" value="0.4395796847635727" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout-land/add_goal.xml" value="0.4395796847635727" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/layout-land/fragment_goal.xml" value="0.33" />
@@ -77,6 +78,8 @@
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.33" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/menu/context_transaction_menu.xml" value="0.5229166666666667" />
         <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/menu/transaction_app_bar.xml" value="0.521875" />
+        <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1555" />
+        <entry key="..\:/Users/Desktop-Alessio/Desktop/Universita/Embedded/Android Studio/MD3/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1555" />
       </map>
     </option>
   </component>
