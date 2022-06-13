@@ -55,7 +55,7 @@ class ProfileFragment : Fragment() {
                 //var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
 
                 var bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver,uri))
-                bitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, true)
+                bitmap = Bitmap.createScaledBitmap(bitmap, 400, 400, true)
 
                 profileImage.setImageBitmap(bitmap)
                 activityData.updateImageUri(bitmap)
