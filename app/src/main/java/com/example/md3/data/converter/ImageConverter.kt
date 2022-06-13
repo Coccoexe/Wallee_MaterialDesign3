@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory
 import androidx.room.TypeConverter
 import java.io.ByteArrayOutputStream
 
+//nel database viene salvata l'immagine di profilo
+//e' necessario convertirla sia in inserimento che in lettura dal database
 class ImageConverter {
 
     @TypeConverter

@@ -93,6 +93,7 @@ class GraphFragment : Fragment() {
         updateView()
 
         //listener
+        //aore e chiude il menu filtri
         topAppBar.setOnMenuItemClickListener{menuItem ->
             when(menuItem.itemId){
                 R.id.filterMenu -> {
@@ -119,6 +120,7 @@ class GraphFragment : Fragment() {
             }
         }
 
+        //applica il filtro data
         dateGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked){
                 when (checkedId) {
@@ -135,6 +137,7 @@ class GraphFragment : Fragment() {
             }
         }
 
+        //dialog di aiuto per ogni grafico
         helpBalance.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(resources.getString(R.string.help_reading_chart))
@@ -178,6 +181,7 @@ class GraphFragment : Fragment() {
         val formatArray : ArrayList<String> = ArrayList()
         val calendar = Calendar.getInstance()
 
+        //ottiene i dati filtrati
         if (transactionList.isNotEmpty()) {
             if (filterDate != null) {
 
@@ -223,6 +227,7 @@ class GraphFragment : Fragment() {
                 }
             }
         }
+
 
         val barDataSet = MyBarDataSet(entry,resources.getString(R.string.balance))
         barDataSet.colors = colors

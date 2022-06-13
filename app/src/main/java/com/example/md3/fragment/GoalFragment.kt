@@ -108,6 +108,7 @@ class GoalFragment : Fragment() {
             popup.show(childFragmentManager, "popupGoal")
         }
 
+        //apre e chiude il menu dei filtri
         topAppBar.setOnMenuItemClickListener{menuItem ->
             when(menuItem.itemId){
                 R.id.filterMenu -> {
@@ -134,6 +135,7 @@ class GoalFragment : Fragment() {
             }
         }
 
+        //applica il filtro tipo di transazione(tutte,positive,negative)
         transactionGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 when(checkedId) {
@@ -217,6 +219,7 @@ class GoalFragment : Fragment() {
         return activityData.getUserBalanceCategory(filterAmount, category, date)
     }
 
+    //action bar
     private val mActionModeCallback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu?): Boolean {
             mode.menuInflater.inflate(R.menu.context_transaction_menu, menu)

@@ -37,9 +37,12 @@ class MainActivity : AppCompatActivity(), IActivityData {
         val navController = navHostFragment.navController
         findViewById<BottomNavigationView>(R.id.navigationBar).setupWithNavController(navController)
 
+        //ricevo dal login l'utente che ha effettuato l'accesso
         userEmail = intent.getStringExtra("email")!!
 
         //database
+        //ottengo l'id dell'utente dopo aver ottenuto un istanza del database
+        //che verra' utilizzato per tutto il tempo in cui l'app rimarra' aperta
         dao = UserDatabase.getInstance(this).userDao
         runBlocking {
             userId = dao.getId(userEmail)
@@ -52,10 +55,14 @@ class MainActivity : AppCompatActivity(), IActivityData {
 
     }
 
+    //voglio impedire che l'utente possa usare la gesture back
+    //perche' per navigare tra i fragment e' presenta la navigation bar
+    //e altrimenti ritornerebbe alla pagina di login(esiste il pulsante apposito per uscire)
     override fun onBackPressed() {
         //super.onBackPressed()
     }
 
+    //implementazione di tutti i metodi di Utility usati da tutti i fragment
     override fun insertTransaction(transaction: Transaction) {
         runBlocking {
             dao.insertTransaction(transaction)

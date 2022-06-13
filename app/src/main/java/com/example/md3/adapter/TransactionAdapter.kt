@@ -21,6 +21,7 @@ class TransactionAdapter(ctx: Context?, transList : List<Transaction>,
     var context = ctx
     private var transactionList = transList.reversed()
 
+    //variabili per la gestione della selezione multipla dei vari oggetti della lista
     var selectionMode = false
     var selected : ArrayList<Int>
 

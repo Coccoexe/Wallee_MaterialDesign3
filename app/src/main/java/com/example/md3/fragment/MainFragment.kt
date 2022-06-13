@@ -112,6 +112,7 @@ class MainFragment : Fragment() {
         activityData.updateBadge()
 
         //listener
+        //applica il filtro data
         dateGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked){
                 when (checkedId) {
@@ -128,12 +129,14 @@ class MainFragment : Fragment() {
             updateView()
         }
 
+        //crea il popup per aggiungere una transazione
         addTrans.setOnClickListener{
             val popup = AddTransPopup()
             //popup.show(requireActivity().supportFragmentManager, "popupTransaction")
             popup.show(childFragmentManager, "popupTransaction")
         }
 
+        //dialog aiuto a leggere il grafico
         helpButton.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(resources.getString(R.string.help_reading_chart))
@@ -144,6 +147,7 @@ class MainFragment : Fragment() {
                 .show()
         }
 
+        //grafico
         pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
             override fun onValueSelected(e: Entry, h: Highlight) {
                 legendEntry = ""

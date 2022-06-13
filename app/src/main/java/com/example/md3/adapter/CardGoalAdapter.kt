@@ -23,6 +23,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
     var context = ctx
     private var cards = goalList
 
+    //variabili per la gestione della selezione multipla dei vari oggetti della lista
     var selectionMode = false
     var selected : ArrayList<Int>
 
@@ -119,6 +120,9 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             }
         }
 
+        //gestisce la view del goal
+        //  selezionato-non selezionato
+        //  completato-incompleto
         fun selectionUpdateView(){
             if (goal.isSelected){
                 selectedImage.visibility = View.VISIBLE
@@ -133,6 +137,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
             fragment.updateContextBarTitle(selected.size)
         }
 
+        //gestisce la selezione/edselezione dei goal
         private fun updateView(){
             if (goal.isSelected) {
                 selected.remove(goal.id)

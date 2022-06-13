@@ -16,6 +16,9 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var userMail : TextInputLayout
     private lateinit var userPass : TextInputLayout
+    private lateinit var loginButton: Button
+    private lateinit var registerButton : Button
+    private lateinit var checkLog : CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,17 +28,19 @@ class LoginActivity : AppCompatActivity() {
         val dao = UserDatabase.getInstance(this).userDao
 
         //button
-        val loginButton: Button = findViewById(R.id.loginButton)
-        val registerButton : Button = findViewById(R.id.registerButton)
+        loginButton = findViewById(R.id.loginButton)
+        registerButton = findViewById(R.id.registerButton)
         userMail = findViewById(R.id.emailText)
         userPass = findViewById(R.id.passText)
+        checkLog = findViewById(R.id.autoLog)
 
         //clear edit text
         userMail.editText?.text?.clear()
         userPass.editText?.text?.clear()
 
         //autologin
-        val checkLog : CheckBox = findViewById(R.id.autoLog)
+        // se in precedenza l'utente ha spuntato l'autologin, viene automaticamente
+        // effettuato l'accesso all'app
         runBlocking {
             val autoLogin: AutoLogin? = dao.getAutoLogin()
             if(autoLogin != null)
@@ -53,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
             userMail.error = null
             userPass.error = null
 
+            //controllo la correttezza dei dati inseriti e accedo
             if (mail.isEmpty() || pass.isEmpty()){
                 if(mail.isEmpty()) {
                     userMail.error = resources.getString(R.string.fill_this_field)
@@ -73,8 +79,12 @@ class LoginActivity : AppCompatActivity() {
                         userMail.error = null
                         userPass.error = null
 
+                        //rimuovo l'autologin nel caso ci sia
                         dao.removeAutoLog()
 
+                        //se l'utente ha deciso di salvare il login
+                        //aggiorno il database per accedere automaticamente la
+                        //volta successiva
                         if(checkLog.isChecked)
                         {
                             dao.insertAutoLog(AutoLogin(mail, pass))
@@ -95,6 +105,8 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    // voglio sempre i campi email e password puliti quando viene ricreato il fragment
+    // sia in apertura sia dopo la registrazione
     override fun onResume() {
         super.onResume()
         userMail.editText!!.text.clear()

@@ -145,6 +145,7 @@ class TransactionFragment : Fragment(){
         // ---------------------------------------------------------------
 
         //listener
+        //apre e chiude il menu filtri
         topAppBar.setOnMenuItemClickListener{menuItem ->
             when(menuItem.itemId){
                 R.id.filterMenu -> {
@@ -190,6 +191,7 @@ class TransactionFragment : Fragment(){
             }
         }
 
+        //applica il filtro tipo di transazione
         transactionGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked){
 
@@ -264,6 +266,7 @@ class TransactionFragment : Fragment(){
             setAdapter()
         }
 
+        //applica il filtro data
         dateGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked){
                 when (checkedId) {
@@ -291,6 +294,7 @@ class TransactionFragment : Fragment(){
             setAdapter()
         }
 
+        //applica il filtro categoria
         categoryGroup.setOnCheckedChangeListener{ _, optionId ->
             run {
                 when (optionId) {
