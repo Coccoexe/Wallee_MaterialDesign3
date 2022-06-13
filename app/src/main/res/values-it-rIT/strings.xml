@@ -109,5 +109,6 @@
         <item>Regali</item>
         <item>Altro</item>
     </string-array>
+    <string name="your_wallet_free">Il Tuo Portafoglio Gratuito</string>
 
 </resources>
