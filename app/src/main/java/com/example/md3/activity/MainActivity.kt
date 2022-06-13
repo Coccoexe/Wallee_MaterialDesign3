@@ -354,7 +354,7 @@ class MainActivity : AppCompatActivity(), IActivityData {
             expense[2] -> return R.drawable.transportation
             expense[3] -> return R.drawable.home
             expense[4] -> return R.drawable.health
-            expense[5] -> return R.drawable.gift
+            expense[5] -> return R.drawable.car
             expense[6] -> return R.drawable.more
         }
         return R.drawable.more

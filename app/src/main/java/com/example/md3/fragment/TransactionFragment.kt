@@ -379,6 +379,10 @@ class TransactionFragment : Fragment(){
         return activityData.formatMoney(num)
     }
 
+    fun getDrawable(category : String) : Int{
+        return activityData.getDrawable(category)
+    }
+
     private val mActionModeCallback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu?): Boolean {
             mode.menuInflater.inflate(R.menu.context_transaction_menu, menu)
