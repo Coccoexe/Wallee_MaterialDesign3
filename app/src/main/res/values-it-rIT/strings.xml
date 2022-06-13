@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MD3</string>
+    <string name="app_name">Wallee</string>
     <string name="balance">Saldo</string>
     <string name="transactions">Transaziones</string>
     <string name="my_profile">Il mio Profilo</string>
@@ -40,8 +40,8 @@
     <string name="email_already_used">Mail già usata</string>
     <string name="mail_equals">La Mail Confermata deve essere la stessa</string>
     <string name="n_item_selected">%s Oggetti Selezionati</string>
-    <string name="delete_selected">Eliminare gli Oggetti Selezionati?</string>
-    <string name="n_selected_deleted">%s Obiettivi selezionati verranno eliminati. Confermare?</string>
+    <string name="delete_selected">Eliminare i Selezionati?</string>
+    <string name="n_selected_deleted">%s oggetti selezionati verranno eliminati. Confermare?</string>
     <string name="cancel">Cancella</string>
     <string name="accept">Accetta</string>
     <string name="thanks">Grazie</string>
@@ -109,4 +109,5 @@
     <string name="from_goal">Dal %s</string>
     <string name="charts">Grafici</string>
     <string name="transaction">Transazione</string>
+    <string name="your_wallet_4_free">Il tuo Portafoglio</string>
 </resources>

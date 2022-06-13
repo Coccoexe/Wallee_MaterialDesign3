@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MD3</string>
+    <string name="app_name">Wallee</string>
     <string name="balance">Balance</string>
     <string name="transactions">Transactions</string>
     <string name="add_transaction">Add Transaction</string>
@@ -40,7 +40,7 @@
     <string name="mail_equals">Mail Confirm must be same as New Mail</string>
     <string name="n_item_selected">%s Item Selected</string>
     <string name="delete_selected">Delete Selected?</string>
-    <string name="n_selected_deleted">%s selected goal/s will be deleted. Confirm?</string>
+    <string name="n_selected_deleted">%s selected item/s will be deleted. Confirm?</string>
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
     <string name="thanks">Thanks</string>
@@ -114,4 +114,5 @@
     </string-array>
     <string name="from_goal">From %s</string>
     <string name="transaction">Transaction</string>
+    <string name="your_wallet_4_free">Your Wallet 4 free</string>
 </resources>
