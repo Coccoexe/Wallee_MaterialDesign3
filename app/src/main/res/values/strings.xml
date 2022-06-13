@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MD3</string>
     <string name="balance">Balance</string>
-    <string name="transaction">Transaction</string>
+    <string name="transactions">Transactions</string>
     <string name="add_transaction">Add Transaction</string>
     <string name="my_profile">My Profile</string>
     <string name="my_name">My Name</string>
@@ -82,7 +82,7 @@
     <string name="new_username">New Username</string>
     <string name="confirm_new_username">Confirm New Username</string>
     <string name="home">Home</string>
-    <string name="graph">Graph</string>
+    <string name="charts">Charts</string>
     <string name="profile">Profile</string>
     <string name="select_deselect_all">Select/Deselect All</string>
     <string name="deleteSelected">Delete Selected</string>
@@ -113,4 +113,5 @@
         <item>£</item>
     </string-array>
     <string name="from_goal">From %s</string>
+    <string name="transaction">Transaction</string>
 </resources>

@@ -10,17 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/profileTitle"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:backgroundTint="?attr/colorSurface"
+            app:liftOnScroll="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/my_profile"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                app:title="@string/profile"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <ImageView
             android:id="@+id/profileImage"
@@ -30,7 +36,7 @@
             android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileTitle"
+            app:layout_constraintTop_toBottomOf="@id/appBar"
             tools:ignore="ContentDescription" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

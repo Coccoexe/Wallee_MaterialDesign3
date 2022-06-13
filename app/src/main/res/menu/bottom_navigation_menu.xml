@@ -13,7 +13,7 @@
         android:id="@+id/graphFragment"
         android:enabled="true"
         android:icon="@drawable/ic_bar_chart_24"
-        android:title="@string/graph"/>
+        android:title="@string/charts"/>
     <item
         android:id="@+id/goalFragment"
         android:enabled="true"
