@@ -20,12 +20,12 @@
     <string name="log_out">Log Out</string>
     <string name="more_filters">more filters</string>
     <string name="filter_by_date">Filter by date:</string>
-    <string name="month">month</string>
+    <string name="month">Month</string>
     <string name="_3_month">3 month</string>
-    <string name="year">year</string>
+    <string name="year">Year</string>
     <string name="filter_by_category">Filter by category:</string>
-    <string name="all">all</string>
-    <string name="custom">custom</string>
+    <string name="all">All</string>
+    <string name="custom">Custom</string>
     <string name="category">Category</string>
     <string name="no_transaction_found">No Transaction Found</string>
     <string name="filter_by_transaction_type">Filter by Transaction Type:</string>
