@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">MD3</string>
     <string name="balance">Saldo</string>
-    <string name="transactions">Transaziones</string>
+    <string name="transactions">Transazioni</string>
     <string name="my_profile">Il mio Profilo</string>
     <string name="my_name">Il mio Nome</string>
     <string name="user_welcome">Ciao %s,</string>
@@ -87,6 +87,9 @@
     <string name="select_deselect_all">Seleziona/Deseleziona Tutto</string>
     <string name="deleteSelected">Elimina Selezionati</string>
     <string name="filters">Filtri</string>
+    <string name="from_goal">Dal %s</string>
+    <string name="charts">Grafici</string>
+    <string name="transaction">Transazion</string>
 
     <string-array name="expenses">
         <item>Bollette</item>
@@ -106,7 +109,5 @@
         <item>Regali</item>
         <item>Altro</item>
     </string-array>
-    <string name="from_goal">Dal %s</string>
-    <string name="charts">Grafici</string>
-    <string name="transaction">Transazione</string>
+
 </resources>
