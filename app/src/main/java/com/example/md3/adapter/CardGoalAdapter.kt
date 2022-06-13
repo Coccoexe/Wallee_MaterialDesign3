@@ -69,7 +69,7 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
 
         fun bind() {
             categoryCard.text = goal.category
-            date.text = goal.date
+            date.text = fragment.resources.getString(R.string.from_goal).format(goal.date)
             progressBar.max = abs(goal.sum).toInt()
             filterAmount = if (goal.sum > 0){
                 "positive"
@@ -122,6 +122,11 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
         fun selectionUpdateView(){
             if (goal.isSelected){
                 selectedImage.visibility = View.VISIBLE
+                if (goal.completed){
+                    selectedImage.setColorFilter(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorErrorContainer))
+                }else{
+                    selectedImage.colorFilter = null
+                }
             }else{
                 selectedImage.visibility = View.INVISIBLE
             }
@@ -137,6 +142,11 @@ class CardGoalAdapter(ctx: Context?, goalList : List<Goal>, var fragment: GoalFr
                 selected.add(goal.id)
                 goal.isSelected = true
                 selectedImage.visibility = View.VISIBLE
+                if (goal.completed){
+                    selectedImage.setColorFilter(MaterialColors.getColor(itemView,com.google.android.material.R.attr.colorErrorContainer))
+                }else{
+                    selectedImage.colorFilter = null
+                }
             }
             fragment.updateContextBarTitle(selected.size)
         }

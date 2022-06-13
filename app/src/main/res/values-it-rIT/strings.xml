@@ -107,4 +107,5 @@
         <item>Regali</item>
         <item>Altro</item>
     </string-array>
+    <string name="from_goal">Dal %s</string>
 </resources>

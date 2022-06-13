@@ -112,4 +112,5 @@
         <item>€</item>
         <item>£</item>
     </string-array>
+    <string name="from_goal">From %s</string>
 </resources>
