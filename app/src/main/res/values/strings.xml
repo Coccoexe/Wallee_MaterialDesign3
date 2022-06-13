@@ -87,6 +87,8 @@
     <string name="select_deselect_all">Select/Deselect All</string>
     <string name="deleteSelected">Delete Selected</string>
     <string name="filters">Filters</string>
+    <string name="from_goal">From %s</string>
+    <string name="transaction">Transaction</string>
 
     <string-array name="expenses">
         <item>Bills</item>
@@ -112,7 +114,5 @@
         <item>€</item>
         <item>£</item>
     </string-array>
-    <string name="from_goal">From %s</string>
-    <string name="transaction">Transaction</string>
-    <string name="your_wallet_4_free">Your Wallet 4 free</string>
+
 </resources>
