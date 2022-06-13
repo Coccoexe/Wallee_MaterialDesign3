@@ -89,6 +89,7 @@
     <string name="filters">Filters</string>
     <string name="from_goal">From %s</string>
     <string name="transaction">Transaction</string>
+    <string name="your_wallet_free">Your Wallet Free</string>
 
     <string-array name="expenses">
         <item>Bills</item>
