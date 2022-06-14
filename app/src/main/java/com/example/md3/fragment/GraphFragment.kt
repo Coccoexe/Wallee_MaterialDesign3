@@ -188,8 +188,8 @@ class GraphFragment : Fragment() {
                 val day = SimpleDateFormat("dd", Locale.getDefault())
 
                 val monthBalance: MutableMap<Int, Double> =
-                    (1..LocalDate.now().lengthOfMonth()).toList().associateBy({ it }, { 0.0 })
-                        .toMutableMap()
+                    (1..31).toList().associateBy({ it }, { 0.0 }).toMutableMap()
+                    //(1..LocalDate.now().lengthOfMonth()).toList().associateBy({ it }, { 0.0 }).toMutableMap()
 
                 for (t in transactionList) {
                     monthBalance[day.format(format.parse(t.date)!!).toInt()] =
