@@ -185,6 +185,8 @@ class AddGoalPopup : DialogFragment() {
 
     private fun updateView()
     {
+        (parentFragment as GoalFragment).checkCompletedGoal()
+        (parentFragment as GoalFragment).checkToNotify()
         (parentFragment as GoalFragment).getGoalList()
         (parentFragment as GoalFragment).setAdapter()
         dismiss()

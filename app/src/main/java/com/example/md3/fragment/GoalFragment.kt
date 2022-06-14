@@ -278,7 +278,11 @@ class GoalFragment : Fragment() {
         }
     }
 
-    private fun checkToNotify(){
+    fun checkCompletedGoal(){
+        activityData.checkCompletedGoal()
+    }
+
+    fun checkToNotify(){
         val allGoal = activityData.getAllGoal("all")
         for (g in allGoal!!){
             if (g.completed and g.toNotify){
